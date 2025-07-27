@@ -34,6 +34,11 @@
               "Behavior/DisabledAddons" = {
                 "0" = "cloudpinyin";
               };
+              "Hotkey/TriggerKeys" = {
+                "0" = "Shift+Control_L";
+                "1" = "Zenkaku_Hankaku";
+                "2" = "Hangul";
+              };
             };
             addons = {
               classicui.globalSection = {
