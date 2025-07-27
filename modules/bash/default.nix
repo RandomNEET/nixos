@@ -1,23 +1,25 @@
 { ... }:
 {
   home-manager.sharedModules = [
-    (_: {
-      programs.bash = {
-        enable = true;
+    (
+      { config, ... }:
+      {
+        programs.bash = {
+          enable = true;
+          historyFile = "${config.xdg.dataHome}/bash/history";
+          historyFileSize = 100000;
 
-        historyFileSize = 100000;
-        historyFile = "\${XDG_DATA_HOME}/bash/history";
+          bashrcExtra = '''';
 
-        bashrcExtra = '''';
+          initExtra = '''';
 
-        initExtra = '''';
+          profileExtra = '''';
 
-        profileExtra = '''';
-
-        shellAliases = {
-          update = "sudo nixos-rebuild switch";
+          shellAliases = {
+            update = "sudo nixos-rebuild switch";
+          };
         };
-      };
-    })
+      }
+    )
   ];
 }
