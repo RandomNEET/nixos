@@ -48,9 +48,11 @@
     # ../../modules/mpv
     ../../modules/nixvim
     # ../../modules/obs-studio
+    # ../../modules/obsidian
     # ../../modules/pipewire
     ../../modules/proxy/${opts.proxy.method}
     ../../modules/rice
+    # ../../modules/rigprep
     ../../modules/samba
     ../../modules/scripts/system/${opts.hostname}
     ../../modules/scripts/user/${opts.hostname}
@@ -221,6 +223,13 @@
           remotePort = 10330;
         }
         {
+          name = "obsidian-livesync";
+          type = "tcp";
+          localIP = "127.0.0.1";
+          localPort = 10340;
+          remotePort = 10340;
+        }
+        {
           name = "speedtest";
           type = "tcp";
           localIP = "127.0.0.1";
@@ -258,6 +267,7 @@
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
+    6881
     9997
     9998
     9999
@@ -275,10 +285,11 @@
     10310
     10320
     10330
+    10340
     10400
     61208
   ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [ 6881 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 }

@@ -93,4 +93,13 @@ rec {
     dir = "/home/${username}/pic/wallpapers";
     default = "${wallpaper.dir}/universal/black.png";
   };
+
+  obsidian = {
+    vaults = {
+      default = {
+        enable = true;
+        target = "doc/obsidian";
+      };
+    };
+  };
 }

@@ -75,4 +75,13 @@ rec {
     dir = "";
     default = "";
   };
+
+  obsidian = {
+    vaults = {
+      name = {
+        enable = true;
+        target = "";
+      };
+    };
+  };
 }

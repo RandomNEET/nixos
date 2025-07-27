@@ -48,9 +48,11 @@
     ../../modules/mpv
     ../../modules/nixvim
     ../../modules/obs-studio
+    ../../modules/obsidian
     ../../modules/pipewire
     ../../modules/proxy/${opts.proxy.method}
     ../../modules/rice
+    ../../modules/rigprep
     # ../../modules/samba
     ../../modules/scripts/system/${opts.hostname}
     ../../modules/scripts/user/${opts.hostname}
