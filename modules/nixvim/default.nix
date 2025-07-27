@@ -18,6 +18,7 @@
         enable = true;
         viAlias = true;
         vimAlias = true;
+        globals.mapleader = " ";
         clipboard = {
           register = "unnamedplus";
           providers = {
@@ -25,7 +26,11 @@
             xclip.enable = true;
           };
         };
-        globals.mapleader = " ";
+        withNodeJs = opts.nixvim.withNodeJs;
+        withPerl = opts.nixvim.withPerl;
+        withPython3 = opts.nixvim.withPython3;
+        withRuby = opts.nixvim.withRuby;
+
         extraPackages =
           with pkgs;
           (

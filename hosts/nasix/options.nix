@@ -81,6 +81,11 @@ rec {
   };
 
   nixvim = {
+    withNodeJs = false;
+    withPerl = false;
+    withPython3 = true;
+    withRuby = false;
+
     lsp.enable = false;
     treesitter.enable = false; # Automatically disable noice if set to false
     lint.enable = false;
