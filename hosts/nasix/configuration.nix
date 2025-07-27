@@ -45,7 +45,6 @@
     # ../../modules/kitty
     # ../../modules/lazygit
     # ../../modules/libreoffice
-    # ../../modules/libvirtd
     # ../../modules/localsend
     # ../../modules/mpv
     ../../modules/nixvim
@@ -66,6 +65,7 @@
     # ../../modules/thunderbird
     ../../modules/tmux
     # ../../modules/utilities
+    ../../modules/virt-manager
     # ../../modules/vscode
     ../../modules/yazi
     # ../../modules/zathura
