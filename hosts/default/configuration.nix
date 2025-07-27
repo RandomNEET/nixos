@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     ../common.nix
 
+    # ../../modules/bat
     # ../../modules/blueman
     # ../../modules/btop
     # ../../modules/cava
@@ -41,6 +42,7 @@
     # ../../modules/impermanence
     # ../../modules/imv
     # ../../modules/jellyfin
+    # ../../modules/jq
     # ../../modules/kitty
     # ../../modules/lazygit
     # ../../modules/libreoffice
