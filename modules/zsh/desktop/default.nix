@@ -24,7 +24,6 @@
           oh-my-zsh = {
             enable = true;
             plugins = [
-              "git"
               "vi-mode"
               "themes"
             ];
