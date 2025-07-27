@@ -8,6 +8,7 @@
         cmatrix
         fortune
         figlet
+        lolcat
         pipes
         tty-clock
       ];
