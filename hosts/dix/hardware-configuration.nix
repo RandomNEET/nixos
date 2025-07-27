@@ -44,6 +44,8 @@
     ];
   };
 
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/498e4910-6b3b-431d-95ba-4db548781ffb";
+
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/e0245cf4-e437-4b8a-a800-8a4c0ae94a58";
     fsType = "btrfs";
@@ -53,8 +55,6 @@
       "noatime"
     ];
   };
-
-  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/498e4910-6b3b-431d-95ba-4db548781ffb";
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/e0245cf4-e437-4b8a-a800-8a4c0ae94a58";
