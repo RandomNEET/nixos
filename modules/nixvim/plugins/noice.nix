@@ -5,18 +5,19 @@
       noice = {
         enable = opts.nixvim.noice.enable && opts.nixvim.treesitter.enable;
         settings = {
-          notify = {
+          cmdline = {
             enabled = true;
-          };
-          presets = {
-            bottom_search = false;
-            command_palette = true;
-            inc_rename = false;
-            long_message_to_split = false;
-            lsp_doc_border = false;
+            view = "cmdline_popup";
           };
           messages = {
-            enabled = true; # Adds a padding-bottom to neovim statusline when set to false for some reason (untested)
+            enabled = true;
+          };
+          popupmenu = {
+            enabled = true;
+            backend = "nui";
+          };
+          notify = {
+            enabled = true;
           };
           lsp = {
             message = {
@@ -32,9 +33,35 @@
               "cmp.entry.get_documentation" = true;
             };
           };
-          popupmenu = {
-            enabled = true;
-            backend = "nui";
+          views = {
+            cmdline_popup = {
+              position = {
+                row = 3;
+                col = "50%";
+              };
+              size = {
+                width = 60;
+                height = "auto";
+              };
+            };
+            popupmenu = {
+              relative = "editor";
+              position = {
+                row = 6;
+                col = "50%";
+              };
+              size = {
+                width = 60;
+                height = 10;
+              };
+              border = {
+                style = "rounded";
+                padding = [
+                  0
+                  1
+                ];
+              };
+            };
           };
           format = {
             filter = {
@@ -62,11 +89,13 @@
               lang = "regex";
             };
           };
-          #presets = {
-          #    bottom_search = true;
-          #    command_palette = true;
-          #    lsp_doc_border = true;
-          #};
+          presets = {
+            bottom_search = false;
+            command_palette = false;
+            inc_rename = false;
+            long_message_to_split = false;
+            lsp_doc_border = false;
+          };
         };
       };
     };

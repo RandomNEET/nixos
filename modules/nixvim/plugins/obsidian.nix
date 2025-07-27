@@ -1,7 +1,12 @@
-{ lib, opts, ... }:
+{
+  config,
+  lib,
+  opts,
+  ...
+}:
 {
   programs.nixvim = {
-    keymaps = lib.mkIf opts.nixvim.obsidian.enable [
+    keymaps = lib.mkIf config.programs.obsidian.enable [
       {
         mode = "n";
         action = "<cmd>Obsidian new<CR>";
@@ -45,7 +50,7 @@
     ];
     plugins = {
       obsidian = {
-        enable = opts.nixvim.obsidian.enable;
+        enable = config.programs.obsidian.enable;
         settings = {
           completion = {
             min_chars = 2;

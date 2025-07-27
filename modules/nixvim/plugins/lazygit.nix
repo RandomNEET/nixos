@@ -1,7 +1,7 @@
-{ lib, opts, ... }:
+{ config, lib, ... }:
 {
   programs.nixvim = {
-    keymaps = lib.mkIf opts.nixvim.lazygit.enable [
+    keymaps = lib.mkIf config.programs.lazygit.enable [
       {
         mode = [
           "n"
@@ -14,7 +14,7 @@
       }
     ];
     plugins.lazygit = {
-      enable = opts.nixvim.lazygit.enable;
+      enable = config.programs.lazygit.enable;
       settings = {
       };
     };

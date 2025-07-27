@@ -23,6 +23,9 @@
           ]
           ++ lib.optional opts.nixvim.copilot.enable "copilot";
         };
+        cmdline = lib.mkIf opts.nixvim.noice.enable {
+          enabled = false;
+        };
       };
     };
     plugins.blink-cmp-copilot.enable = opts.nixvim.copilot.enable;

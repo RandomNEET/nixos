@@ -1,7 +1,11 @@
-{ lib, opts, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 {
   programs.nixvim = {
-    keymaps = lib.mkIf opts.nixvim.yazi.enable [
+    keymaps = lib.mkIf config.programs.yazi.enable [
       {
         mode = [
           "n"
@@ -29,7 +33,7 @@
       }
     ];
     plugins.yazi = {
-      enable = opts.nixvim.yazi.enable;
+      enable = config.programs.yazi.enable;
       settings = {
         enable_mouse_support = true;
         open_for_directories = true;

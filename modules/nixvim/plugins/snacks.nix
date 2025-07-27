@@ -1,4 +1,4 @@
-{ ... }:
+{ opts, ... }:
 {
   programs.nixvim = {
     keymaps = [
@@ -210,7 +210,7 @@
             enabled = true;
           };
           image = {
-            enabled = true;
+            enabled = opts.nixvim.snack.image.enable;
           };
         };
       };

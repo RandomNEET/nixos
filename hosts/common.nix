@@ -59,8 +59,8 @@
         initialHashedPassword = opts.userpasswd;
         isNormalUser = true;
         extraGroups = [
-          "networkmanager"
           "wheel"
+          "networkmanager"
         ];
       };
     };

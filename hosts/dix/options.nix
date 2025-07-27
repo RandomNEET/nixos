@@ -51,7 +51,7 @@ rec {
     homedir = "/home/${username}/.vault/gpg";
     agent = {
       enable = true;
-      enableSshSupport = true;
+      enableSshSupport = true; # Automatically disable ssh-agent if set to true
     };
   };
 
@@ -67,17 +67,15 @@ rec {
 
   nixvim = {
     lsp.enable = true;
-    treesitter.enable = true;
+    treesitter.enable = true; # Automatically disable noice if set to false
     lint.enable = true;
     conform.enable = true;
     copilot.enable = true;
-    noice.enable = true;
-    yazi.enable = true;
-    lazygit.enable = true;
-    markdown-preview.enable = true;
-
+    noice.enable = true; # Require treesitter
+    snack = {
+      image.enable = true;
+    };
     obsidian = {
-      enable = true;
       workspaces = [
         {
           name = "default";
