@@ -10,14 +10,6 @@
               installation_mode = "force_installed";
               install_url = "https://raw.githubusercontent.com/catppuccin/thunderbird/main/themes/mocha/mocha-mauve.xpi";
             };
-            "tbsync@jobisoft.de" = {
-              installation_mode = "force_installed";
-              install_url = "https://addons.thunderbird.net/thunderbird/downloads/latest/tbsync/addon-773590-latest.xpi";
-            };
-            "eas4tbsync@jobisoft.de" = {
-              installation_mode = "force_installed";
-              install_url = "https://addons.thunderbird.net/thunderbird/downloads/latest/eas-4-tbsync/addon-986338-latest.xpi";
-            };
           };
         };
         profiles = {
