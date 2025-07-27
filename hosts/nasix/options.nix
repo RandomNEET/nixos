@@ -19,6 +19,21 @@ rec {
   browser = "";
   emailClient = "";
 
+  # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+  secure-boot = {
+    enable = false;
+    lanzaboote = {
+      enable = false;
+      pkiBundle = "";
+    };
+  };
+
+  snapper = {
+    config = { };
+    snapshotInterval = "hourly";
+    cleanupInterval = "1d";
+  };
+
   ssh = {
     dir = "/home/${username}/.vault/ssh";
     matchBlocks = {

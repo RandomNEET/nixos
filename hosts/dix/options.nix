@@ -19,6 +19,28 @@ rec {
   browser = "firefox";
   emailClient = "thunderbird";
 
+  # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+  secure-boot = {
+    enable = true;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/nix/persist/var/lib/sbctl";
+    };
+  };
+
+  snapper = {
+    config = {
+      home = {
+        SUBVOLUME = "/home";
+        ALLOW_USERS = [ "${username}" ];
+        TIMELINE_CREATE = true;
+        TIMELINE_CLEANUP = true;
+      };
+    };
+    snapshotInterval = "hourly";
+    cleanupInterval = "1d";
+  };
+
   ssh = {
     dir = "/home/${username}/.vault/ssh";
     matchBlocks = {

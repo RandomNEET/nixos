@@ -58,6 +58,7 @@
     ../../modules/samba
     ../../modules/scripts/system/${opts.hostname}
     ../../modules/scripts/user/${opts.hostname}
+    # ../../modules/secure-boot
     # ../../modules/snapper
     # ../../modules/spicetify
     # ../../modules/spotify-player
