@@ -1,9 +1,9 @@
-{ ... }:
+{ opts, ... }:
 {
   programs.nixvim = {
     plugins = {
       lsp = {
-        enable = true;
+        enable = opts.nixvim.lsp.enable;
         servers = {
           rust_analyzer = {
             # enable = true;

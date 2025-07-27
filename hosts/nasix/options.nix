@@ -65,6 +65,24 @@ rec {
     userEmail = "";
   };
 
+  nixvim = {
+    lsp.enable = false;
+    treesitter.enable = false;
+    lint.enable = false;
+    conform.enable = false;
+    copilot.enable = false;
+    noice.enable = false;
+    yazi.enable = false;
+    lazygit.enable = false;
+    markdown-preview.enable = false;
+
+    obsidian = {
+      enable = false;
+      workspaces = [
+      ];
+    };
+  };
+
   hyprland = {
     monitor = [ ];
     workspaceBind = "";
@@ -93,7 +111,7 @@ rec {
   obsidian = {
     vaults = {
       default = {
-        enable = true;
+        enable = false;
         target = "";
       };
     };

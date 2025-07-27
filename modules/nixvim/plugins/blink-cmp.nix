@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, opts, ... }:
 {
   programs.nixvim = {
     plugins.blink-cmp = {
@@ -8,7 +8,7 @@
           preset = "super-tab";
         };
         sources = {
-          providers = {
+          providers = lib.mkIf opts.nixvim.copilot.enable {
             copilot = {
               async = true;
               module = "blink-cmp-copilot";
@@ -20,11 +20,11 @@
             "lsp"
             "path"
             "buffer"
-            "copilot"
-          ];
+          ]
+          ++ lib.optional opts.nixvim.copilot.enable "copilot";
         };
       };
     };
-    plugins.blink-cmp-copilot.enable = true;
+    plugins.blink-cmp-copilot.enable = opts.nixvim.copilot.enable;
   };
 }

@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, opts, ... }:
 {
   programs.nixvim = {
-    keymaps = [
+    keymaps = lib.mkIf opts.nixvim.markdown-preview.enable [
       {
         mode = [
           "n"
@@ -14,7 +14,7 @@
       }
     ];
     plugins.markdown-preview = {
-      enable = true;
+      enable = opts.nixvim.markdown-preview.enable;
       settings = {
         auto_close = 1;
         # auto_start = true;

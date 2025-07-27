@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  opts,
+  ...
+}:
 {
   home-manager.sharedModules = [
     (_: {
@@ -21,29 +26,37 @@
           };
         };
         globals.mapleader = " ";
-        extraPackages = with pkgs; [
-          ripgrep
-          lynx
-          fd
-          ghostscript
-          # Formatters
-          nixfmt-rfc-style
-          shfmt
-          stylua
-          prettier
-          prettierd
-          isort
-          black
-          # Linters
-          commitlint
-          luajitPackages.luacheck
-          markdownlint-cli
-          nodePackages.jsonlint
-          pylint
-          ruff
-          shellcheck
-          yamllint
-        ];
+        extraPackages =
+          with pkgs;
+          (
+            [
+              ripgrep
+              lynx
+              fd
+              ghostscript
+            ]
+            ++ lib.optionals opts.nixvim.conform.enable [
+              # Formatters
+              nixfmt-rfc-style
+              shfmt
+              stylua
+              prettier
+              prettierd
+              isort
+              black
+            ]
+            ++ lib.optionals opts.nixvim.lint.enable [
+              # Linters
+              commitlint
+              luajitPackages.luacheck
+              markdownlint-cli
+              nodePackages.jsonlint
+              pylint
+              ruff
+              shellcheck
+              yamllint
+            ]
+          );
       };
 
       home.packages = with pkgs; [ ];

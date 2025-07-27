@@ -1,9 +1,9 @@
-{ ... }:
+{ opts, ... }:
 {
   programs.nixvim = {
     plugins = {
       noice = {
-        enable = true;
+        enable = opts.nixvim.noice.enable && opts.nixvim.treesitter.enable;
         settings = {
           notify = {
             enabled = true;

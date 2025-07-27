@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, opts, ... }:
 {
   programs.nixvim = {
     plugins = {
@@ -6,7 +6,7 @@
         enable = false;
       };
       treesitter = {
-        enable = true;
+        enable = opts.nixvim.treesitter.enable;
         nixvimInjections = true;
         nixGrammars = true;
         folding = false;

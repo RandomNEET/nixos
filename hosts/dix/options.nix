@@ -65,6 +65,42 @@ rec {
     userEmail = "howell.ding@outlook.com";
   };
 
+  nixvim = {
+    lsp.enable = true;
+    treesitter.enable = true;
+    lint.enable = true;
+    conform.enable = true;
+    copilot.enable = true;
+    noice.enable = true;
+    yazi.enable = true;
+    lazygit.enable = true;
+    markdown-preview.enable = true;
+
+    obsidian = {
+      enable = true;
+      workspaces = [
+        {
+          name = "default";
+          path = "~/${obsidian.vaults.default.target}";
+        }
+        {
+          name = "daily";
+          path = "~/${obsidian.vaults.default.target}/daily";
+          overrides = {
+            notes_subdir = "daily";
+          };
+        }
+        {
+          name = "develop";
+          path = "~/${obsidian.vaults.default.target}/develop";
+          overrides = {
+            notes_subdir = "develop";
+          };
+        }
+      ];
+    };
+  };
+
   hyprland = {
     monitor = [
       "desc:SAC G7u Pro 0001, 3840x2160@160, 0x0, 1.5"

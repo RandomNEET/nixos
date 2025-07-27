@@ -1,7 +1,7 @@
-{ opts, ... }:
+{ lib, opts, ... }:
 {
   programs.nixvim = {
-    keymaps = [
+    keymaps = lib.mkIf opts.nixvim.obsidian.enable [
       {
         mode = "n";
         action = "<cmd>Obsidian new<CR>";
@@ -45,27 +45,14 @@
     ];
     plugins = {
       obsidian = {
-        enable = true;
+        enable = opts.nixvim.obsidian.enable;
         settings = {
           completion = {
             min_chars = 2;
             blink = true;
           };
           new_notes_location = "current_dir";
-          workspaces = [
-            {
-              name = "default";
-              path = "~/${opts.obsidian.vaults.default.target}";
-            }
-            {
-              name = "dev";
-              path = "~/${opts.obsidian.vaults.default.target}/dev";
-            }
-            {
-              name = "2hu";
-              path = "~/${opts.obsidian.vaults.default.target}/2hu";
-            }
-          ];
+          workspaces = opts.nixvim.obsidian.workspaces;
           picker = {
             name = "snacks.pick";
           };

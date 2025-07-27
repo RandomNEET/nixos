@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, opts, ... }:
 {
   programs.nixvim = {
-    keymaps = [
+    keymaps = lib.mkIf opts.nixvim.conform.enable [
       {
         mode = "n";
         key = "<leader>fm";
@@ -12,7 +12,7 @@
       }
     ];
     plugins.conform-nvim = {
-      enable = true;
+      enable = opts.nixvim.conform.enable;
       settings = {
         formatters_by_ft = {
           # asm = [ "asmfmt" ];
