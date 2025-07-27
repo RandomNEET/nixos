@@ -9,7 +9,7 @@
         enable = true;
         steamArgs = [ "-tenfoot" ]; # Default: -tenfoot -pipewire-dmabuf
       };
-      extraCompatPackages = [ pkgs.proton-ge-bin ];
+      extraCompatPackages = [ pkgs.proton-ge-bin ]; # Or using protonup-qt
     };
     gamescope = {
       enable = true;
@@ -20,8 +20,8 @@
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
-        prismlauncher
         osu-lazer
+        prismlauncher
       ];
     })
   ];
