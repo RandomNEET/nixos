@@ -4,7 +4,7 @@
     (_: {
       programs.gpg = {
         enable = true;
-        homedir = opts.gpg.dir;
+        homedir = opts.gpg.homedir;
       };
       services.gpg-agent = {
         enable = opts.gpg.agent.enable;
