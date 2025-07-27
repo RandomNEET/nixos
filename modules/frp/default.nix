@@ -2,7 +2,7 @@
 {
   services.frp = {
     enable = true;
-    role = opts.frp.fole;
+    role = opts.frp.role;
     settings = opts.frp.settings;
   };
 }
