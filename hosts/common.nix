@@ -47,9 +47,6 @@
 
   console.keyMap = opts.consoleKeymap; # Configure console keymap
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = opts.openssh.enable;
-
   # Packages in system profile
   environment.systemPackages = with pkgs; [ ];
 

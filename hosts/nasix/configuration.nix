@@ -34,6 +34,7 @@
     ../../modules/garbage-collection
     # ../../modules/gimp
     ../../modules/git
+    # ../../modules/gpg
     ../../modules/gpu/${opts.gpu}/${opts.hostType}
     # ../../modules/greetd
     # ../../modules/impermanence
@@ -56,7 +57,7 @@
     # ../../modules/snapper
     # ../../modules/spicetify
     # ../../modules/spotify-player
-    # ../../modules/ssh
+    ../../modules/ssh
     # ../../modules/thunderbird
     ../../modules/tmux
     # ../../modules/utilities
@@ -121,13 +122,6 @@
       transport.tls.keyFile = "/etc/frp/cert/client.key";
 
       proxies = [
-        {
-          name = "ssh";
-          type = "tcp";
-          localIP = "127.0.0.1";
-          localPort = 22;
-          remotePort = 22222;
-        }
         {
           name = "jellyfin";
           type = "tcp";

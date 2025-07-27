@@ -34,6 +34,7 @@
     ../../modules/garbage-collection
     ../../modules/gimp
     ../../modules/git
+    ../../modules/gpg
     ../../modules/gpu/${opts.gpu}/${opts.hostType}
     ../../modules/greetd
     ../../modules/impermanence

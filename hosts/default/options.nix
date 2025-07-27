@@ -17,17 +17,39 @@ rec {
   browser = "";
   emailClient = "";
 
+  ssh = {
+    dir = "/home/${username}/.vault/ssh";
+    matchBlocks = { };
+    daemon = {
+      enable = true;
+      ports = [
+        22
+      ];
+      authorizedKeysFiles = [ "${ssh.dir}/..." ];
+      settings = {
+        PasswordAuthentication = false;
+      };
+    };
+    agent.enable = true;
+  };
+
+  gpg = {
+    dir = "/home/${username}/.vault/gpg";
+    agent = {
+      enable = true;
+      enableSshSupport = false;
+    };
+  };
+
   proxy = {
     method = ""; # tproxy lpf
-    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}";
+    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/...";
   };
 
   git = {
     userName = "";
     userEmail = "";
   };
-
-  openssh.enable = true;
 
   hyprland = {
     monitor = [ ];

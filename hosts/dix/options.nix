@@ -17,6 +17,42 @@ rec {
   browser = "firefox";
   emailClient = "thunderbird";
 
+  ssh = {
+    dir = "/home/${username}/.vault/ssh";
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "${ssh.dir}/gh-howl";
+      };
+      "nasix" = {
+        hostname = "192.168.0.56";
+        port = 22;
+        user = "howl";
+        identityFile = "${ssh.dir}/nasix";
+      };
+    };
+    daemon = {
+      enable = true;
+      ports = [
+        22
+      ];
+      authorizedKeysFiles = [ "${ssh.dir}/dix.pub" ];
+      settings = {
+        PasswordAuthentication = false;
+      };
+    };
+    agent.enable = false;
+  };
+
+  gpg = {
+    dir = "/home/${username}/.vault/gpg";
+    agent = {
+      enable = true;
+      enableSshSupport = true;
+    };
+  };
+
   proxy = {
     method = "tproxy"; # tproxy lpf
     settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/default.json";
@@ -26,8 +62,6 @@ rec {
     userName = "howl";
     userEmail = "howell.ding@outlook.com";
   };
-
-  openssh.enable = true;
 
   hyprland = {
     monitor = [
