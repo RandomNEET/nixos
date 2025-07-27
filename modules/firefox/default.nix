@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   lock-false = {
     Value = false;
@@ -12,8 +17,6 @@ in
 {
   home-manager.sharedModules = [
     (_: {
-      home.file.".mozilla/firefox/default/chrome/userChrome.css".source = ./chrome/userChrome.css;
-      home.file.".mozilla/firefox/default/chrome/userContent.css".source = ./chrome/userContent.css;
       programs = {
         firefox = {
           enable = true;
@@ -332,6 +335,11 @@ in
           };
         };
       };
+      home.file.".mozilla/firefox/default/chrome".source =
+        if config.programs.hyprland.enable then
+          ./chrome/titlebar-buttons-disable
+        else
+          ./chrome/titlebar-buttons-enable;
     })
   ];
 }
