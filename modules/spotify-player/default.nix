@@ -4,9 +4,12 @@
     (_: {
       programs.spotify-player = {
         enable = true;
+        settings = {
+          theme = "catppuccin-mocha";
+        };
         themes = [
           {
-            name = "Catppuccin-mocha";
+            name = "catppuccin-mocha";
             palette = {
               background = "#1e1e2e";
               foreground = "#cdd6f4";
