@@ -4,15 +4,7 @@
     keymaps = [
       {
         mode = "n";
-        action = "<cmd>ObsidianOpen<CR>";
-        key = "<leader>obo";
-        options = {
-          desc = "Open note";
-        };
-      }
-      {
-        mode = "n";
-        action = "<cmd>ObsidianNew<CR>";
+        action = "<cmd>Obsidian new<CR>";
         key = "<leader>obn";
         options = {
           desc = "New note";
@@ -20,7 +12,7 @@
       }
       {
         mode = "n";
-        action = "<cmd>ObsidianQuickSwitch<CR>";
+        action = "<cmd>Obsidian quick_switch<CR>";
         key = "<leader>obq";
         options = {
           desc = "Quick switch note";
@@ -28,7 +20,7 @@
       }
       {
         mode = "n";
-        action = "<cmd>ObsidianSearch<CR>";
+        action = "<cmd>Obsidian search<CR>";
         key = "<leader>obs";
         options = {
           desc = "Search notes";
@@ -36,7 +28,7 @@
       }
       {
         mode = "n";
-        action = "<cmd>ObsidianWorkspace<CR>";
+        action = "<cmd>Obsidian workspace<CR>";
         key = "<leader>obw";
         options = {
           desc = "Workspace switch";
@@ -44,7 +36,7 @@
       }
       {
         mode = "n";
-        action = "<cmd>ObsidianRename<CR>";
+        action = "<cmd>Obsidian rename<CR>";
         key = "<leader>obr";
         options = {
           desc = "Rename note";
