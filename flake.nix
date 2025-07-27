@@ -32,7 +32,23 @@
         system = systemType;
         specialArgs = { inherit inputs opts; };
         modules = [
+          ({
+            nixpkgs.overlays = [
+              (
+                final: prev:
+                import ./pkgs {
+                  pkgs = final;
+                }
+              )
+            ];
+          })
           ./hosts/${opts.hostname}/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = {
+              inherit opts;
+            };
+          }
         ];
       };
     };
