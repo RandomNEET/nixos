@@ -83,8 +83,8 @@ rec {
   };
 
   git = {
-    userName = "howl";
-    userEmail = "howell.ding@outlook.com";
+    userName = "RandomNEET";
+    userEmail = "dev@randomneet.me";
   };
 
   nixvim = {
