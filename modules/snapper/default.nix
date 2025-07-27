@@ -2,14 +2,14 @@
 {
   services.snapper = {
     configs = {
-      home = {
-        SUBVOLUME = "/home";
+      nix = {
+        SUBVOLUME = "/nix";
         ALLOW_USERS = [ "${opts.username}" ];
         TIMELINE_CREATE = true;
         TIMELINE_CLEANUP = true;
       };
-      nix = {
-        SUBVOLUME = "/nix";
+      home = {
+        SUBVOLUME = "/home";
         ALLOW_USERS = [ "${opts.username}" ];
         TIMELINE_CREATE = true;
         TIMELINE_CLEANUP = true;
