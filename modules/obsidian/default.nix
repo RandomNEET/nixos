@@ -7,6 +7,7 @@
         defaultSettings = {
           app = {
             vimMode = true;
+            trashOption = "local";
           };
           corePlugins = [
             "backlink"
@@ -31,6 +32,10 @@
           communityPlugins = [
             {
               pkg = pkgs.obsidian-livesync;
+              enable = true;
+            }
+            {
+              pkg = pkgs.obsidian-trash-explorer;
               enable = true;
             }
           ];
