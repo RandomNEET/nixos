@@ -70,7 +70,7 @@ rec {
   };
 
   gpg = {
-    homedir = "/home/${username}/.vault/gpg";
+    homedir = "/home/${username}/.gnupg";
     agent = {
       enable = true;
       enableSshSupport = true; # Automatically disable ssh-agent if set to true
