@@ -42,6 +42,14 @@
           desc = "Workspace switch";
         };
       }
+      {
+        mode = "n";
+        action = "<cmd>ObsidianRename<CR>";
+        key = "<leader>obr";
+        options = {
+          desc = "Rename note";
+        };
+      }
     ];
     plugins = {
       obsidian = {
