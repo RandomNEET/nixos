@@ -223,7 +223,7 @@ in
                 "dom.security.https_only_mode_ever_enabled" = lock-true;
                 "identity.fxaccounts.enabled" = lock-false;
                 "app.update.auto" = false;
-                "browser.startup.homepage" = "https://howl-24.github.io/homepage/";
+                "browser.startup.homepage" = "https://homepage.randomneet.me/";
                 "browser.bookmarks.restore_default_bookmarks" = false;
                 "browser.ctrlTab.recentlyUsedOrder" = false;
                 "browser.discovery.enabled" = false;
