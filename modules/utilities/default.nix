@@ -7,6 +7,7 @@
         _7zz
         ffmpeg
         imagemagick
+        trash-cli
       ];
     })
   ];

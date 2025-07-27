@@ -53,9 +53,6 @@
           "alt+8" = "goto_tab 8";
           "alt+9" = "goto_tab 9";
           "alt+0" = "goto_tab 10";
-
-          # Tmux
-          "alt+t" = "launch --cwd=current --type=overlay tmux";
         };
       };
     })
