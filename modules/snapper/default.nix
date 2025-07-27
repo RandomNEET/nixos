@@ -1,15 +1,8 @@
 { opts, ... }:
 {
   services.snapper = {
-    configs = {
-      home = {
-        SUBVOLUME = "/home";
-        ALLOW_USERS = [ "${opts.username}" ];
-        TIMELINE_CREATE = true;
-        TIMELINE_CLEANUP = true;
-      };
-    };
-    snapshotInterval = "hourly";
-    cleanupInterval = "1d";
+    configs = opts.snapper.config;
+    snapshotInterval = opts.snapper.snapshotInterval;
+    cleanupInterval = opts.snapper.cleanupInterval;
   };
 }
