@@ -40,7 +40,6 @@
     ../../modules/gpu/${opts.gpu}/${opts.hostType}
     # ../../modules/greetd
     # ../../modules/impermanence
-    # ../../modules/imv
     ../../modules/jellyfin
     # ../../modules/jq
     # ../../modules/kitty
@@ -63,6 +62,7 @@
     # ../../modules/spicetify
     # ../../modules/spotify-player
     ../../modules/ssh
+    # ../../modules/swayimg
     # ../../modules/thunderbird
     ../../modules/tmux
     # ../../modules/utilities
