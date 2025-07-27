@@ -21,7 +21,7 @@ rec {
     dir = "/home/${username}/.vault/ssh";
     matchBlocks = { };
     daemon = {
-      enable = true;
+      enable = false;
       ports = [
         22
       ];
@@ -30,13 +30,13 @@ rec {
         PasswordAuthentication = false;
       };
     };
-    agent.enable = true;
+    agent.enable = false;
   };
 
   gpg = {
     homedir = "/home/${username}/.vault/gpg";
     agent = {
-      enable = true;
+      enable = false;
       enableSshSupport = false;
     };
   };
@@ -79,9 +79,14 @@ rec {
   obsidian = {
     vaults = {
       default = {
-        enable = true;
+        enable = false;
         target = "";
       };
+    };
+  };
+
+  samba = {
+    settings = {
     };
   };
 

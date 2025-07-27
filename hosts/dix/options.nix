@@ -103,6 +103,11 @@ rec {
     };
   };
 
+  samba = {
+    settings = {
+    };
+  };
+
   frp = {
     role = ""; # server client
     settings = {

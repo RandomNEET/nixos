@@ -3,22 +3,6 @@
   services.samba = {
     enable = true;
     openFirewall = true;
-    settings = {
-      global = {
-        "invalid users" = [
-          "root"
-        ];
-        "passwd program" = "/run/wrappers/bin/passwd %u";
-        security = "user";
-      };
-      private = {
-        browseable = "yes";
-        comment = "Private samba share.";
-        path = "/mnt/smb";
-        "valid users" = [ "${opts.username}" ];
-        "read only" = "no";
-        "writable" = "yes";
-      };
-    };
+    settings = opts.samba.settings;
   };
 }
