@@ -89,6 +89,21 @@ in
           bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
         '';
       };
+
+      home.shellAliases = {
+        ta = "tmux attach -t";
+        tad = "tmux attach -d -t";
+        tkss = "tmux kill-session -t";
+        tksv = "tmux kill-server";
+        tl = "tmux list-sessions";
+        ts = "tmux new-session -s";
+      };
+
+      programs.zsh = {
+        initContent = ''
+          bindkey -s '^t' "tmux\r"
+        '';
+      };
     })
   ];
 }

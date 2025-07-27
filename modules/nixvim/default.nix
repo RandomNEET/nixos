@@ -9,7 +9,6 @@
         ./themes
       ];
 
-      home.packages = with pkgs; [ ];
       programs.nixvim = {
         enable = true;
         viAlias = true;
@@ -46,6 +45,8 @@
           yamllint
         ];
       };
+
+      home.packages = with pkgs; [ ];
     })
   ];
 }

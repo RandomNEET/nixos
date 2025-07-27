@@ -25,6 +25,11 @@
           label = "#CDD6F4";
         };
       };
+      programs.zsh = {
+        initContent = ''
+          bindkey '^f' "fzf-file-widget"
+        '';
+      };
     })
   ];
 }

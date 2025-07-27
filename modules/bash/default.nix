@@ -4,7 +4,6 @@
     (_: {
       programs.bash = {
         enable = true;
-        enableCompletion = true;
 
         historyFileSize = 100000;
         historyFile = "\${XDG_DATA_HOME}/bash/history";
