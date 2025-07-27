@@ -13,7 +13,7 @@
         addKeysToAgent = "yes";
         matchBlocks = opts.ssh.matchBlocks;
       };
-      services.ssh-agent.enable = opts.ssh.agent.enable;
+      services.ssh-agent.enable = opts.ssh.agent.enable && !opts.gpg.agent.enableSshSupport;
     })
   ];
 }
