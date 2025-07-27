@@ -1,8 +1,13 @@
-{ pkgs, opts, ... }:
+{ pkgs, ... }:
 {
   home-manager.sharedModules = [
     (_: {
-      home.file.".config/yazi/theme.toml".source = ./catppuccin-mocha-mauve.toml;
+      imports = [
+        ./init.nix
+        ./keymap.nix
+        ./theme.nix
+      ];
+
       programs.yazi = {
         enable = true;
         enableBashIntegration = true;
@@ -63,84 +68,6 @@
             ];
           };
         };
-        keymap = {
-          mgr.prepend_keymap = [
-            # Goto
-            {
-              on = [
-                "g"
-                "h"
-              ];
-              run = "cd ~";
-              desc = "Go home";
-            }
-            {
-              on = [
-                "g"
-                "n"
-              ];
-              run = "cd ~/nixos";
-              desc = "Go ~/nixos";
-            }
-            {
-              on = [
-                "g"
-                "d"
-              ];
-              run = "cd ~/dls";
-              desc = "Go ~/dls";
-            }
-            {
-              on = [
-                "g"
-                "r"
-              ];
-              run = "cd ~/repo";
-              desc = "Go ~/repo";
-            }
-            {
-              on = [
-                "g"
-                "t"
-              ];
-              run = "cd ~/tmp";
-              desc = "Go ~/tmp";
-            }
-            {
-              on = [
-                "g"
-                "<Space>"
-              ];
-              run = "cd --interactive";
-              desc = "Jump interactively";
-            }
-            {
-              on = [
-                "g"
-                "f"
-              ];
-              run = "follow";
-              desc = "Follow hovered symlink";
-            }
-            # Plugins
-            {
-              on = "<C-d>";
-              run = "plugin diff";
-              desc = "Diff the selected with the hovered file";
-            }
-            {
-              on = "T";
-              run = "plugin toggle-pane min-preview";
-              desc = "Show or hide the preview pane";
-            }
-            {
-              on = "T";
-              run = "plugin toggle-pane max-preview";
-              desc = "Maximize or restore the preview pane";
-            }
-          ];
-        };
-        initLua = ./init.lua;
         plugins = {
           piper = pkgs.yaziPlugins.piper;
           git = pkgs.yaziPlugins.git;
