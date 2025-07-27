@@ -37,7 +37,7 @@
     # ../../modules/gimp
     ../../modules/git
     # ../../modules/gpg
-    ../../modules/gpu/${opts.gpu}/${opts.hostType}
+    ../../modules/gpu/${opts.gpu}/${opts.role}
     # ../../modules/greetd
     # ../../modules/impermanence
     ../../modules/jellyfin
@@ -70,7 +70,7 @@
     ../../modules/yazi
     # ../../modules/zathura
     ../../modules/zoxide
-    ../../modules/zsh/${opts.hostType}
+    ../../modules/zsh/${opts.role}
 
     # ../../modules/desktop/hyprland
     # ../../modules/desktop/themes/catppuccin
@@ -162,4 +162,6 @@
   networking.firewall.allowedUDPPorts = [ 6881 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  nix.settings.require-sigs = false;
 }

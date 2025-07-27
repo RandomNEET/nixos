@@ -22,34 +22,41 @@
   outputs =
     inputs@{ nixpkgs, home-manager, ... }:
     let
-      whoami = import ./hosts/whoami.nix;
-      host = if whoami.host != "" then whoami.host else "default";
-      systemType = if whoami.system != "" then whoami.system else "x86_64-linux";
-      opts = import ./hosts/${whoami.host}/options.nix;
+      hosts = builtins.filter (name: builtins.pathExists ./hosts/${name}/options.nix) (
+        builtins.attrNames (builtins.readDir ./hosts)
+      );
     in
     {
-      nixosConfigurations."${opts.hostname}" = nixpkgs.lib.nixosSystem {
-        system = systemType;
-        specialArgs = { inherit inputs opts; };
-        modules = [
-          ({
-            nixpkgs.overlays = [
-              (
-                final: prev:
-                import ./pkgs {
-                  pkgs = final;
-                }
-              )
-            ];
-          })
-          ./hosts/${opts.hostname}/configuration.nix
-          home-manager.nixosModules.home-manager
+      nixosConfigurations = builtins.listToAttrs (
+        map (
+          name:
+          let
+            opts = import ./hosts/${name}/options.nix;
+          in
           {
-            home-manager.extraSpecialArgs = {
-              inherit opts;
+            name = opts.hostname;
+            value = nixpkgs.lib.nixosSystem {
+              system = opts.system;
+              specialArgs = {
+                inherit inputs opts;
+              };
+              modules = [
+                {
+                  nixpkgs.overlays = [
+                    (final: prev: import ./pkgs { pkgs = final; })
+                  ];
+                }
+                ./hosts/${name}/configuration.nix
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.extraSpecialArgs = {
+                    inherit opts;
+                  };
+                }
+              ];
             };
           }
-        ];
-      };
+        ) hosts
+      );
     };
 }

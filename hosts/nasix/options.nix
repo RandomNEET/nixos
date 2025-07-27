@@ -1,6 +1,8 @@
 rec {
   hostname = "nasix";
-  hostType = "server";
+  system = "x86_64-linux";
+  role = "server";
+
   gpu = "nvidia";
   locale = "en_US.UTF-8";
   timezone = "Asia/Shanghai";

@@ -1,6 +1,8 @@
 rec {
   hostname = "dix";
-  hostType = "desktop";
+  system = "x86_64-linux";
+  role = "desktop";
+
   gpu = "nvidia";
   locale = "en_US.UTF-8";
   timezone = "Asia/Shanghai";
