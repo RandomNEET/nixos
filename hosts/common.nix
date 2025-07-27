@@ -94,7 +94,7 @@
             music = "${config.home.homeDirectory}/mus";
             pictures = "${config.home.homeDirectory}/pic";
             publicShare = "${config.home.homeDirectory}/pub";
-            templates = "${config.home.homeDirectory}/tmp";
+            templates = "${config.home.homeDirectory}/tpl";
             videos = "${config.home.homeDirectory}/vid";
           };
         };
