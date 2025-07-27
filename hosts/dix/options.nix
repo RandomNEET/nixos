@@ -47,7 +47,7 @@ rec {
       "github.com" = {
         hostname = "github.com";
         user = "git";
-        identityFile = "${ssh.dir}/gh-howl";
+        identityFile = "${ssh.dir}/gh-randomneet";
       };
       "nasix" = {
         hostname = "192.168.0.56";
