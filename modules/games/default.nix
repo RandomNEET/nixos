@@ -15,6 +15,7 @@
       enable = true;
       capSysNice = true;
     };
+    gamemode.enable = true;
   };
 
   home-manager.sharedModules = [
