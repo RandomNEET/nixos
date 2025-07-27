@@ -129,6 +129,14 @@ dirs  = [
 	{ name = "pic", text = "" },
 	{ name = "pub", text = "" },
 	{ name = "vid", text = "" },
+
+	{ name = ".config", text = "" },
+	{ name = ".git", text = "" },
+	{ name = ".github", text = "" },
+	{ name = "tmp", text = "" },
+	{ name = "pkg", text = "" },
+	{ name = "repo", text = "" },
+	{ name = "nixos", text = "󱄅" },
 ]
 files = [
   { name = "kritadisplayrc", text = "", fg = "#cba6f7" },
