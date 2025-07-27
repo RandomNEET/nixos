@@ -135,6 +135,7 @@
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
+    5900
     6881
     7102
     9997
