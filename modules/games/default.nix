@@ -1,19 +1,6 @@
 { pkgs, ... }:
 {
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-    xpadneo.enable = true;
-    xone.enable = true;
-  };
-  services.udev.packages = with pkgs; [ game-devices-udev-rules ];
   programs = {
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -24,7 +11,12 @@
       };
       extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
   };
+
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
@@ -33,4 +25,17 @@
       ];
     })
   ];
+
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    # Xbox one controllor support
+    xpadneo.enable = true;
+    xone.enable = true;
+  };
+
+  # Dualsense edge support
+  services.udev.packages = with pkgs; [ game-devices-udev-rules ];
 }
