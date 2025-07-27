@@ -11,9 +11,9 @@ rec {
 
   username = "howl";
   userpasswd = "$6$.FVrKngH1eXjNYi9$lsTAUQvvJyB209fhkf3g5E12iCcgNdDZKW0XTwCp7i3lNwM8gjNq3kRgjW4WIBV68YETysoDCHhKtSIncPT3n1";
-  editor = "nvim";
+  editor = "";
   terminal = "";
-  terminalFileManager = "yazi";
+  terminalFileManager = "";
   browser = "";
   emailClient = "";
 
@@ -34,7 +34,7 @@ rec {
   };
 
   gpg = {
-    dir = "/home/${username}/.vault/gpg";
+    homedir = "/home/${username}/.vault/gpg";
     agent = {
       enable = true;
       enableSshSupport = false;
@@ -78,10 +78,16 @@ rec {
 
   obsidian = {
     vaults = {
-      name = {
+      default = {
         enable = true;
         target = "";
       };
+    };
+  };
+
+  frp = {
+    role = ""; # server client
+    settings = {
     };
   };
 }

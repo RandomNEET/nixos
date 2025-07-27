@@ -46,7 +46,7 @@ rec {
   };
 
   gpg = {
-    dir = "/home/${username}/.vault/gpg";
+    homedir = "/home/${username}/.vault/gpg";
     agent = {
       enable = true;
       enableSshSupport = true;
@@ -100,6 +100,12 @@ rec {
         enable = true;
         target = "doc/obsidian";
       };
+    };
+  };
+
+  frp = {
+    role = ""; # server client
+    settings = {
     };
   };
 }

@@ -29,6 +29,7 @@
     # ../../modules/firejail
     # ../../modules/flatpak
     # ../../modules/fonts
+    # ../../modules/frp
     # ../../modules/fzf
     # ../../modules/games
     # ../../modules/garbage-collection
