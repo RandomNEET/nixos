@@ -6,41 +6,65 @@
         mode = "n";
         action = "<cmd>lua require('snacks').picker.smart()<CR>";
         key = "<leader><space>";
+        options = {
+          desc = "Smart find files";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').picker.buffers()<CR>";
         key = "<leader>,";
+        options = {
+          desc = "Buffers";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').picker.grep()<CR>";
         key = "<leader>/";
+        options = {
+          desc = "Grep";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').picker.command_history()<CR>";
         key = "<leader>:";
+        options = {
+          desc = "Command history";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').picker.notifications()<CR>";
         key = "<leader>n";
+        options = {
+          desc = "Notification history";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').explorer()<CR>";
         key = "<leader>e";
+        options = {
+          desc = "File explorer";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').terminal.toggle()<CR>";
         key = "<leader>t";
+        options = {
+          desc = "Toggle terminal";
+        };
       }
       {
         mode = "n";
         action = "<cmd>lua require('snacks').dashboard()<CR>";
         key = "<leader>db";
+        options = {
+          desc = "Dashboard";
+        };
       }
     ];
     plugins = {
