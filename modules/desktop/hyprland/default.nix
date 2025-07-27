@@ -149,7 +149,6 @@
               ];
 
               exec-once = [
-                "hyprctl dispatch workspace 1"
                 "waybar"
                 "swaync"
                 "nm-applet --indicator"
@@ -160,6 +159,7 @@
                 # "${./scripts/batterynotify.sh}" # battery notification
                 # "${./scripts/autowaybar.sh}" # uncomment packages at the top
                 "polkit-agent-helper-1"
+                "hyprctl dispatch workspace 1"
                 "sleep 2 && pamixer --set-volume 50"
                 "sleep 2 && ${./scripts/random-walls.sh}" # random wallpaper
               ];
