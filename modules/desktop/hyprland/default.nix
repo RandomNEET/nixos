@@ -74,8 +74,8 @@
             wl-clipboard
             xdotool
             yad
-            # socat # for and autowaybar.sh
-            jq # for and autowaybar.sh
+            jq # for random-walls.sh and autowaybar.sh
+            # socat # for autowaybar.sh
           ];
 
           home.sessionVariables = {
