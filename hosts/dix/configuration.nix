@@ -110,7 +110,7 @@
   };
 
   fileSystems."/mnt/hdd1" = {
-    device = "/dev/disk/by-uuid/f76ce5a0-dd4f-4a1d-851a-3ceb038e0769";
+    device = "/dev/disk/by-uuid/63edc807-ec2a-4461-9a4a-854313c19600";
     fsType = "ext4";
     options = [
       "defaults"
@@ -120,7 +120,7 @@
   };
 
   fileSystems."/mnt/hdd2" = {
-    device = "/dev/disk/by-uuid/63edc807-ec2a-4461-9a4a-854313c19600";
+    device = "/dev/disk/by-uuid/f76ce5a0-dd4f-4a1d-851a-3ceb038e0769";
     fsType = "ext4";
     options = [
       "defaults"
