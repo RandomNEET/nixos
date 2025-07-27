@@ -1,4 +1,4 @@
-{ opts, ... }:
+{ lib, opts, ... }:
 {
   home-manager.sharedModules = [
     (_: {
@@ -8,52 +8,36 @@
           general = {
             hide_cursor = true;
           };
-          background =
-            if opts.hyprlock.monitor2 == "" then
-              [
-                {
-                  monitor = opts.hyprlock.monitor1;
-                  color = "rgb(36, 39, 58)";
-                  path = "${opts.hyprlock.background1}";
-                  new_optimizations = true;
-                  blur_size = 3;
-                  blur_passes = 2;
-                  noise = 1.17e-2;
-                  contrast = 1.0;
-                  brightness = 1.0;
-                  vibrancy = 0.21;
-                  vibrancy_darkness = 0.0;
-                }
-              ]
-            else
-              [
-                {
-                  monitor = opts.hyprlock.monitor1;
-                  color = "rgb(36, 39, 58)";
-                  path = "${opts.hyprlock.background1}";
-                  new_optimizations = true;
-                  blur_size = 3;
-                  blur_passes = 2;
-                  noise = 1.17e-2;
-                  contrast = 1.0;
-                  brightness = 1.0;
-                  vibrancy = 0.21;
-                  vibrancy_darkness = 0.0;
-                }
-                {
-                  monitor = opts.hyprlock.monitor2;
-                  color = "rgb(36, 39, 58)";
-                  path = "${opts.hyprlock.background2}";
-                  new_optimizations = true;
-                  blur_size = 3;
-                  blur_passes = 2;
-                  noise = 1.17e-2;
-                  contrast = 1.0;
-                  brightness = 1.0;
-                  vibrancy = 0.21;
-                  vibrancy_darkness = 0.0;
-                }
-              ];
+          background = [
+            {
+              monitor = opts.hyprlock.monitor1;
+              color = "rgb(36, 39, 58)";
+              path = opts.hyprlock.background1;
+              new_optimizations = true;
+              blur_size = 3;
+              blur_passes = 2;
+              noise = 1.17e-2;
+              contrast = 1.0;
+              brightness = 1.0;
+              vibrancy = 0.21;
+              vibrancy_darkness = 0.0;
+            }
+          ]
+          ++ lib.optionals (opts.hyprlock.monitor2 != "") [
+            {
+              monitor = opts.hyprlock.monitor2;
+              color = "rgb(36, 39, 58)";
+              path = opts.hyprlock.background2;
+              new_optimizations = true;
+              blur_size = 3;
+              blur_passes = 2;
+              noise = 1.17e-2;
+              contrast = 1.0;
+              brightness = 1.0;
+              vibrancy = 0.21;
+              vibrancy_darkness = 0.0;
+            }
+          ];
 
           input-field = [
             {
@@ -77,43 +61,30 @@
             }
           ];
 
-          label =
-            if opts.hyprlock.monitor2 == "" then
-              [
-                {
-                  monitor = opts.hyprlock.monitor1;
-                  text = "$TIME";
-                  font_size = 64;
-                  font_family = "JetBrains Mono Nerd Font 10";
-                  color = "rgb(198, 160, 246)";
-                  position = "0, 16";
-                  valign = "center";
-                  halign = "center";
-                }
-              ]
-            else
-              [
-                {
-                  monitor = opts.hyprlock.monitor1;
-                  text = "$TIME";
-                  font_size = 64;
-                  font_family = "JetBrains Mono Nerd Font 10";
-                  color = "rgb(198, 160, 246)";
-                  position = "0, 16";
-                  valign = "center";
-                  halign = "center";
-                }
-                {
-                  monitor = opts.hyprlock.monitor2;
-                  text = ''Hello <span text_transform="capitalize" size="larger">$USER!</span>'';
-                  color = "rgb(198, 160, 246)";
-                  font_size = 20;
-                  font_family = "JetBrains Mono Nerd Font 10";
-                  position = "0, 100";
-                  halign = "center";
-                  valign = "center";
-                }
-              ];
+          label = [
+            {
+              monitor = opts.hyprlock.monitor1;
+              text = "$TIME";
+              font_size = 64;
+              font_family = "JetBrains Mono Nerd Font 10";
+              color = "rgb(198, 160, 246)";
+              position = "0, 16";
+              valign = "center";
+              halign = "center";
+            }
+          ]
+          ++ lib.optionals (opts.hyprlock.monitor2 != "") [
+            {
+              monitor = opts.hyprlock.monitor2;
+              text = ''Hello <span text_transform="capitalize" size="larger">$USER!</span>'';
+              color = "rgb(198, 160, 246)";
+              font_size = 20;
+              font_family = "JetBrains Mono Nerd Font 10";
+              position = "0, 100";
+              halign = "center";
+              valign = "center";
+            }
+          ];
         };
       };
     })

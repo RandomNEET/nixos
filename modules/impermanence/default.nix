@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -23,28 +24,23 @@
         group = "colord";
         mode = "u=rwx,g=rx,o=";
       }
-    ] ++ (if config.virtualisation.libvirtd.enable then [ "/var/lib/libvirt" ] else [ ]);
-    files =
-      [
-        "/etc/machine-id"
-        {
-          file = "/etc/nix/id_rsa";
-          parentDirectory = {
-            mode = "u=rwx,g=rx,o=rx";
-          };
-        }
-      ]
-      ++ (
-        if config.services.openssh.enable then
-          [
-            "/etc/ssh/ssh_host_rsa_key"
-            "/etc/ssh/ssh_host_rsa_key.pub"
-            "/etc/ssh/ssh_host_ed25519_key"
-            "/etc/ssh/ssh_host_ed25519_key.pub"
-          ]
-        else
-          [ ]
-      );
+    ]
+    ++ lib.optional config.virtualisation.libvirtd.enable "/var/lib/libvirt";
+    files = [
+      "/etc/machine-id"
+      {
+        file = "/etc/nix/id_rsa";
+        parentDirectory = {
+          mode = "u=rwx,g=rx,o=rx";
+        };
+      }
+    ]
+    ++ lib.optionals config.services.openssh.enable [
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+    ];
   };
   security.sudo.extraConfig = ''
     Defaults lecture = never

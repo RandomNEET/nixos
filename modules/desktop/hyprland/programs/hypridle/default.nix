@@ -1,4 +1,4 @@
-{ opts, ... }:
+{ lib, opts, ... }:
 {
   home-manager.sharedModules = [
     (_: {
@@ -13,40 +13,25 @@
             after_sleep_cmd = "sleep 3 && hyprctl dispatch dpms on";
           };
           listener =
-            (
-              if opts.hypridle.time.lock != "" then
-                [
-                  {
-                    timeout = opts.hypridle.time.lock;
-                    on-timeout = "loginctl lock-session";
-                  }
-                ]
-              else
-                [ ]
-            )
-            ++ (
-              if opts.hypridle.time.dpmsOff != "" then
-                [
-                  {
-                    timeout = opts.hypridle.time.dpmsOff;
-                    on-timeout = "hyprctl dispatch dpms off";
-                    on-resume = "hyprctl dispatch dpms on";
-                  }
-                ]
-              else
-                [ ]
-            )
-            ++ (
-              if opts.hypridle.time.suspend != "" then
-                [
-                  {
-                    timeout = opts.hypridle.time.suspend;
-                    on-timeout = "systemctl suspend";
-                  }
-                ]
-              else
-                [ ]
-            );
+            lib.optionals (opts.hypridle.time.lock != "") [
+              {
+                timeout = opts.hypridle.time.lock;
+                on-timeout = "loginctl lock-session";
+              }
+            ]
+            ++ lib.optionals (opts.hypridle.time.dpmsOff != "") [
+              {
+                timeout = opts.hypridle.time.dpmsOff;
+                on-timeout = "hyprctl dispatch dpms off";
+                on-resume = "hyprctl dispatch dpms on";
+              }
+            ]
+            ++ lib.optionals (opts.hypridle.time.suspend != "") [
+              {
+                timeout = opts.hypridle.time.suspend;
+                on-timeout = "systemctl suspend";
+              }
+            ];
         };
       };
     })
