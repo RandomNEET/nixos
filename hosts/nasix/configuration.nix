@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     ../common.nix
 
+    ../../modules/bash
     # ../../modules/bat
     # ../../modules/blueman
     # ../../modules/btop
@@ -64,6 +65,7 @@
     # ../../modules/swayimg
     # ../../modules/thunderbird
     ../../modules/tmux
+    ../../modules/trash-cli
     # ../../modules/utilities
     ../../modules/virt-manager
     # ../../modules/vscode
