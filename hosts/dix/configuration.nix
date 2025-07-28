@@ -38,7 +38,7 @@
     ../../modules/gimp
     ../../modules/git
     ../../modules/gpg
-    ../../modules/gpu/${opts.gpu}/${opts.role}
+    ../../modules/gpu
     ../../modules/greetd
     ../../modules/impermanence
     # ../../modules/jellyfin
@@ -52,12 +52,11 @@
     ../../modules/obs-studio
     ../../modules/obsidian
     ../../modules/pipewire
-    ../../modules/proxy/${opts.proxy.method}
+    ../../modules/proxy
     ../../modules/rice
     ../../modules/rigprep
     # ../../modules/samba
-    ../../modules/scripts/system/${opts.hostname}
-    ../../modules/scripts/user/${opts.hostname}
+    ../../modules/scripts
     ../../modules/secure-boot
     ../../modules/snapper
     ../../modules/spicetify
@@ -73,7 +72,7 @@
     ../../modules/yazi
     ../../modules/zathura
     ../../modules/zoxide
-    ../../modules/zsh/${opts.role}
+    ../../modules/zsh
 
     ../../modules/desktop/hyprland
     ../../modules/desktop/themes/catppuccin

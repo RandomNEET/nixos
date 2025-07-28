@@ -45,17 +45,17 @@
                 inherit inputs opts;
               };
               modules = [
-                {
-                  nixpkgs.overlays = [
-                    (final: prev: import ./pkgs { pkgs = final; })
-                  ];
-                }
                 ./hosts/${name}/configuration.nix
                 home-manager.nixosModules.home-manager
                 {
                   home-manager.extraSpecialArgs = {
                     inherit opts;
                   };
+                }
+                {
+                  nixpkgs.overlays = [
+                    (final: prev: import ./pkgs { pkgs = final; })
+                  ];
                 }
               ];
             };

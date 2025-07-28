@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  opts,
+  ...
+}:
 let
   # Recursively find all .nix files in the current directory and subdirectories
   # Ignores default.nix only at the top level
@@ -41,7 +46,7 @@ let
         file:
         let
           fileName = builtins.baseNameOf file;
-          imported = import file;
+          imported = import file { inherit pkgs opts; };
 
           # Check if the imported file is a function expecting pkgs
           isFunction = builtins.isFunction imported;
@@ -70,9 +75,5 @@ let
   _ = builtins.trace "Found ${toString scriptCount} script derivations" null;
 in
 {
-  home-manager.sharedModules = [
-    (_: {
-      home.packages = scriptDerivations;
-    })
-  ];
+  environment.systemPackages = scriptDerivations;
 }

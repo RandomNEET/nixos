@@ -1,7 +1,6 @@
 rec {
   hostname = "dix";
   system = "x86_64-linux";
-  role = "desktop";
 
   gpu = "nvidia";
   locale = "en_US.UTF-8";
@@ -82,9 +81,34 @@ rec {
     settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/default.json";
   };
 
-  git = {
-    userName = "RandomNEET";
-    userEmail = "dev@randomneet.me";
+  zsh = {
+    initContent = ''
+      bindkey '^k' up-line-or-history
+      bindkey '^j' down-line-or-history
+      bindkey '^l' forward-char
+      bindkey '^h' backward-char
+      bindkey '^[l' forward-word
+      bindkey '^[h' backward-word
+    '';
+
+    envExtra = ''
+      export VI_MODE_SET_CURSOR=true
+      MODE_INDICATOR="%F{red}<<<%f"
+    '';
+
+    shellGlobalAliases = {
+      G = "| grep";
+    };
+    shellAliases = {
+      update = "sudo nixos-rebuild switch";
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "vi-mode"
+      ];
+      theme = "simple";
+    };
   };
 
   nixvim = {
@@ -124,6 +148,11 @@ rec {
         }
       ];
     };
+  };
+
+  git = {
+    userName = "RandomNEET";
+    userEmail = "dev@randomneet.me";
   };
 
   hyprland = {
