@@ -163,6 +163,13 @@ rec {
     };
   };
 
+  flatpak = {
+    packages = {
+      system = [ ];
+      user = [ ];
+    };
+  };
+
   samba = {
     settings = {
       global = {

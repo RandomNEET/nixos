@@ -7,6 +7,7 @@
     nur.url = "github:nix-community/NUR";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nixvim = {
       url = "github:nix-community/nixvim";
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
@@ -49,7 +50,7 @@
                 home-manager.nixosModules.home-manager
                 {
                   home-manager.extraSpecialArgs = {
-                    inherit opts;
+                    inherit inputs opts;
                   };
                 }
                 {

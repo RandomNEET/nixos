@@ -195,6 +195,17 @@ rec {
     };
   };
 
+  flatpak = {
+    packages = {
+      system = [ ];
+      user = [
+        "com.github.tchx84.Flatseal"
+        "com.qq.QQ"
+        "com.tencent.WeChat"
+      ];
+    };
+  };
+
   samba = {
     settings = {
     };
