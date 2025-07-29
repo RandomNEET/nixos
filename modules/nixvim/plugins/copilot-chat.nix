@@ -5,7 +5,10 @@
       {
         mode = "n";
         action = "<cmd>CopilotChatToggle<CR>";
-        key = "<leader>ai";
+        key = "<leader>cc";
+        options = {
+          desc = "Toggle Copilot Chat";
+        };
       }
     ];
     plugins.copilot-chat = {
@@ -33,7 +36,7 @@
         show_help = true;
         window = {
           layout = "vertical"; # 'vertical', 'horizontal', 'float', 'replace', or a function that returns the layout
-          width = 0.2; # fractional width of parent, or absolute width in columns when > 1
+          width = 0.25; # fractional width of parent, or absolute width in columns when > 1
           height = 0.5; # fractional height of parent, or absolute height in rows when > 1
         };
       };
