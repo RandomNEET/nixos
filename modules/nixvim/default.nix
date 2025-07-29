@@ -53,6 +53,7 @@
             ++ lib.optionals opts.nixvim.lint.enable [
               # Linters
               commitlint
+              eslint_d
               luajitPackages.luacheck
               markdownlint-cli
               nodePackages.jsonlint

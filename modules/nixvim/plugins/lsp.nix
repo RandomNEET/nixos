@@ -5,34 +5,16 @@
       lsp = {
         enable = opts.nixvim.lsp.enable;
         servers = {
-          rust_analyzer = {
-            # enable = true;
-            settings = {
-              diagnostics.enable = true;
-              # completion.postfix.enable = false; # Disable snippet suggestions because we have no snippet engine at the moment.
-            };
-            # installCargo = true;
-            # installRustc = true;
-          };
-          # gdscript.enable = true;
           lua_ls.enable = true;
           yamlls.enable = true;
-          # nil_ls.enable = true;
+          nil_ls.enable = true;
           marksman.enable = true;
-          # pylsp.enable = true;
           pyright.enable = true;
           bashls.enable = true;
-          # ccls.enable = true;
-          # clangd.enable = true;
-          # cmake.enable = true;
-          # csharp_ls.enable = true;
-          # gopls.enable = true;
           jsonls.enable = true;
-          # ts_ls.enable = true;
+          ts_ls.enable = true;
           html.enable = true;
-          # volar.enable = true;
-          # terraformls = {enable = true;};
-          # ansiblels.enable = true;
+          volar.enable = true;
         };
         keymaps = {
           silent = true;

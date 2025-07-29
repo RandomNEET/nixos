@@ -15,18 +15,19 @@
       enable = opts.nixvim.conform.enable;
       settings = {
         formatters_by_ft = {
-          # asm = [ "asmfmt" ];
-          # c = [ "astyle" ];
-          # cpp = [ "astyle" ];
-          # css = [ "prettierd" "prettier" ];
-          # cmake = [ "cmake_format" ];
-          # go = [ "goimports" "gofumpt" "golines" ];
+          css = [
+            "prettierd"
+            "prettier"
+          ];
           html = [
             "prettierd"
             "prettier"
           ];
-          # javascript = [ "prettierd" "prettier" ];
-          # javascriptreact = [ "prettier" ];
+          javascript = [
+            "prettierd"
+            "prettier"
+          ];
+          javascriptreact = [ "prettier" ];
           json = [ "prettier" ];
           lua = [ "stylua" ];
           markdown = [ "prettier" ];
@@ -35,21 +36,19 @@
             "isort"
             "black"
           ];
-          # rust = [ "rustfmt" ];
           sh = [ "shfmt" ];
-          # typescript = [ "prettierd" "prettier" ];
-          # typescriptreact = [ "prettier" ];
+          typescript = [
+            "prettierd"
+            "prettier"
+          ];
+          typescriptreact = [ "prettier" ];
+          vue = [ "prettier" ];
           yaml = [
             "prettierd"
             "prettier"
           ];
         };
-        formatters = {
-          asmfmt = {
-            command = "asmfmt";
-            stdin = true;
-          };
-        };
+        formatters = { };
         format_on_save = {
           lsp_format = "fallback";
           timeou_ms = 500;

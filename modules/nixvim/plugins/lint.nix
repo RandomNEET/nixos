@@ -4,26 +4,22 @@
     plugins.lint = {
       enable = opts.nixvim.lint.enable;
       lintersByFt = {
-        #text = [ "write_good" ];
         markdownlint = [ "markdownlint" ];
-        # c = [ "clangtidy" ];
-        # cpp = [ "clangtidy" ];
-        # css = ["eslint_d"];
+        css = [ "eslint_d" ];
         gitcommit = [ "commitlint" ];
-        # go = [ "golangcilint" ];
-        # javascript = ["eslint_d"];
-        # javascriptreact = ["eslint_d"];
+        javascript = [ "eslint_d" ];
+        javascriptreact = [ "eslint_d" ];
         json = [ "jsonlint" ];
         lua = [ "luacheck" ];
         nix = [ "nix" ];
         python = [ "ruff" ];
         sh = [ "shellcheck" ];
-        # typescript = ["eslint_d"];
-        # typescriptreact = ["eslint_d"];
+        typescript = [ "eslint_d" ];
+        typescriptreact = [ "eslint_d" ];
         yaml = [ "yamllint" ];
+        vue = [ "eslint_d" ];
       };
-      linters = {
-      };
+      linters = { };
     };
     extraConfigLua = lib.mkIf opts.nixvim.lint.enable ''
         -- Linting function
