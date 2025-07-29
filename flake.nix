@@ -50,7 +50,7 @@
                 home-manager.nixosModules.home-manager
                 {
                   home-manager.extraSpecialArgs = {
-                    inherit inputs opts;
+                    inherit opts;
                   };
                 }
                 {
