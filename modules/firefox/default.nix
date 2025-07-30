@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -329,6 +330,11 @@ in
                   "ddg"
                   "google"
                 ];
+              };
+              settings = {
+              }
+              // lib.optionalAttrs config.programs.hyprland.enable {
+                "full-screen-api.ignore-widgets" = true;
               };
             };
           };
