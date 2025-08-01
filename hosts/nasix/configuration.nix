@@ -16,13 +16,13 @@
     ../common.nix
 
     ../../modules/bash
-    # ../../modules/bat
+    ../../modules/bat
     # ../../modules/blueman
     # ../../modules/btop
     # ../../modules/cava
     ../../modules/cron
     ../../modules/docker
-    # ../../modules/direnv
+    ../../modules/direnv
     # ../../modules/discord
     ../../modules/disks
     ../../modules/eza
