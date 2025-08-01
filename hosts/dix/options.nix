@@ -82,14 +82,7 @@ rec {
   };
 
   zsh = {
-    initContent = ''
-      bindkey '^k' up-line-or-history
-      bindkey '^j' down-line-or-history
-      bindkey '^l' forward-char
-      bindkey '^h' backward-char
-      bindkey '^[l' forward-word
-      bindkey '^[h' backward-word
-    '';
+    initContent = '''';
 
     envExtra = ''
       export VI_MODE_SET_CURSOR=true
