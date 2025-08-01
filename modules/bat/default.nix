@@ -5,6 +5,7 @@
       programs.bat = {
         enable = true;
         config = {
+          style = "plain";
           theme = "catppuccin-mocha";
         };
         themes = {
