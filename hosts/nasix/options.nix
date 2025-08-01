@@ -93,7 +93,6 @@ rec {
       plugins = [
         "vi-mode"
       ];
-      theme = "simple";
     };
   };
 
