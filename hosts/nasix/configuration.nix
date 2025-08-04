@@ -35,6 +35,7 @@
     ../../modules/fzf
     # ../../modules/games
     ../../modules/garbage-collection
+    # ../../modules/gh
     # ../../modules/gimp
     ../../modules/git
     # ../../modules/gpg
