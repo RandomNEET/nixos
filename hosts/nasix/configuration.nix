@@ -67,7 +67,7 @@
     ../../modules/tmux
     ../../modules/trash-cli
     # ../../modules/utilities
-    ../../modules/virt-manager
+    ../../modules/virtualisation
     # ../../modules/vscode
     ../../modules/yazi
     # ../../modules/zathura
