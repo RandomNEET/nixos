@@ -42,7 +42,7 @@ rec {
         identityFile = "${ssh.dir}/gh-howl";
       };
       "dix" = {
-        hostname = "192.168.0.29";
+        hostname = "192.168.0.87";
         port = 22;
         user = "howl";
         identityFile = "${ssh.dir}/dix";
@@ -75,7 +75,9 @@ rec {
   };
 
   zsh = {
-    initContent = '''';
+    initContent = ''
+      export EDITOR=${editor}
+    '';
 
     envExtra = ''
       export VI_MODE_SET_CURSOR=true
