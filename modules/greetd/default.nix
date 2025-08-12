@@ -6,16 +6,16 @@
       default_session = {
         command =
           if config.programs.hyprland.enable then
-            "${pkgs.greetd.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland"
+            "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland"
           else if config.programs.zsh.enable then
-            "${pkgs.greetd.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd zsh"
+            "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd zsh"
           else
-            "${pkgs.greetd.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd bash";
+            "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd bash";
         user = "greeter";
       };
     };
   };
   environment.systemPackages = with pkgs; [
-    pkgs.greetd.tuigreet
+    pkgs.tuigreet
   ];
 }
