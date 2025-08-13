@@ -17,6 +17,18 @@ rec {
   terminalFileManager = "yazi";
   browser = "firefox";
   emailClient = "thunderbird";
+  xdg = {
+    userDirs = {
+      desktop = null; # null or "$HOME/dsk"
+      documents = "$HOME/doc";
+      download = "$HOME/dls";
+      music = "$HOME/mus";
+      pictures = "$HOME/pic";
+      publicShare = "$HOME/pub";
+      templates = "$HOME/tpl";
+      videos = "$HOME/vid";
+    };
+  };
 
   # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
   secure-boot = {

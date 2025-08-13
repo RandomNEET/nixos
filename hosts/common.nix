@@ -88,14 +88,14 @@
           userDirs = {
             enable = true;
             createDirectories = false;
-            desktop = "${config.home.homeDirectory}/dsk";
-            documents = "${config.home.homeDirectory}/doc";
-            download = "${config.home.homeDirectory}/dls";
-            music = "${config.home.homeDirectory}/mus";
-            pictures = "${config.home.homeDirectory}/pic";
-            publicShare = "${config.home.homeDirectory}/pub";
-            templates = "${config.home.homeDirectory}/tpl";
-            videos = "${config.home.homeDirectory}/vid";
+            desktop = opts.xdg.userDirs.desktop;
+            documents = opts.xdg.userDirs.documents;
+            download = opts.xdg.userDirs.download;
+            music = opts.xdg.userDirs.music;
+            pictures = opts.xdg.userDirs.pictures;
+            publicShare = opts.xdg.userDirs.publicShare;
+            templates = opts.xdg.userDirs.templates;
+            videos = opts.xdg.userDirs.videos;
           };
         };
       };
