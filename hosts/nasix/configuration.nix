@@ -86,7 +86,7 @@
   home-manager.sharedModules = [ (_: { home.packages = with pkgs; [ ]; }) ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
+  boot.kernelPackages = pkgs.linuxPackages; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
 
   fileSystems."/mnt/ssd" = {
     device = "/dev/disk/by-uuid/d850efcf-11d2-4a43-9a13-a61d362e1cd3";
