@@ -134,21 +134,38 @@ rec {
     obsidian = {
       workspaces = [
         {
-          name = "default";
-          path = "~/${obsidian.vaults.default.target}";
+          name = "index";
+          path = "~/${obsidian.vaults.default.target}/00 index";
+          overrides = {
+            notes_subdir = "00 index";
+          };
         }
         {
-          name = "daily";
-          path = "~/${obsidian.vaults.default.target}/daily";
+          name = "study";
+          path = "~/${obsidian.vaults.default.target}/10 study";
           overrides = {
-            notes_subdir = "daily";
+            notes_subdir = "10 study";
           };
         }
         {
           name = "develop";
-          path = "~/${obsidian.vaults.default.target}/develop";
+          path = "~/${obsidian.vaults.default.target}/20 develop";
           overrides = {
-            notes_subdir = "develop";
+            notes_subdir = "20 develop";
+          };
+        }
+        {
+          name = "daily";
+          path = "~/${obsidian.vaults.default.target}/30 daily";
+          overrides = {
+            notes_subdir = "30 daily";
+          };
+        }
+        {
+          name = "todos";
+          path = "~/${obsidian.vaults.default.target}/99 todos";
+          overrides = {
+            notes_subdir = "99 todos";
           };
         }
       ];
