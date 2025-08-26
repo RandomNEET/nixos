@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   #  use later
   home-manager.sharedModules = [
@@ -37,6 +37,7 @@
             "volume"
             "mpris"
             "notifications"
+            "buttons-grid"
           ];
           widget-config = {
             title = {
@@ -45,6 +46,9 @@
               button-text = "";
             };
             "menubar#desktop" = {
+              "backlight" = {
+                label = "       󰃟  ";
+              };
               "menu#screenshot" = {
                 label = "	󰄀   Screenshot	";
                 position = "left";
@@ -63,6 +67,10 @@
                 label = "	   Power Menu	  ";
                 position = "left";
                 actions = [
+                  {
+                    label = "   Lock";
+                    command = "hyprlock";
+                  }
                   {
                     label = "   Logout";
                     command = "hyprctl dispatch exit 0";
@@ -102,6 +110,39 @@
               clear-all-button = true;
               button-text = "";
             };
+
+            "buttons-grid" = {
+              actions = [
+
+                {
+                  label = "󰝟";
+                  type = "toggle";
+                  command = "pamixer -t";
+                  update-command = "sh -c 'pamixer --get-mute | grep -q true && echo true || echo false'";
+                }
+                {
+                  label = "󰍭";
+                  type = "toggle";
+                  command = "pamixer --default-source -t";
+                  update-command = "sh -c 'pamixer --get-mute --default-source | grep true && echo true || echo false'";
+                }
+
+                {
+                  label = "";
+                  type = "toggle";
+                  command = "blueman-manager";
+                  update-command = "sh -c 'bluetoothctl show | grep -q \\\"Powered: yes\\\" && echo true || echo false'";
+                }
+
+                {
+                  label = "󰤨";
+                  type = "toggle";
+                  command = "sh -c '[ \"$SWAYNC_TOGGLE_STATE\" = true ] && nmcli radio wifi on || nmcli radio wifi off'";
+                  update-command = "sh -c 'nmcli radio wifi | grep -q enabled && echo true || echo false'";
+                }
+
+              ];
+            };
           };
           scripts = {
             example-script = {
@@ -123,7 +164,7 @@
           };
         };
         style = ''
-                    @define-color shadow rgba(0, 0, 0, 0.25);
+          @define-color shadow rgba(0, 0, 0, 0.25);
           /*
           *
           * Catppuccin Mocha palette
@@ -171,7 +212,7 @@
           }
 
           /* #notifications_box { */
-          /*   border: solid 4px red; */
+          /* border: solid 4px red; */
           /* } */
 
           label {
@@ -298,7 +339,7 @@
           }
 
           /* .right.overlay-indicator { */
-          /*   border: solid 5px red; */
+          /* border: solid 5px red; */
           /* } */
 
           .control-center-list {
@@ -320,7 +361,7 @@
 
           .notification-group {
             /* unset the annoying focus thingie */
-            opacity: 0;
+            opacity: 1.0;
             box-shadow: none;
             /* selectable: no; */
           }
@@ -580,7 +621,7 @@
 
           .notification-group > box.vertical {
             /* border: solid 5px red; */
-            margin-top: 3px
+            margin-top: 3px;
           }
 
           /* Backlight and volume widgets */
@@ -591,7 +632,8 @@
             /* background-color: @theme_bg_color; */
             /* border: 1px solid @surface1; */
             border-top: none;
-            border-bottom: none; font-size: 13px;
+            border-bottom: none;
+            font-size: 13px;
             font-weight: 600;
             border-radius: 0px;
             margin: 0px;
