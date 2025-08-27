@@ -52,12 +52,14 @@ rec {
         hostname = "github.com";
         user = "git";
         identityFile = "${ssh.dir}/gh-howl";
+        addKeysToAgent = "yes";
       };
       "dix" = {
         hostname = "192.168.0.87";
         port = 22;
         user = "howl";
         identityFile = "${ssh.dir}/dix";
+        addKeysToAgent = "yes";
       };
     };
     daemon = {

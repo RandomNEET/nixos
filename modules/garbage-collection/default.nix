@@ -18,7 +18,7 @@
       nix.gc = {
         automatic = true;
         persistent = true;
-        frequency = "weekly";
+        dates = "weekly";
         randomizedDelaySec = "30min";
       };
     })

@@ -59,12 +59,14 @@ rec {
         hostname = "github.com";
         user = "git";
         identityFile = "${ssh.dir}/gh-randomneet";
+        addKeysToAgent = "yes";
       };
       "nasix" = {
         hostname = "192.168.0.56";
         port = 22;
         user = "howl";
         identityFile = "${ssh.dir}/nasix";
+        addKeysToAgent = "yes";
       };
     };
     daemon = {
