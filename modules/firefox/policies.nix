@@ -11,8 +11,8 @@
   BlockAboutSupport = false;
   #Containers = { };
   DisableAppUpdate = true;
-  DisableFirefoxAccounts = true;
-  DisableFirefoxScreenshots = true;
+  DisableFirefoxAccounts = false;
+  DisableFirefoxScreenshots = false;
   DisableFirefoxStudies = true;
   DisableFormHistory = true;
   DisableMasterPasswordCreation = true;
@@ -47,7 +47,7 @@
   };
   HardwareAcceleration = true;
   ManualAppUpdateOnly = true;
-  NoDefaultBookmarks = false;
+  NoDefaultBookmarks = true;
   OfferToSaveLogins = false;
   PasswordManagerEnabled = false;
   PictureInPicture = {
