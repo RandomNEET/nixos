@@ -214,7 +214,7 @@ rec {
     vaults = {
       default = {
         enable = true;
-        target = "doc/obsidian";
+        target = "doc/notes";
       };
     };
   };
