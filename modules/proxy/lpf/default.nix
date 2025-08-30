@@ -1,5 +1,7 @@
 { opts, ... }:
 {
-  services.xray.enable = true;
-  services.xray.settingsFile = opts.proxy.settingsFile;
+  services.xray = {
+    enable = true;
+    settingsFile = opts.proxy.settingsFile;
+  };
 }
