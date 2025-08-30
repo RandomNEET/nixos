@@ -1,6 +1,5 @@
 {
   networking.firewall.extraCommands = ''
-
     iptables -t mangle -N XRAY
     iptables -t mangle -A XRAY -d 10.0.0.0/8 -j RETURN
     iptables -t mangle -A XRAY -d 100.64.0.0/10 -j RETURN
