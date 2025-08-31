@@ -194,7 +194,7 @@ rec {
     monitor1 = "DP-1";
     monitor2 = "HDMI-A-1";
     background1 = "${wallpaper.dir}/horizontal/mocha/greenbus.jpg";
-    background2 = "${wallpaper.dir}/vertical/anime/76257949_p0.jpg";
+    background2 = "${wallpaper.dir}/vertical/anime/reimu-city.jpg";
   };
 
   hypridle = {
