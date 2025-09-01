@@ -179,6 +179,11 @@ rec {
     userEmail = "dev@randomneet.me";
   };
 
+  wallpaper = {
+    dir = "/home/${username}/pic/wallpapers";
+    default = "${wallpaper.dir}/universal/black.png";
+  };
+
   hyprland = {
     monitor = [
       "desc:SAC G7u Pro 0001, 3840x2160@160, 0x0, 1.5"
@@ -203,11 +208,6 @@ rec {
       dpmsOff = "";
       suspend = "";
     };
-  };
-
-  wallpaper = {
-    dir = "/home/${username}/pic/wallpapers";
-    default = "${wallpaper.dir}/universal/black.png";
   };
 
   obsidian = {

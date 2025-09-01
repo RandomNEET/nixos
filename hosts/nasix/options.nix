@@ -137,6 +137,11 @@ rec {
     userEmail = "";
   };
 
+  wallpaper = {
+    dir = "";
+    default = "";
+  };
+
   hyprland = {
     monitor = [ ];
     workspaceBind = "";
@@ -155,11 +160,6 @@ rec {
       dpmsOff = "";
       suspend = "";
     };
-  };
-
-  wallpaper = {
-    dir = "";
-    default = "";
   };
 
   obsidian = {
