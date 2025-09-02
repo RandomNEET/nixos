@@ -1,8 +1,9 @@
 { pkgs, opts, ... }:
 if opts.hostname != null && opts.hostname == "dix" then
   pkgs.writeShellScriptBin "backup" ''
-    tar czf vault.tar.gz ~/.vault
-    gpg -e -r neet@randomneet.me vault.tar.gz && rm vault.tar.gz
+    cd ~/
+    sudo tar czf vault.tar.gz ~/.vault
+    gpg -e -r neet@randomneet.me vault.tar.gz && rm -f vault.tar.gz
     mv -v ~/vault.tar.gz.gpg /mnt/hdd2/backup
 
     rsync -av --delete ~/nixos /mnt/hdd2/backup
