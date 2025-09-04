@@ -11,8 +11,8 @@
 
         programs.spicetify = {
           enable = true;
-          theme = spicePkgs.themes.comfy;
-          colorScheme = "catppuccin-mocha";
+          theme = spicePkgs.themes.text;
+          colorScheme = "CatppuccinMocha";
           enabledExtensions = with spicePkgs.extensions; [
             shuffle
             keyboardShortcut
