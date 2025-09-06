@@ -55,7 +55,7 @@ rec {
         addKeysToAgent = "yes";
       };
       "dix" = {
-        hostname = "192.168.0.87";
+        hostname = "192.168.0.24";
         port = 22;
         user = "howl";
         identityFile = "${ssh.dir}/dix";
