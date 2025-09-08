@@ -29,7 +29,7 @@
     fsType = "tmpfs";
     options = [
       "noatime"
-      #"size=3G"
+      "size=3G"
       "mode=755"
     ];
   };
