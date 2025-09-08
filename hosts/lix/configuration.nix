@@ -58,7 +58,7 @@
     ../../modules/rigprep
     # ../../modules/samba
     ../../modules/scripts
-    #    ../../modules/secure-boot
+    ../../modules/secure-boot
     ../../modules/snapper
     ../../modules/spicetify
     ../../modules/spotify-player
