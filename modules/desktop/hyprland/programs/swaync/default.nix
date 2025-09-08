@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ opts, ... }:
 {
   #  use later
   home-manager.sharedModules = [
@@ -80,13 +80,21 @@
                     command = "systemctl poweroff";
                   }
                   {
-                    label = "󰤄   Suspend";
-                    command = "systemctl suspend";
-                  }
-                  {
                     label = "   Reboot";
                     command = "systemctl reboot";
                   }
+                  (
+                    if opts.hibernate then
+                      {
+                        label = "󰤄   Hibernate";
+                        command = "systemctl hibernate";
+                      }
+                    else
+                      {
+                        label = "󰤄   Suspend";
+                        command = "systemctl suspend";
+                      }
+                  )
                 ];
               };
             };

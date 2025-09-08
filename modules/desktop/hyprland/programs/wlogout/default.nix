@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ opts, ... }:
 {
   home-manager.sharedModules = [
     (_: {
@@ -19,17 +19,27 @@
             keybind = "s";
           }
           {
-            label = "suspend";
-            action = "systemctl suspend";
-            text = "Suspend";
-            keybind = "u";
-          }
-          {
             label = "reboot";
             action = "systemctl reboot";
             text = "Reboot";
             keybind = "r";
           }
+          (
+            if opts.hibernate then
+              {
+                label = "hibernate";
+                action = "systemctl hibernate";
+                text = "Hibernate";
+                keybind = "h";
+              }
+            else
+              {
+                label = "suspend";
+                action = "systemctl suspend";
+                text = "Suspend";
+                keybind = "h";
+              }
+          )
         ];
         style = ''
           window {
@@ -71,13 +81,6 @@
             background-image: image(url("icons/logout-hover.png"));
           }
 
-          #suspend {
-            background-image: image(url("icons/sleep.png"));
-          }
-          #suspend:focus {
-            background-image: image(url("icons/sleep-hover.png"));
-          }
-
           #shutdown {
             background-image: image(url("icons/power.png"));
           }
@@ -90,6 +93,20 @@
           }
           #reboot:focus {
             background-image: image(url("icons/restart-hover.png"));
+          }
+
+          #hibernate {
+            background-image: image(url("icons/sleep.png"));
+          }
+          #hibernate:focus {
+            background-image: image(url("icons/sleep-hover.png"));
+          }
+
+          #suspend {
+            background-image: image(url("icons/sleep.png"));
+          }
+          #suspend:focus {
+            background-image: image(url("icons/sleep-hover.png"));
           }
         '';
       };
