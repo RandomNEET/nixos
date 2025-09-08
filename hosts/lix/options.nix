@@ -2,7 +2,8 @@ rec {
   hostname = "lix";
   system = "x86_64-linux";
 
-  gpu = "";
+  gpu = "intel";
+  gpuType = "integrated";
   locale = "en_US.UTF-8";
   timezone = "Asia/Shanghai";
   kbdLayout = "us";

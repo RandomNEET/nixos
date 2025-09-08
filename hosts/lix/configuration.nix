@@ -39,7 +39,7 @@
     # ../../modules/gimp
     ../../modules/git
     ../../modules/gpg
-    #../../modules/gpu
+    ../../modules/gpu
     ../../modules/greetd
     ../../modules/impermanence
     # ../../modules/jellyfin

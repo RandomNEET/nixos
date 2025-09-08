@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  lib,
+  pkgs,
+  opts,
+  ...
+}:
 {
   fonts.packages = with pkgs.nerd-fonts; [ jetbrains-mono ];
   home-manager.sharedModules = [
@@ -34,17 +39,20 @@
               "idle_inhibitor"
               "clock"
             ];
-            modules-right = [
-              "custom/gpuinfo"
-              "cpu"
-              "memory"
-              "backlight"
-              "pulseaudio"
-              "bluetooth"
-              "network"
-              "tray"
-              "battery"
-            ];
+            modules-right =
+              lib.optionals (opts.gpuType == "discrete") [
+                "custom/gpuinfo"
+              ]
+              ++ [
+                "cpu"
+                "memory"
+                "backlight"
+                "pulseaudio"
+                "bluetooth"
+                "network"
+                "tray"
+                "battery"
+              ];
 
             "custom/notification" = {
               tooltip = false;
