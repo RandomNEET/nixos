@@ -64,6 +64,7 @@
     options = [
       "subvol=@home"
       "compress=zstd"
+      "noatime"
     ];
   };
 
