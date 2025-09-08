@@ -1,20 +1,14 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  opts,
+  ...
+}:
 {
   services.greetd = {
     enable = true;
-    settings = {
-      default_session = {
-        command =
-          if config.programs.hyprland.enable then
-            "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland"
-          else if config.programs.zsh.enable then
-            "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd zsh"
-          else
-            "${pkgs.tuigreet}/bin/tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd bash";
-        user = "greeter";
-      };
-    };
+    settings = opts.greetd.settings;
   };
+
   environment.systemPackages = with pkgs; [
     pkgs.tuigreet
   ];

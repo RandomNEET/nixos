@@ -3,7 +3,6 @@ rec {
   system = "x86_64-linux";
 
   gpu = "nvidia";
-  gpuType = "discrete";
   locale = "en_US.UTF-8";
   timezone = "Asia/Shanghai";
   kbdLayout = "us";

@@ -2,8 +2,7 @@ rec {
   hostname = "lix";
   system = "x86_64-linux";
 
-  gpu = "intel";
-  gpuType = "integrated";
+  gpu = "intel-integrated";
   locale = "en_US.UTF-8";
   timezone = "Asia/Shanghai";
   kbdLayout = "us";
@@ -192,6 +191,15 @@ rec {
   wallpaper = {
     dir = "/home/${username}/pic/wallpapers";
     default = "${wallpaper.dir}/universal/black.png";
+  };
+
+  greetd = {
+    settings = {
+      default_session = {
+        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
+        user = "greeter";
+      };
+    };
   };
 
   hyprland = {
