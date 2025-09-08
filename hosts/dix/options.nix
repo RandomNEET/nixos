@@ -64,6 +64,13 @@ rec {
         identityFile = "${ssh.dir}/gh-randomneet";
         addKeysToAgent = "yes";
       };
+      "lix" = {
+        hostname = "192.168.0.69";
+        port = 22;
+        user = "howl";
+        identityFile = "${ssh.dir}/lix";
+        addKeysToAgent = "yes";
+      };
       "nasix" = {
         hostname = "192.168.0.56";
         port = 22;

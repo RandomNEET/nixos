@@ -84,7 +84,7 @@ rec {
       ports = [
         22
       ];
-      authorizedKeysFiles = [ "${ssh.dir}/dix.pub" ];
+      authorizedKeysFiles = [ "${ssh.dir}/lix.pub" ];
       settings = {
         PasswordAuthentication = false;
       };
