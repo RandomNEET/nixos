@@ -146,6 +146,11 @@ rec {
     userEmail = "";
   };
 
+  display = {
+    width = 1920;
+    height = 1080;
+  };
+
   wallpaper = {
     dir = "";
     default = "";
@@ -168,6 +173,15 @@ rec {
       lock = "";
       dpmsOff = "";
       sleep = "";
+    };
+  };
+
+  greetd = {
+    settings = {
+      default_session = {
+        command = "";
+        user = "";
+      };
     };
   };
 

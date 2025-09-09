@@ -188,18 +188,14 @@ rec {
     userEmail = "dev@randomneet.me";
   };
 
+  display = {
+    width = 1920;
+    height = 1080;
+  };
+
   wallpaper = {
     dir = "/home/${username}/pic/wallpapers";
     default = "${wallpaper.dir}/universal/black.png";
-  };
-
-  greetd = {
-    settings = {
-      default_session = {
-        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
-        user = "greeter";
-      };
-    };
   };
 
   hyprland = {
@@ -222,6 +218,15 @@ rec {
       lock = "300";
       dpmsOff = "1800";
       sleep = "3600";
+    };
+  };
+
+  greetd = {
+    settings = {
+      default_session = {
+        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
+        user = "greeter";
+      };
     };
   };
 

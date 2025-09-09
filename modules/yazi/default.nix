@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, opts, ... }:
 {
   home-manager.sharedModules = [
     (_: {
@@ -29,8 +29,8 @@
             # wrap = "yes";
             tab_size = 4;
             image_filter = "triangle"; # from fast to slow but high quality: nearest, triangle, catmull-rom, lanczos3
-            max_width = 3840; # maybe 1000
-            max_height = 2160; # maybe 1000
+            max_width = opts.display.width;
+            max_height = opts.display.height;
             image_quality = 90;
           };
           plugin = {
