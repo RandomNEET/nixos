@@ -40,7 +40,7 @@
               "clock"
             ];
             modules-right =
-              lib.optionals (lib.match "integrated" opts.gpu != null) [
+              lib.optionals (lib.match ".*integrated.*" opts.gpu == null) [
                 "custom/gpuinfo"
               ]
               ++ [
