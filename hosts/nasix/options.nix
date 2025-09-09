@@ -167,7 +167,7 @@ rec {
     time = {
       lock = "";
       dpmsOff = "";
-      suspend = "";
+      sleep = "";
     };
   };
 

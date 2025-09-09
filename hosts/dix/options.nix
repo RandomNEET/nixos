@@ -222,9 +222,9 @@ rec {
 
   hypridle = {
     time = {
-      lock = "300";
-      dpmsOff = "";
-      suspend = "";
+      lock = "1800";
+      dpmsOff = "3600";
+      sleep = "";
     };
   };
 

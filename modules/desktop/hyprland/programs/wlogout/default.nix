@@ -30,14 +30,14 @@
                 label = "hibernate";
                 action = "systemctl hibernate";
                 text = "Hibernate";
-                keybind = "h";
+                keybind = "u";
               }
             else
               {
                 label = "suspend";
                 action = "systemctl suspend";
                 text = "Suspend";
-                keybind = "h";
+                keybind = "u";
               }
           )
         ];

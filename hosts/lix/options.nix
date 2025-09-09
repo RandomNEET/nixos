@@ -220,8 +220,8 @@ rec {
   hypridle = {
     time = {
       lock = "300";
-      dpmsOff = "";
-      suspend = "";
+      dpmsOff = "1800";
+      sleep = "3600";
     };
   };
 

@@ -26,11 +26,19 @@
                 on-resume = "hyprctl dispatch dpms on";
               }
             ]
-            ++ lib.optionals (opts.hypridle.time.suspend != "") [
-              {
-                timeout = opts.hypridle.time.suspend;
-                on-timeout = "systemctl suspend";
-              }
+            ++ lib.optionals (opts.hypridle.time.sleep != "") [
+              (
+                if opts.hibernate then
+                  {
+                    timeout = opts.hypridle.time.sleep;
+                    on-timeout = "systemctl hibernate";
+                  }
+                else
+                  {
+                    timeout = opts.hypridle.time.sleep;
+                    on-timeout = "systemctl suspend";
+                  }
+              )
             ];
         };
       };
