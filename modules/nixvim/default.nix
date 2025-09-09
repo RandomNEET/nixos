@@ -35,20 +35,22 @@
           with pkgs;
           (
             [
-              ripgrep
-              lynx
               fd
               ghostscript
+              lynx
+              ripgrep
             ]
             ++ lib.optionals opts.nixvim.conform.enable [
               # Formatters
+              astyle
+              black
+              isort
               nixfmt-rfc-style
-              shfmt
-              stylua
               prettier
               prettierd
-              isort
-              black
+              rustfmt
+              shfmt
+              stylua
             ]
             ++ lib.optionals opts.nixvim.lint.enable [
               # Linters

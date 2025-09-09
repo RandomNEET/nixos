@@ -15,6 +15,8 @@
       enable = opts.nixvim.conform.enable;
       settings = {
         formatters_by_ft = {
+          c = [ "astyle" ];
+          cpp = [ "astyle" ];
           css = [
             "prettierd"
             "prettier"
@@ -36,6 +38,7 @@
             "isort"
             "black"
           ];
+          rust = [ "rustfmt" ];
           sh = [ "shfmt" ];
           typescript = [
             "prettierd"

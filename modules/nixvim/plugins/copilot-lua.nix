@@ -9,6 +9,9 @@
           enabled = false;
           auto_trigger = false;
         };
+        server_opts_overrides = {
+          offset_encoding = "utf-8";
+        };
       };
     };
   };

@@ -4,13 +4,15 @@
     plugins.lint = {
       enable = opts.nixvim.lint.enable;
       lintersByFt = {
-        markdownlint = [ "markdownlint" ];
+        c = [ "clangtidy" ];
+        cpp = [ "clangtidy" ];
         css = [ "eslint_d" ];
         gitcommit = [ "commitlint" ];
         javascript = [ "eslint_d" ];
         javascriptreact = [ "eslint_d" ];
         json = [ "jsonlint" ];
         lua = [ "luacheck" ];
+        markdownlint = [ "markdownlint" ];
         nix = [ "nix" ];
         python = [ "ruff" ];
         sh = [ "shellcheck" ];

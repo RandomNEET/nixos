@@ -5,11 +5,17 @@
       lsp = {
         enable = opts.nixvim.lsp.enable;
         servers = {
+          clangd.enable = true;
           lua_ls.enable = true;
           yamlls.enable = true;
           nil_ls.enable = true;
           marksman.enable = true;
           pyright.enable = true;
+          rust_analyzer = {
+            enable = true;
+            installCargo = true;
+            installRustc = true;
+          };
           bashls.enable = true;
           jsonls.enable = true;
           ts_ls.enable = true;
