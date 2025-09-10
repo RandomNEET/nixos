@@ -74,8 +74,7 @@
             wl-clipboard
             xdotool
             yad
-            jq # for random-walls.sh and autowaybar.sh
-            # socat # for autowaybar.sh
+            jq # for random-walls.sh
           ];
 
           home.sessionVariables = {
@@ -115,12 +114,10 @@
             settings = {
               "$mainMod" = "SUPER";
               "$terminal" = "${getExe pkgs.${opts.terminal}}";
-              "$terminalFileManager" =
-                ''$terminal --class "terminalFileManager" -e ${opts.terminalFileManager}''; # "dolphin";
+              "$fileManager" = ''$terminal --class "terminalFileManager" -e ${opts.terminalFileManager}'';
               "$menu" = "rofi -show drun";
-              "$editor" = ''$terminal --class "editor" -e ${opts.editor}''; # "code --disable-gpu";
+              "$editor" = ''$terminal --class "editor" -e ${opts.editor}'';
               "$browser" = opts.browser;
-              "$emailClient" = opts.emailClient;
 
               env = [
                 "LIBVA_DRIVER_NAME,nvidia"
@@ -156,8 +153,6 @@
                 "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store" # clipboard store text data
                 "${getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store" # clipboard store image data
                 "rm '$XDG_CACHE_HOME/cliphist/db'" # Clear clipboard
-                # "${./scripts/batterynotify.sh}" # battery notification
-                # "${./scripts/autowaybar.sh}" # uncomment packages at the top
                 "polkit-agent-helper-1"
                 "hyprctl dispatch workspace 1"
                 "sleep 2 && pamixer --set-volume 50"
@@ -405,8 +400,8 @@
                   "$mainMod, F10, exec, pkill hyprsunset"
 
                   # Window/Session actions
-                  "$mainMod, Q, exec, ${./scripts/dontkillsteam.sh}" # killactive, kill the window on focus
-                  "ALT, F4, exec, ${./scripts/dontkillsteam.sh}" # killactive, kill the window on focus
+                  "$mainMod, Q, killactive" # killactive, kill the window on focus
+                  "ALT, F4, killactive" # killactive, kill the window on focus
                   "$mainMod, delete, exit" # kill hyperland session
                   "$mainMod, W, togglefloating" # toggle the window on focus to float
                   "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to group
@@ -418,13 +413,9 @@
                   # Applications/Programs
                   "$mainMod, Return, exec, $terminal"
                   "$mainMod, T, exec, $terminal"
-                  "$mainMod, E, exec, $terminalFileManager"
-                  "$mainMod, N, exec, $editor"
+                  "$mainMod, F, exec, $fileManager"
+                  "$mainMod, E, exec, $editor"
                   "$mainMod, B, exec, $browser"
-                  "$mainMod, M, exec, $emailClient"
-                  "$mainMod SHIFT, C, exec, code --disable-gpu"
-                  "$mainMod SHIFT, S, exec, spotify"
-                  # "$mainMod SHIFT, Y, exec, youtube-music"
                   "$CONTROL ALT, DELETE, exec, $terminal -e '${getExe pkgs.btop}'" # System Monitor
                   "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
@@ -435,17 +426,13 @@
                   # } emoji" # launch emoji picker
                   # "$mainMod, tab, exec, pkill -x rofi || ${./scripts/rofi.sh} window" # switch between desktop applications
                   # "$mainMod, R, exec, pkill -x rofi || ${./scripts/rofi.sh} file" # brrwse system files
-                  "$mainMod ALT, K, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
+                  "$mainMod ALT, K, exec, ${./scripts/keyboard-switch.sh}" # change keyboard layout
                   "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
-                  "$mainMod CTRL, G, exec, ${./scripts/steam-scope.sh} games" # launch steam in gamescope
-                  "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
+                  "$mainMod, V, exec, ${./scripts/clip-manager.sh}" # Clipboard Manager
                   "$mainMod, R, exec, ${./scripts/random-walls.sh}" # random wallpaper
-                  # "$mainMod, M, exec, pkill -x rofi || ${
-                  #   ./scripts/rofimusic.sh
-                  # }" # online music
 
                   # Screenshot/Screencapture
                   "$mainMod, P, exec, ${./scripts/screenshot.sh} s" # drag to snip an area / click on a window to print it
@@ -462,10 +449,10 @@
                   ",xf86AudioNext,exec,playerctl next" # go to next media
                   ",xf86AudioPrev,exec,playerctl previous" # go to previous media
 
-                  # ",xf86AudioNext,exec,${./scripts/MediaCtrl.sh} next" # go to next media
-                  # ",xf86AudioPrev,exec,${./scripts/MediaCtrl.sh} previous" # go to previous media
-                  # ",XF86AudioPlay,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
-                  # ",XF86AudioPause,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
+                  # ",xf86AudioNext,exec,${./scripts/media-ctrl.sh} next" # go to next media
+                  # ",xf86AudioPrev,exec,${./scripts/media-ctrl.sh} previous" # go to previous media
+                  # ",XF86AudioPlay,exec,${./scripts/media-ctrl.sh} play-pause" # go to next media
+                  # ",XF86AudioPause,exec,${./scripts/media-ctrl.sh} play-pause" # go to next media
 
                   # to switch between windows in a floating workspace
                   "$mainMod, Tab, cyclenext"

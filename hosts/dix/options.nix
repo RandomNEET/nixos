@@ -18,7 +18,6 @@ rec {
   terminal = "kitty";
   terminalFileManager = "yazi";
   browser = "firefox";
-  emailClient = "thunderbird";
   xdg = {
     userDirs = {
       desktop = null; # null or "$HOME/dsk"

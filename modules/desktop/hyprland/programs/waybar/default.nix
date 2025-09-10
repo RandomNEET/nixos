@@ -82,7 +82,7 @@
               on-scroll-down = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
             };
             "custom/cava_mviz" = {
-              exec = "${../../scripts/WaybarCava.sh}";
+              exec = "${../../scripts/waybar-cava.sh}";
               format = "{}";
             };
             "cava" = {
@@ -154,7 +154,7 @@
             };
             "hyprland/language" = {
               format = "{short}"; # can use {short} and {variant}
-              on-click = "${../../scripts/keyboardswitch.sh}";
+              on-click = "${../../scripts/keyboard-switch.sh}";
             };
             "hyprland/workspaces" = {
               disable-scroll = true;

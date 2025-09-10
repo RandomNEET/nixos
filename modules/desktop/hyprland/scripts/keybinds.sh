@@ -18,7 +18,6 @@ _terminal=$(get_nix_value "terminal =")
 _terminal_FM=$(get_nix_value "terminalFileManager =")
 _editor=$(get_nix_value "editor =")
 _browser=$(get_nix_value "browser =")
-_email=$(get_nix_value "emailClient =")
 
 yad \
 	--center \
@@ -33,12 +32,9 @@ yad \
 	--timeout-indicator=bottom \
 	"SUPER Return" "Launch terminal" "$_terminal" \
 	"SUPER T" "Launch terminal" "$_terminal" \
-	"SUPER E" "Launch file manager" "$_terminal_FM" \
-	"SUPER N" "Launch editor" "$_editor" \
+	"SUPER F" "Launch file manager" "$_terminal_FM" \
+	"SUPER E" "Launch editor" "$_editor" \
 	"SUPER B" "Launch browser" "$_browser" \
-	"SUPER M" "Launch email client" "$_email" \
-	"SUPER SHIFT S" "Launch spotify" "spotify" \
-	"SUPER SHIFT C" "Launch vscode" "vscode" \
 	"CTRL ALT Delete" "Open system monitor" "$_terminal -e 'btop'" \
 	"SUPER A" "Launch application menu" "scripts/rofi.sh drun" \
 	"SUPER SPACE" "Launch application menu" "scripts/rofi.sh drun" \
@@ -74,15 +70,15 @@ yad \
 	"CTRL Escape" "Toggle Waybar" "pkill waybar || waybar" \
 	"SUPER SHIFT N" "Open notification panel" "swaync-client -t -sw" \
 	"SUPER SHIFT Q" "Open notification panel" "swaync-client -t -sw" \
-	"SUPER Q" "Close active window" "scripts/dontkillsteam.sh" \
-	"ALT F4" "Close active window" "scripts/dontkillsteam.sh" \
+	"SUPER Q" "Close active window" "killactive" \
+	"ALT F4" "Close active window" "killactive" \
 	\
-	"SUPER ALT K" "Change keyboard layout" "scripts/keyboardswitch.sh" \
+	"SUPER R" "Random wallpapers" "scripts/random-walls.sh" \
+	"SUPER ALT K" "Change keyboard layout" "scripts/keyboard-switch.sh" \
 	"SUPER U" "Rebuild system" "$_terminal -e scripts/rebuild.sh" \
 	"SUPER G" "Game launcher" "scripts/rofi.sh games" \
 	"SUPER ALT G" "Enable game mode" "scripts/gamemode.sh" \
-	"SUPER CTRL G" "Steam gamescope" "scripts/steam-scope.sh" \
-	"SUPER V" "Clipboard manager" "scripts/ClipManager.sh" \
+	"SUPER V" "Clipboard manager" "scripts/clip-manager.sh" \
 	\
 	"SUPER P" "Screenshot (select area)" "scripts/screenshot.sh s" \
 	"SUPER CTRL P" "Screenshot (frozen screen)" "scripts/screenshot.sh sf" \
@@ -107,5 +103,4 @@ yad \
 	"SUPER 1-0" "Switch to workspace 1-10" "workspace 1-10" \
 	"SUPER SHIFT 1-0" "Move to workspace 1-10" "movetoworkspace 1-10"
 # "SUPER SHIFT 1-0" "Silently move to workspace 1-10" "movetoworkspacesilent 1-10"#
-# "SUPER M" "Online music" "scripts/rofimusic.sh"
 # "SUPER Z" "Launch emoji picker" "scripts/rofi.sh emoji" \
