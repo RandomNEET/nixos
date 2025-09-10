@@ -15,6 +15,9 @@
     ./hardware-configuration.nix
     ../common.nix
 
+    # ../../modules/desktop/hyprland
+    # ../../modules/desktop/themes/catppuccin
+
     ../../modules/bash
     ../../modules/bat
     # ../../modules/blueman
@@ -55,7 +58,6 @@
     # ../../modules/obsidian
     # ../../modules/pipewire
     ../../modules/proxy
-    ../../modules/rice
     # ../../modules/rigprep
     ../../modules/samba
     ../../modules/scripts
@@ -68,7 +70,6 @@
     # ../../modules/thunderbird
     ../../modules/tmux
     ../../modules/trash-cli
-    # ../../modules/utilities
     ../../modules/virtualisation
     # ../../modules/vscode
     ../../modules/yazi
@@ -76,8 +77,10 @@
     ../../modules/zoxide
     ../../modules/zsh
 
-    # ../../modules/desktop/hyprland
-    # ../../modules/desktop/themes/catppuccin
+    ../../modules/no-config/archive
+    # ../../modules/no-config/media
+    ../../modules/no-config/rice
+    # ../../modules/no-config/type
   ];
 
   # Define system packages here

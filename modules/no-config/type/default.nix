@@ -4,9 +4,8 @@
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
-        _7zz
-        ffmpeg
-        imagemagick
+        gtypist
+        ttyper
       ];
     })
   ];
