@@ -27,6 +27,7 @@
     ../../modules/disks
     ../../modules/eza
     ../../modules/fastfetch
+    ../../modules/fcitx5
     ../../modules/firefox
     ../../modules/firejail
     ../../modules/flatpak

@@ -12,7 +12,6 @@
     ./programs/hyprlock
     ./programs/swaync
     ./programs/rofi
-    ./programs/fcitx5
   ];
 
   nix.settings = {
