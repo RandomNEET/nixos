@@ -11,76 +11,78 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common.nix
 
+    ../../modules/system/automount
+    ../../modules/system/blueman
+    # ../../modules/system/cron
+    # ../../modules/system/docker
+    ../../modules/system/flatpak
+    # ../../modules/system/frp
+    ../../modules/system/garbage-collect
+    ../../modules/system/gpu
+    ../../modules/system/impermanence
+    # ../../modules/system/jellyfin
+    ../../modules/system/pipewire
+    ../../modules/system/proxy
+    # ../../modules/system/samba
+    ../../modules/system/secure-boot
+    ../../modules/system/snapper
+    ../../modules/system/ssh
+    ../../modules/system/virtualisation
+
+    ../../modules/desktop/fonts
+    ../../modules/desktop/greetd
     ../../modules/desktop/hyprland
     ../../modules/desktop/themes/catppuccin
 
-    ../../modules/bash
-    ../../modules/bat
-    ../../modules/blueman
-    ../../modules/btop
-    ../../modules/cava
-    # ../../modules/cron
-    # ../../modules/docker
-    ../../modules/direnv
-    ../../modules/discord
-    ../../modules/disks
-    ../../modules/eza
-    ../../modules/fastfetch
-    ../../modules/fcitx5
-    ../../modules/firefox
-    ../../modules/firejail
-    ../../modules/flatpak
-    ../../modules/fonts
-    # ../../modules/frp
-    ../../modules/fzf
-    ../../modules/games
-    ../../modules/garbage-collection
-    ../../modules/gh
-    ../../modules/gimp
-    ../../modules/git
-    ../../modules/gpg
-    ../../modules/gpu
-    ../../modules/greetd
-    ../../modules/impermanence
-    # ../../modules/jellyfin
-    ../../modules/jq
-    ../../modules/kitty
-    ../../modules/lazygit
-    ../../modules/libreoffice
-    ../../modules/localsend
-    ../../modules/mpv
-    ../../modules/nixvim
-    ../../modules/obs-studio
-    ../../modules/obsidian
-    ../../modules/pipewire
-    ../../modules/proxy
-    ../../modules/rigprep
-    # ../../modules/samba
-    ../../modules/scripts
-    ../../modules/secure-boot
-    ../../modules/snapper
-    ../../modules/spicetify
-    ../../modules/spotify-player
-    ../../modules/ssh
-    ../../modules/swayimg
-    ../../modules/thunderbird
-    ../../modules/tmux
-    ../../modules/trash-cli
-    ../../modules/virtualisation
-    ../../modules/vscode
-    ../../modules/yazi
-    ../../modules/zathura
-    ../../modules/zoxide
-    ../../modules/zsh
+    ../../modules/cli/bash
+    ../../modules/cli/bat
+    ../../modules/cli/btop
+    ../../modules/cli/cava
+    ../../modules/cli/direnv
+    ../../modules/cli/eza
+    ../../modules/cli/fastfetch
+    ../../modules/cli/fzf
+    ../../modules/cli/gh
+    ../../modules/cli/git
+    ../../modules/cli/gpg
+    ../../modules/cli/jq
+    ../../modules/cli/lazygit
+    ../../modules/cli/mpv
+    ../../modules/cli/nixvim
+    ../../modules/cli/rigprep
+    ../../modules/cli/spotify-player
+    ../../modules/cli/tmux
+    ../../modules/cli/trash-cli
+    ../../modules/cli/yazi
+    ../../modules/cli/zoxide
+    ../../modules/cli/zsh
+
+    ../../modules/gui/discord
+    ../../modules/gui/fcitx5
+    ../../modules/gui/firefox
+    ../../modules/gui/firejail
+    ../../modules/gui/games
+    ../../modules/gui/gimp
+    ../../modules/gui/kitty
+    ../../modules/gui/libreoffice
+    ../../modules/gui/localsend
+    ../../modules/gui/obs-studio
+    ../../modules/gui/obsidian
+    ../../modules/gui/spicetify
+    ../../modules/gui/swayimg
+    ../../modules/gui/thunderbird
+    ../../modules/gui/vscode
+    ../../modules/gui/zathura
 
     ../../modules/no-config/archive
     ../../modules/no-config/media
     ../../modules/no-config/rice
     ../../modules/no-config/type
+
+    ../../modules/scripts
   ];
 
   # Define system packages here
@@ -97,12 +99,6 @@
   boot.kernelPackages = pkgs.linuxPackages; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
 
   # Disks
-  systemd.tmpfiles.rules = [
-    "d /mnt/ssd 0775 ${opts.username} users -"
-    "d /mnt/hdd1 0775 ${opts.username} users -"
-    "d /mnt/hdd2 0775 ${opts.username} users -"
-  ];
-
   fileSystems."/mnt/ssd" = {
     device = "/dev/disk/by-uuid/CC28EE4576AC5AE3";
     fsType = "ntfs-3g";
@@ -112,6 +108,8 @@
       "dmask=0022"
       "fmask=002"
       "exec"
+      "nofail"
+      "X-mount.mkdir"
     ];
     neededForBoot = false;
   };
@@ -122,6 +120,7 @@
     options = [
       "defaults"
       "nofail"
+      "X-mount.mkdir"
     ];
     neededForBoot = false;
   };
@@ -132,6 +131,7 @@
     options = [
       "defaults"
       "nofail"
+      "X-mount.mkdir"
     ];
     neededForBoot = false;
   };
