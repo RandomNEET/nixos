@@ -1,19 +1,14 @@
 rec {
+  # General
   hostname = "dix";
   system = "x86_64-linux";
 
-  gpu = "nvidia";
-  locale = "en_US.UTF-8";
-  timezone = "Asia/Shanghai";
-  kbdLayout = "us";
-  kbdVariant = "";
-  consoleKeymap = "us";
-  hibernate = false;
-
+  # Users
   rootpasswd = "$6$1bNtqKFsObhMC1OG$THnog0HqmR/GnN.0IwndZzuijVMiV0cZIPUjmCvDs6gsjHAc.FYfcIlKmiMx2hy2gbd814Br1uNAhiyKl4W9g.";
   username = "howl";
   userpasswd = "$6$.FVrKngH1eXjNYi9$lsTAUQvvJyB209fhkf3g5E12iCcgNdDZKW0XTwCp7i3lNwM8gjNq3kRgjW4WIBV68YETysoDCHhKtSIncPT3n1";
 
+  # User environment
   editor = "nvim";
   terminal = "kitty";
   terminalFileManager = "yazi";
@@ -31,13 +26,47 @@ rec {
     };
   };
 
-  # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+  # System
+  gpu = "nvidia";
+  locale = "en_US.UTF-8";
+  timezone = "Asia/Shanghai";
+  kbdLayout = "us";
+  kbdVariant = "";
+  consoleKeymap = "us";
+  hibernate = false;
+
   secure-boot = {
     enable = true;
     lanzaboote = {
       enable = true;
       pkiBundle = "/nix/persist/var/lib/sbctl";
     };
+  };
+
+  # Services
+  flatpak = {
+    packages = {
+      system = [ ];
+      user = [
+        "com.github.tchx84.Flatseal"
+        "com.qq.QQ"
+        "com.tencent.WeChat"
+      ];
+    };
+  };
+
+  greetd = {
+    settings = {
+      default_session = {
+        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
+  proxy = {
+    method = "tproxy"; # tproxy lpf
+    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/default.json";
   };
 
   snapper = {
@@ -90,39 +119,17 @@ rec {
     agent.enable = false;
   };
 
+  # Programs
+  git = {
+    userName = "RandomNEET";
+    userEmail = "dev@randomneet.me";
+  };
+
   gpg = {
     homedir = "/home/${username}/.gnupg";
     agent = {
       enable = true;
       enableSshSupport = true; # Automatically disable ssh-agent if set to true
-    };
-  };
-
-  proxy = {
-    method = "tproxy"; # tproxy lpf
-    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/default.json";
-  };
-
-  zsh = {
-    initContent = '''';
-
-    envExtra = ''
-      export VI_MODE_SET_CURSOR=true
-      MODE_INDICATOR="%F{red}<<<%f"
-    '';
-
-    shellGlobalAliases = {
-      G = "| grep";
-    };
-    shellAliases = {
-      update = "sudo nixos-rebuild switch";
-    };
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "vi-mode"
-      ];
-      theme = "simple";
     };
   };
 
@@ -182,11 +189,39 @@ rec {
     };
   };
 
-  git = {
-    userName = "RandomNEET";
-    userEmail = "dev@randomneet.me";
+  zsh = {
+    initContent = '''';
+
+    envExtra = ''
+      export VI_MODE_SET_CURSOR=true
+      MODE_INDICATOR="%F{red}<<<%f"
+    '';
+
+    shellGlobalAliases = {
+      G = "| grep";
+    };
+    shellAliases = {
+      update = "sudo nixos-rebuild switch";
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "vi-mode"
+      ];
+      theme = "simple";
+    };
   };
 
+  obsidian = {
+    vaults = {
+      default = {
+        enable = true;
+        target = "doc/notes";
+      };
+    };
+  };
+
+  # Desktop
   display = {
     width = 3840;
     height = 2160;
@@ -220,46 +255,6 @@ rec {
       lock = "1800";
       dpmsOff = "3600";
       sleep = "";
-    };
-  };
-
-  greetd = {
-    settings = {
-      default_session = {
-        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
-        user = "greeter";
-      };
-    };
-  };
-
-  obsidian = {
-    vaults = {
-      default = {
-        enable = true;
-        target = "doc/notes";
-      };
-    };
-  };
-
-  flatpak = {
-    packages = {
-      system = [ ];
-      user = [
-        "com.github.tchx84.Flatseal"
-        "com.qq.QQ"
-        "com.tencent.WeChat"
-      ];
-    };
-  };
-
-  samba = {
-    settings = {
-    };
-  };
-
-  frp = {
-    role = ""; # server client
-    settings = {
     };
   };
 }

@@ -1,19 +1,14 @@
 rec {
+  # General
   hostname = "nasix";
   system = "x86_64-linux";
 
-  gpu = "nvidia";
-  locale = "en_US.UTF-8";
-  timezone = "Asia/Shanghai";
-  kbdLayout = "us";
-  kbdVariant = "";
-  consoleKeymap = "us";
-  hibernate = false;
-
+  # Users
   rootpasswd = "$6$1bNtqKFsObhMC1OG$THnog0HqmR/GnN.0IwndZzuijVMiV0cZIPUjmCvDs6gsjHAc.FYfcIlKmiMx2hy2gbd814Br1uNAhiyKl4W9g.";
   username = "howl";
   userpasswd = "$6$.FVrKngH1eXjNYi9$lsTAUQvvJyB209fhkf3g5E12iCcgNdDZKW0XTwCp7i3lNwM8gjNq3kRgjW4WIBV68YETysoDCHhKtSIncPT3n1";
 
+  # User environment
   editor = "nvim";
   terminal = "";
   terminalFileManager = "yazi";
@@ -31,7 +26,15 @@ rec {
     };
   };
 
-  # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+  # System
+  gpu = "nvidia";
+  locale = "en_US.UTF-8";
+  timezone = "Asia/Shanghai";
+  kbdLayout = "us";
+  kbdVariant = "";
+  consoleKeymap = "us";
+  hibernate = false;
+
   secure-boot = {
     enable = false;
     lanzaboote = {
@@ -40,186 +43,7 @@ rec {
     };
   };
 
-  snapper = {
-    config = { };
-    snapshotInterval = "hourly";
-    cleanupInterval = "1d";
-  };
-
-  ssh = {
-    dir = "/home/${username}/.vault/ssh";
-    matchBlocks = {
-      "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "${ssh.dir}/gh-howl";
-        addKeysToAgent = "yes";
-      };
-      "dix" = {
-        hostname = "192.168.0.24";
-        port = 22;
-        user = "howl";
-        identityFile = "${ssh.dir}/dix";
-        addKeysToAgent = "yes";
-      };
-      "lix" = {
-        hostname = "192.168.0.69";
-        port = 22;
-        user = "howl";
-        identityFile = "${ssh.dir}/lix";
-        addKeysToAgent = "yes";
-      };
-    };
-    daemon = {
-      enable = true;
-      ports = [
-        22
-      ];
-      authorizedKeysFiles = [ "${ssh.dir}/nasix.pub" ];
-      settings = {
-        PasswordAuthentication = false;
-      };
-    };
-    agent.enable = true;
-  };
-
-  gpg = {
-    homedir = "/home/${username}/.vault/gpg";
-    agent = {
-      enable = true;
-      enableSshSupport = false; # Automatically disable ssh-agent if set to true
-    };
-  };
-
-  proxy = {
-    method = "lpf"; # tproxy lpf
-    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/motherly-outside/docker.json";
-  };
-
-  zsh = {
-    initContent = ''
-      export EDITOR=${editor}
-    '';
-
-    envExtra = ''
-      export VI_MODE_SET_CURSOR=true
-      MODE_INDICATOR="%F{red}<<<%f"
-    '';
-
-    shellGlobalAliases = {
-      G = "| grep";
-    };
-    shellAliases = {
-      update = "sudo nixos-rebuild switch";
-    };
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "vi-mode"
-      ];
-    };
-  };
-
-  nixvim = {
-    withNodeJs = false;
-    withPerl = false;
-    withPython3 = true;
-    withRuby = false;
-
-    lsp.enable = false;
-    treesitter.enable = false; # Automatically disable noice if set to false
-    lint.enable = false;
-    conform.enable = false;
-    copilot.enable = false;
-    noice.enable = false; # Require treesitter
-    snack = {
-      image.enable = false;
-    };
-    obsidian = {
-      workspaces = [ ];
-    };
-  };
-
-  git = {
-    userName = "";
-    userEmail = "";
-  };
-
-  display = {
-    width = 1920;
-    height = 1080;
-  };
-
-  wallpaper = {
-    dir = "";
-    default = "";
-  };
-
-  hyprland = {
-    monitor = [ ];
-    workspaceBind = "";
-  };
-
-  hyprlock = {
-    monitor1 = "";
-    monitor2 = "";
-    background1 = "";
-    background2 = "";
-  };
-
-  hypridle = {
-    time = {
-      lock = "";
-      dpmsOff = "";
-      sleep = "";
-    };
-  };
-
-  greetd = {
-    settings = {
-      default_session = {
-        command = "";
-        user = "";
-      };
-    };
-  };
-
-  obsidian = {
-    vaults = {
-      default = {
-        enable = false;
-        target = "";
-      };
-    };
-  };
-
-  flatpak = {
-    packages = {
-      system = [ ];
-      user = [ ];
-    };
-  };
-
-  samba = {
-    settings = {
-      global = {
-        "invalid users" = [
-          "root"
-        ];
-        "passwd program" = "/run/wrappers/bin/passwd %u";
-        security = "user";
-      };
-      private = {
-        browseable = "yes";
-        comment = "Private samba share.";
-        path = "/mnt/smb";
-        "valid users" = [ "${username}" ];
-        "read only" = "no";
-        "writable" = "yes";
-      };
-    };
-  };
-
+  # Services
   frp = {
     role = "client"; # server client
     settings = {
@@ -350,6 +174,115 @@ rec {
           localPort = 61208;
           remotePort = 61208;
         }
+      ];
+    };
+  };
+
+  proxy = {
+    method = "lpf"; # tproxy lpf
+    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/motherly-outside/docker.json";
+  };
+
+  samba = {
+    settings = {
+      global = {
+        "invalid users" = [
+          "root"
+        ];
+        "passwd program" = "/run/wrappers/bin/passwd %u";
+        security = "user";
+      };
+      private = {
+        browseable = "yes";
+        comment = "Private samba share.";
+        path = "/mnt/smb";
+        "valid users" = [ "${username}" ];
+        "read only" = "no";
+        "writable" = "yes";
+      };
+    };
+  };
+
+  ssh = {
+    dir = "/home/${username}/.vault/ssh";
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "${ssh.dir}/gh-howl";
+        addKeysToAgent = "yes";
+      };
+      "dix" = {
+        hostname = "192.168.0.24";
+        port = 22;
+        user = "howl";
+        identityFile = "${ssh.dir}/dix";
+        addKeysToAgent = "yes";
+      };
+      "lix" = {
+        hostname = "192.168.0.69";
+        port = 22;
+        user = "howl";
+        identityFile = "${ssh.dir}/lix";
+        addKeysToAgent = "yes";
+      };
+    };
+    daemon = {
+      enable = true;
+      ports = [
+        22
+      ];
+      authorizedKeysFiles = [ "${ssh.dir}/nasix.pub" ];
+      settings = {
+        PasswordAuthentication = false;
+      };
+    };
+    agent.enable = true;
+  };
+
+  # Programs
+  git = {
+    userName = "RandomNEET";
+    userEmail = "dev@randomneet.me";
+  };
+
+  nixvim = {
+    withNodeJs = false;
+    withPerl = false;
+    withPython3 = true;
+    withRuby = false;
+
+    lsp.enable = false;
+    treesitter.enable = false; # Automatically disable noice if set to false
+    lint.enable = false;
+    conform.enable = false;
+    copilot.enable = false;
+    noice.enable = false; # Require treesitter
+    snack = {
+      image.enable = false;
+    };
+  };
+
+  zsh = {
+    initContent = ''
+      export EDITOR=${editor}
+    '';
+
+    envExtra = ''
+      export VI_MODE_SET_CURSOR=true
+      MODE_INDICATOR="%F{red}<<<%f"
+    '';
+
+    shellGlobalAliases = {
+      G = "| grep";
+    };
+    shellAliases = {
+      update = "sudo nixos-rebuild switch";
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "vi-mode"
       ];
     };
   };

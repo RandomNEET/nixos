@@ -29,8 +29,8 @@
             # wrap = "yes";
             tab_size = 4;
             image_filter = "triangle"; # from fast to slow but high quality: nearest, triangle, catmull-rom, lanczos3
-            max_width = opts.display.width;
-            max_height = opts.display.height;
+            max_width = opts.display.width or 600;
+            max_height = opts.display.height or 900;
             image_quality = 90;
           };
           plugin = {

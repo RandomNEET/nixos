@@ -14,75 +14,71 @@
     ./hardware-configuration.nix
     ../common.nix
 
-    ../../modules/system/automount
-    ../../modules/system/blueman
-    # ../../modules/system/cron
-    # ../../modules/system/docker
-    ../../modules/system/flatpak
-    # ../../modules/system/frp
+    ../../modules/system/fonts
     ../../modules/system/garbage-collect
     ../../modules/system/gpu
     ../../modules/system/impermanence
-    # ../../modules/system/jellyfin
-    ../../modules/system/pipewire
-    ../../modules/system/proxy
-    # ../../modules/system/samba
     ../../modules/system/secure-boot
-    ../../modules/system/snapper
-    ../../modules/system/ssh
     ../../modules/system/virtualisation
 
-    ../../modules/desktop/fonts
-    ../../modules/desktop/greetd
-    ../../modules/desktop/hyprland
-    ../../modules/desktop/themes/catppuccin
+    ../../modules/services/automount
+    ../../modules/services/blueman
+    ../../modules/services/flatpak
+    ../../modules/services/greetd
+    ../../modules/services/pipewire
+    ../../modules/services/proxy
+    ../../modules/services/snapper
+    ../../modules/services/ssh
 
-    ../../modules/cli/bash
-    ../../modules/cli/bat
-    ../../modules/cli/btop
-    ../../modules/cli/cava
-    ../../modules/cli/direnv
-    ../../modules/cli/eza
-    ../../modules/cli/fastfetch
-    ../../modules/cli/fzf
-    ../../modules/cli/gh
-    ../../modules/cli/git
-    ../../modules/cli/gpg
-    ../../modules/cli/jq
-    ../../modules/cli/lazygit
-    ../../modules/cli/mpv
-    ../../modules/cli/nixvim
-    ../../modules/cli/rigprep
-    ../../modules/cli/spotify-player
-    ../../modules/cli/tmux
-    ../../modules/cli/trash-cli
-    ../../modules/cli/yazi
-    ../../modules/cli/zoxide
-    ../../modules/cli/zsh
+    ../../modules/programs/cli/bash
+    ../../modules/programs/cli/bat
+    ../../modules/programs/cli/btop
+    ../../modules/programs/cli/cava
+    ../../modules/programs/cli/direnv
+    ../../modules/programs/cli/eza
+    ../../modules/programs/cli/fastfetch
+    ../../modules/programs/cli/fzf
+    ../../modules/programs/cli/gh
+    ../../modules/programs/cli/git
+    ../../modules/programs/cli/gpg
+    ../../modules/programs/cli/jq
+    ../../modules/programs/cli/lazygit
+    ../../modules/programs/cli/mpv
+    ../../modules/programs/cli/nixvim
+    ../../modules/programs/cli/rigprep
+    ../../modules/programs/cli/spotify-player
+    ../../modules/programs/cli/tmux
+    ../../modules/programs/cli/trash-cli
+    ../../modules/programs/cli/yazi
+    ../../modules/programs/cli/zoxide
+    ../../modules/programs/cli/zsh
+    ../../modules/programs/cli/no-config/archive
+    ../../modules/programs/cli/no-config/media
+    ../../modules/programs/cli/no-config/rice
+    ../../modules/programs/cli/no-config/typing
 
-    ../../modules/gui/discord
-    ../../modules/gui/fcitx5
-    ../../modules/gui/firefox
-    ../../modules/gui/firejail
-    ../../modules/gui/games
-    ../../modules/gui/gimp
-    ../../modules/gui/kitty
-    ../../modules/gui/libreoffice
-    ../../modules/gui/localsend
-    ../../modules/gui/obs-studio
-    ../../modules/gui/obsidian
-    ../../modules/gui/spicetify
-    ../../modules/gui/swayimg
-    ../../modules/gui/thunderbird
-    ../../modules/gui/vscode
-    ../../modules/gui/zathura
-
-    ../../modules/no-config/archive
-    ../../modules/no-config/media
-    ../../modules/no-config/rice
-    ../../modules/no-config/type
+    ../../modules/programs/gui/discord
+    ../../modules/programs/gui/fcitx5
+    ../../modules/programs/gui/firefox
+    ../../modules/programs/gui/firejail
+    ../../modules/programs/gui/games
+    ../../modules/programs/gui/kitty
+    ../../modules/programs/gui/localsend
+    ../../modules/programs/gui/obs-studio
+    ../../modules/programs/gui/obsidian
+    ../../modules/programs/gui/spicetify
+    ../../modules/programs/gui/swayimg
+    ../../modules/programs/gui/thunderbird
+    ../../modules/programs/gui/vscode
+    ../../modules/programs/gui/zathura
+    ../../modules/programs/gui/no-config/graphics
+    ../../modules/programs/gui/no-config/networking
+    ../../modules/programs/gui/no-config/productivity
 
     ../../modules/scripts
+
+    ../../modules/desktop/hyprland
+    ../../modules/desktop/themes
   ];
 
   # Define system packages here
