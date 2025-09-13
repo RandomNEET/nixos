@@ -94,6 +94,13 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
 
+  # GPU
+  hardware.nvidia.prime = {
+    # Make sure to use the correct Bus ID values for your system!
+    nvidiaBusId = "PCI:07:0:0";
+    amdgpuBusId = "PCI:01:0:0";
+  };
+
   # Disks
   fileSystems."/mnt/ssd" = {
     device = "/dev/disk/by-uuid/d850efcf-11d2-4a43-9a13-a61d362e1cd3";
