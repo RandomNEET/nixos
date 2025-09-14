@@ -221,12 +221,6 @@ rec {
   ssh = {
     dir = "/home/${username}/.vault/ssh";
     matchBlocks = {
-      "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "${ssh.dir}/gh-howl";
-        addKeysToAgent = "yes";
-      };
       "dix" = {
         hostname = "192.168.0.24";
         port = 22;
