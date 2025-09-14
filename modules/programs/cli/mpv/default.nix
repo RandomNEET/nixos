@@ -3,6 +3,9 @@
   home-manager.sharedModules = [
     (
       { config, ... }:
+      let
+        resolveHome = path: builtins.replaceStrings [ "$HOME" ] [ config.home.homeDirectory ] path;
+      in
       {
         programs.mpv = {
           enable = true;
@@ -112,7 +115,7 @@
             wayland-edge-pixels-touch = 0;
             screenshot-format = "webp";
             screenshot-webp-lossless = true;
-            screenshot-directory = "${config.home.homeDirectory}/Pictures/Screenshots/mpv";
+            screenshot-directory = "${resolveHome config.xdg.userDirs.pictures}/screenshots/mpv";
             screenshot-sw = true;
             # cache-dir = "${config.xdg.cacheHome}/mpv";
             input-default-bindings = false;
