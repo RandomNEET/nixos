@@ -44,6 +44,7 @@
     ../../modules/programs/cli/jq
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/mpv
+    ../../modules/programs/cli/ncmpcpp
     ../../modules/programs/cli/nixvim
     ../../modules/programs/cli/rigprep
     ../../modules/programs/cli/spotify-player

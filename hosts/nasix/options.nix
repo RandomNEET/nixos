@@ -178,6 +178,21 @@ rec {
     };
   };
 
+  mpd = {
+    musicDirectory = "/mnt/smb/media/music";
+    extraConfig = ''
+      bind_to_address "0.0.0.0"
+      port "6600"
+      audio_output {
+          type        "httpd"
+          name        "MPD HTTP Stream"
+          encoder     "vorbis"
+          port        "8000"
+          quality     "5.0"
+      }
+    '';
+  };
+
   proxy = {
     method = "lpf"; # tproxy lpf
     settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/motherly-outside/docker.json";

@@ -23,6 +23,7 @@
     ../../modules/services/cron
     ../../modules/services/frp
     ../../modules/services/jellyfin
+    ../../modules/services/mpd
     ../../modules/services/proxy
     ../../modules/services/samba
     ../../modules/services/ssh
@@ -121,8 +122,10 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     5900
+    6600
     6881
     7102
+    8000
     9997
     9998
     9999

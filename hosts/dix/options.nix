@@ -133,6 +133,13 @@ rec {
     };
   };
 
+  ncmpcpp = {
+    settings = {
+      mpd_host = "192.168.0.56";
+      mpd_port = "6600";
+    };
+  };
+
   nixvim = {
     withNodeJs = false;
     withPerl = false;
