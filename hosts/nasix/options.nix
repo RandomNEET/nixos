@@ -7,6 +7,7 @@ rec {
   rootpasswd = "$6$1bNtqKFsObhMC1OG$THnog0HqmR/GnN.0IwndZzuijVMiV0cZIPUjmCvDs6gsjHAc.FYfcIlKmiMx2hy2gbd814Br1uNAhiyKl4W9g.";
   username = "howl";
   userpasswd = "$6$.FVrKngH1eXjNYi9$lsTAUQvvJyB209fhkf3g5E12iCcgNdDZKW0XTwCp7i3lNwM8gjNq3kRgjW4WIBV68YETysoDCHhKtSIncPT3n1";
+  uid = 1000;
 
   # User environment
   editor = "nvim";
@@ -179,7 +180,9 @@ rec {
   };
 
   mpd = {
+    startWhenNeeded = false;
     musicDirectory = "/mnt/smb/media/music";
+    dataDir = "/mnt/smb/media/.mpd";
     extraConfig = ''
       bind_to_address "0.0.0.0"
       port "6600"
@@ -191,6 +194,7 @@ rec {
           quality     "5.0"
       }
     '';
+    audioType = "httpd";
   };
 
   proxy = {

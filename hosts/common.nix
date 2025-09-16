@@ -63,6 +63,7 @@
       root.initialHashedPassword = opts.rootpasswd;
       ${opts.username} = {
         initialHashedPassword = opts.userpasswd;
+        uid = opts.uid;
         isNormalUser = true;
         extraGroups = [
           "wheel"

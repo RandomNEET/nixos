@@ -7,6 +7,7 @@ rec {
   rootpasswd = "$6$1bNtqKFsObhMC1OG$THnog0HqmR/GnN.0IwndZzuijVMiV0cZIPUjmCvDs6gsjHAc.FYfcIlKmiMx2hy2gbd814Br1uNAhiyKl4W9g.";
   username = "howl";
   userpasswd = "$6$.FVrKngH1eXjNYi9$lsTAUQvvJyB209fhkf3g5E12iCcgNdDZKW0XTwCp7i3lNwM8gjNq3kRgjW4WIBV68YETysoDCHhKtSIncPT3n1";
+  uid = 1000;
 
   # User environment
   editor = "nvim";
@@ -62,6 +63,30 @@ rec {
         user = "greeter";
       };
     };
+  };
+
+  mpd = {
+    startWhenNeeded = true;
+    musicDirectory = "/mnt/hdd1/media/music";
+    dataDir = "/mnt/hdd1/media/.mpd";
+    extraConfig = ''
+      bind_to_address "127.0.0.1"
+      port "6600"
+
+      audio_output {
+         type   "pipewire"
+         name   "PipeWire Sound Server"
+      }
+      audio_output {
+         type   "fifo"
+         name   "my_fifo"
+         path   "/tmp/mpd.fifo"
+         format "44100:16:2"
+      }
+
+      auto_update "yes"
+    '';
+    audioType = "pipewire";
   };
 
   proxy = {
@@ -130,13 +155,6 @@ rec {
     agent = {
       enable = true;
       enableSshSupport = true; # Automatically disable ssh-agent if set to true
-    };
-  };
-
-  ncmpcpp = {
-    settings = {
-      mpd_host = "192.168.0.56";
-      mpd_port = "6600";
     };
   };
 
