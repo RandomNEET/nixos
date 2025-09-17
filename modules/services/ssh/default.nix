@@ -1,19 +1,20 @@
 { opts, ... }:
 {
   services.openssh = {
-    enable = opts.ssh.daemon.enable;
-    ports = opts.ssh.daemon.ports;
-    authorizedKeysFiles = opts.ssh.daemon.authorizedKeysFiles;
-    settings = opts.ssh.daemon.settings;
+    enable = opts.ssh.system.enable or false;
+    ports = opts.ssh.system.ports or [ 22 ];
+    authorizedKeysFiles = opts.ssh.system.authorizedKeysFiles;
+    settings = opts.ssh.system.settings;
   };
   home-manager.sharedModules = [
     (_: {
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false;
-        matchBlocks = opts.ssh.matchBlocks;
+        matchBlocks = opts.ssh.home.matchBlocks;
       };
-      services.ssh-agent.enable = opts.ssh.agent.enable && !(opts.gpg.agent.enableSshSupport or false);
+      services.ssh-agent.enable =
+        (opts.ssh.home.agent.enable or false) && !(opts.gpg.agent.enableSshSupport or false);
     })
   ];
 }

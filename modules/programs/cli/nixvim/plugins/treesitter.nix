@@ -6,7 +6,7 @@
         enable = false;
       };
       treesitter = {
-        enable = opts.nixvim.treesitter.enable;
+        enable = opts.nixvim.treesitter.enable or true;
         nixvimInjections = true;
         nixGrammars = true;
         folding = false;

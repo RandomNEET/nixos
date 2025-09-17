@@ -210,7 +210,7 @@
             enabled = true;
           };
           image = {
-            enabled = opts.nixvim.snack.image.enable;
+            enabled = opts.nixvim.snack.image.enable or true;
           };
         };
       };

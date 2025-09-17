@@ -2,7 +2,8 @@
 {
   programs.nixvim = {
     plugins.copilot-lua = {
-      enable = opts.nixvim.copilot.enable;
+      enable = opts.nixvim.copilot.enable or true;
+
       settings = {
         filetypes.markdown = true;
         suggestion = {

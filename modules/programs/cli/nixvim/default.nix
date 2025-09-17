@@ -26,10 +26,10 @@
             xclip.enable = true;
           };
         };
-        withNodeJs = opts.nixvim.withNodeJs;
-        withPerl = opts.nixvim.withPerl;
-        withPython3 = opts.nixvim.withPython3;
-        withRuby = opts.nixvim.withRuby;
+        withNodeJs = opts.nixvim.withNodeJs or false;
+        withPerl = opts.nixvim.withPerl or false;
+        withPython3 = opts.nixvim.withPython3 or true;
+        withRuby = opts.nixvim.withRuby or true;
 
         extraPackages =
           with pkgs;
@@ -40,7 +40,7 @@
               lynx
               ripgrep
             ]
-            ++ lib.optionals opts.nixvim.conform.enable [
+            ++ lib.optionals (opts.nixvim.conform.enable or true) [
               # Formatters
               astyle
               black
@@ -52,7 +52,7 @@
               shfmt
               stylua
             ]
-            ++ lib.optionals opts.nixvim.lint.enable [
+            ++ lib.optionals (opts.nixvim.lint.enable or true) [
               # Linters
               commitlint
               eslint_d

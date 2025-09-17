@@ -3,7 +3,7 @@
   programs.nixvim = {
     plugins = {
       lsp = {
-        enable = opts.nixvim.lsp.enable;
+        enable = opts.nixvim.lsp.enable or true;
         servers = {
           clangd.enable = true;
           lua_ls.enable = true;

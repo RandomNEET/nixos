@@ -35,13 +35,9 @@ rec {
   kbdVariant = "";
   consoleKeymap = "us";
   hibernate = false;
-
-  secure-boot = {
+  lanzaboote = {
     enable = true;
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/nix/persist/var/lib/sbctl";
-    };
+    pkiBundle = "/nix/persist/var/lib/sbctl";
   };
 
   # Services
@@ -94,54 +90,45 @@ rec {
     settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/default.json";
   };
 
-  snapper = {
-    config = {
-      home = {
-        SUBVOLUME = "/home";
-        ALLOW_USERS = [ "${username}" ];
-        TIMELINE_CREATE = true;
-        TIMELINE_CLEANUP = true;
-      };
-    };
-    snapshotInterval = "hourly";
-    cleanupInterval = "1d";
-  };
-
   ssh = {
-    dir = "/home/${username}/.vault/ssh";
-    matchBlocks = {
-      "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "${ssh.dir}/gh-randomneet";
-        addKeysToAgent = "yes";
-      };
-      "lix" = {
-        hostname = "192.168.0.69";
-        port = 22;
-        user = "howl";
-        identityFile = "${ssh.dir}/lix";
-        addKeysToAgent = "yes";
-      };
-      "nasix" = {
-        hostname = "192.168.0.56";
-        port = 22;
-        user = "howl";
-        identityFile = "${ssh.dir}/nasix";
-        addKeysToAgent = "yes";
-      };
-    };
-    daemon = {
+    keysDir = "/home/${username}/.vault/ssh";
+
+    system = {
       enable = true;
       ports = [
         22
       ];
-      authorizedKeysFiles = [ "${ssh.dir}/dix.pub" ];
+      authorizedKeysFiles = [ "${ssh.keysDir}/dix.pub" ];
       settings = {
         PasswordAuthentication = false;
       };
     };
-    agent.enable = false;
+
+    home = {
+      matchBlocks = {
+        "github.com" = {
+          hostname = "github.com";
+          user = "git";
+          identityFile = "${ssh.keysDir}/gh-randomneet";
+          addKeysToAgent = "yes";
+        };
+        "lix" = {
+          hostname = "192.168.0.69";
+          port = 22;
+          user = "howl";
+          identityFile = "${ssh.keysDir}/lix";
+          addKeysToAgent = "yes";
+        };
+        "nasix" = {
+          hostname = "192.168.0.56";
+          port = 22;
+          user = "howl";
+          identityFile = "${ssh.keysDir}/nasix";
+          addKeysToAgent = "yes";
+        };
+      };
+      agent.enable = false;
+    };
   };
 
   # Programs
@@ -225,9 +212,11 @@ rec {
     shellGlobalAliases = {
       G = "| grep";
     };
+
     shellAliases = {
       update = "sudo nixos-rebuild switch";
     };
+
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -235,6 +224,13 @@ rec {
       ];
       theme = "simple";
     };
+  };
+
+  firefox = {
+    titlebar-buttons-disable = true;
+    full-screen-api.ignore-widgets = true;
+    network.trr.mode = 3; # 2 if your havng DNS problems
+    browser.startup.homepage = "https://homepage.randomneet.me/";
   };
 
   obsidian = {

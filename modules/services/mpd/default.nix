@@ -7,8 +7,8 @@
   services.mpd = {
     enable = true;
     startWhenNeeded = opts.mpd.startWhenNeeded or false;
-    musicDirectory = opts.mpd.musicDirectory;
-    dataDir = opts.mpd.dataDir;
+    dataDir = opts.mpd.dataDir or "/var/lib/mpd";
+    musicDirectory = opts.mpd.musicDirectory or "/var/lib/mpd/music";
     extraConfig = opts.mpd.extraConfig;
     user = lib.mkIf (opts.mpd.audioType == "pipewire") opts.username;
   };

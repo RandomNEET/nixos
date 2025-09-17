@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ lib, opts, ... }:
 let
   lock-false = {
     Value = false;
@@ -34,7 +34,7 @@ in
   "privacy.webrtc.legacyGlobalIndicator" = false;
 
   # Use cloudflare for better security/privacy
-  "network.trr.mode" = 3; # 2 if your havng DNS problems
+  "network.trr.mode" = opts.firefox.network.trr.mode or 3;
   "network.trr.custom_uri" = "https://cloudflare-dns.com/dns-query";
   "network.trr.uri" = "https://cloudflare-dns.com/dns-query";
 
@@ -146,7 +146,7 @@ in
   "dom.security.https_only_mode_ever_enabled" = lock-true;
   "identity.fxaccounts.enabled" = lock-false;
   "app.update.auto" = false;
-  "browser.startup.homepage" = "https://homepage.randomneet.me/";
+  "browser.startup.homepage" = opts.firefox.browser.startup.homepage or "about:home";
   "browser.bookmarks.restore_default_bookmarks" = false;
   "browser.ctrlTab.recentlyUsedOrder" = false;
   "browser.discovery.enabled" = false;
@@ -236,6 +236,6 @@ in
     };
   };
 }
-// lib.optionalAttrs config.programs.hyprland.enable {
+// lib.optionalAttrs (opts.firefox.full-screen-api.ignore-widgets or false) {
   "full-screen-api.ignore-widgets" = true;
 }

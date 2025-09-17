@@ -23,11 +23,31 @@
             saveNoDups = true;
             size = 100000;
           };
-          oh-my-zsh = opts.zsh.oh-my-zsh;
-          initContent = opts.zsh.initContent;
-          envExtra = opts.zsh.envExtra;
-          shellGlobalAliases = opts.zsh.shellGlobalAliases;
-          shellAliases = opts.zsh.shellAliases;
+
+          initExtra = opts.zsh.initContent or '''';
+
+          envExtra =
+            opts.zsh.envExtra or ''
+              export VI_MODE_SET_CURSOR=true
+              MODE_INDICATOR="%F{red}<<<%f"
+            '';
+
+          shellGlobalAliases =
+            opts.zsh.shellGlobalAliases or {
+              G = "| grep";
+            };
+
+          shellAliases =
+            opts.zsh.shellAliases or {
+              update = "sudo nixos-rebuild switch";
+            };
+
+          oh-my-zsh =
+            opts.zsh.oh-my-zsh or {
+              enable = true;
+              plugins = [ "vi-mode" ];
+              theme = "simple";
+            };
         };
       }
     )

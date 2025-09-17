@@ -4,6 +4,9 @@
   opts,
   ...
 }:
+let
+  docDir = lib.removePrefix "$HOME/" opts.xdg.userDirs.documents;
+in
 {
   programs.nixvim = {
     keymaps = lib.mkIf config.programs.obsidian.enable [
@@ -57,7 +60,13 @@
             blink = true;
           };
           new_notes_location = "current_dir";
-          workspaces = opts.nixvim.obsidian.workspaces;
+          workspaces =
+            opts.nixvim.obsidian.workspaces or [
+              {
+                name = "notes";
+                path = "~/${docDir}/notes";
+              }
+            ];
           picker = {
             name = "snacks.pick";
           };

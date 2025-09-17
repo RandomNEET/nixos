@@ -1,7 +1,7 @@
 { lib, opts, ... }:
 {
   programs.nixvim = {
-    keymaps = lib.mkIf opts.nixvim.copilot.enable [
+    keymaps = lib.mkIf (opts.nixvim.copilot.enable or true) [
       {
         mode = "n";
         action = "<cmd>CopilotChatToggle<CR>";
@@ -12,7 +12,7 @@
       }
     ];
     plugins.copilot-chat = {
-      enable = opts.nixvim.copilot.enable;
+      enable = opts.nixvim.copilot.enable or true;
       settings = {
         answer_header = "## Copilot ";
         auto_follow_cursor = false;

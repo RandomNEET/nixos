@@ -36,14 +36,6 @@ rec {
   consoleKeymap = "us";
   hibernate = false;
 
-  secure-boot = {
-    enable = false;
-    lanzaboote = {
-      enable = false;
-      pkiBundle = "";
-    };
-  };
-
   # Services
   frp = {
     role = "client"; # server client
@@ -223,34 +215,38 @@ rec {
   };
 
   ssh = {
-    dir = "/home/${username}/.vault/ssh";
-    matchBlocks = {
-      "dix" = {
-        hostname = "192.168.0.24";
-        port = 22;
-        user = "howl";
-        identityFile = "${ssh.dir}/dix";
-        addKeysToAgent = "yes";
-      };
-      "lix" = {
-        hostname = "192.168.0.69";
-        port = 22;
-        user = "howl";
-        identityFile = "${ssh.dir}/lix";
-        addKeysToAgent = "yes";
-      };
-    };
-    daemon = {
+    keysDir = "/home/${username}/.vault/ssh";
+
+    system = {
       enable = true;
       ports = [
         22
       ];
-      authorizedKeysFiles = [ "${ssh.dir}/nasix.pub" ];
+      authorizedKeysFiles = [ "${ssh.keysDir}/nasix.pub" ];
       settings = {
         PasswordAuthentication = false;
       };
     };
-    agent.enable = true;
+
+    home = {
+      matchBlocks = {
+        "dix" = {
+          hostname = "192.168.0.24";
+          port = 22;
+          user = "howl";
+          identityFile = "${ssh.keysDir}/dix";
+          addKeysToAgent = "yes";
+        };
+        "lix" = {
+          hostname = "192.168.0.69";
+          port = 22;
+          user = "howl";
+          identityFile = "${ssh.keysDir}/lix";
+          addKeysToAgent = "yes";
+        };
+      };
+      agent.enable = true;
+    };
   };
 
   # Programs
@@ -277,26 +273,6 @@ rec {
   };
 
   zsh = {
-    initContent = ''
-      export EDITOR=${editor}
-    '';
-
-    envExtra = ''
-      export VI_MODE_SET_CURSOR=true
-      MODE_INDICATOR="%F{red}<<<%f"
-    '';
-
-    shellGlobalAliases = {
-      G = "| grep";
-    };
-    shellAliases = {
-      update = "sudo nixos-rebuild switch";
-    };
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "vi-mode"
-      ];
-    };
+    oh-my-zsh.enable = false;
   };
 }
