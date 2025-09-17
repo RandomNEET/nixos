@@ -260,8 +260,11 @@
               };
               xwayland.force_zero_scaling = true;
               gestures = {
-                workspace_swipe = true;
-                workspace_swipe_fingers = 3;
+                gesture = [
+                  "3, horizontal, workspace"
+                  "3, up, fullscreen"
+                  "3, down, close"
+                ];
               };
               dwindle = {
                 pseudotile = true;
