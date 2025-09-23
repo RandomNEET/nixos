@@ -50,7 +50,7 @@
                 label = "       󰃟  ";
               };
               "menu#screenshot" = {
-                label = "	󰄀   Screenshot	";
+                label = "󰄀  Screenshot";
                 position = "left";
                 actions = [
                   {
@@ -64,23 +64,23 @@
                 ];
               };
               "menu#power" = {
-                label = "	   Power Menu	  ";
+                label = "  Power Menu";
                 position = "left";
                 actions = [
                   {
-                    label = "   Lock";
+                    label = "  Lock";
                     command = "hyprlock";
                   }
                   {
-                    label = "   Logout";
+                    label = "  Logout";
                     command = "hyprctl dispatch exit 0";
                   }
                   {
-                    label = "   Shut down";
+                    label = "  Shut down";
                     command = "systemctl poweroff";
                   }
                   {
-                    label = "   Reboot";
+                    label = "  Reboot";
                     command = "systemctl reboot";
                   }
                   (
@@ -113,7 +113,7 @@
               image-size = 96;
               image-radius = 4;
             };
-            label = {
+            notifications = {
               text = "Notifications";
               clear-all-button = true;
               button-text = "";
@@ -121,7 +121,6 @@
 
             "buttons-grid" = {
               actions = [
-
                 {
                   label = "󰝟";
                   type = "toggle";
@@ -148,7 +147,6 @@
                   command = "sh -c '[ \"$SWAYNC_TOGGLE_STATE\" = true ] && nmcli radio wifi on || nmcli radio wifi off'";
                   update-command = "sh -c 'nmcli radio wifi | grep -q enabled && echo true || echo false'";
                 }
-
               ];
             };
           };
@@ -337,8 +335,8 @@
             border-radius: 15px;
             border: 0px solid @selected;
             box-shadow: 0 0 10px 0 rgba(0,0,0,.80);
-            margin: 10px;
-            padding: 4px;
+            margin: 0px;
+            padding: 0px;
           }
 
           /* .right.overlay-indicator { */
@@ -387,7 +385,7 @@
             background: alpha(@mantle, .80);
             /* background: @theme_bg_color; */
             border: 0px solid @crust;
-            margin: 10px 5px 0px 5px;
+            margin: 10px 5px 10px 5px;
             border-radius: 14px;
             /* box-shadow: 0px 0px 4px black; */
             /* background: alpha(currentColor, 0.05); */
@@ -409,7 +407,7 @@
           }
 
           .control-center-list > row:last-child {
-            padding: 5px 10px 10px 10px;
+            padding: 5px 10px 5px 10px;
           }
 
 
@@ -525,7 +523,7 @@
             font-size: 14px;
             font-weight: 500;
             margin: 0px;
-            padding: 5px;
+            padding: 0px;
             border-radius: 0px;
           }
 
@@ -533,7 +531,7 @@
             background: alpha(@mantle, .80);
             /* background: alpha(currentColor, 0.05); */
             border-radius: 4px;
-            min-height: 50px;
+            min-height: 40px;
             min-width: 85px;
             margin: 5px;
             padding: 0px;
@@ -557,7 +555,7 @@
           .widget-mpris {
             padding: 8px;
             padding-bottom: 15px;
-            margin-bottom: -33px;
+            margin-bottom: 0px;
           }
           .widget-mpris > box {
             padding: 0px;
@@ -699,7 +697,8 @@
 
           /* DND widget */
           .widget-dnd {
-            margin: 6px;
+            margin: 6px 10px;
+            padding: 0 8px;
             font-size: 1.2rem;
           }
 
@@ -756,11 +755,11 @@
           scale highlight {
             border-radius: 5px;
             min-height: 10px;
-            margin-right: -5px;
+            margin-right: 0px;
           }
 
           scale slider {
-            margin: -10px;
+            margin: 0px;
             min-width: 10px;
             min-height: 10px;
             background: transparent;
