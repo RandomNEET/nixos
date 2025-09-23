@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   opts,
@@ -46,7 +47,7 @@ let
         file:
         let
           fileName = builtins.baseNameOf file;
-          imported = import file { inherit pkgs opts; };
+          imported = import file { inherit config pkgs opts; };
 
           # Check if the imported file is a function expecting pkgs
           isFunction = builtins.isFunction imported;

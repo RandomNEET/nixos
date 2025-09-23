@@ -1,4 +1,4 @@
-{ opts, ... }:
+{ pkgs, opts, ... }:
 {
   #  use later
   home-manager.sharedModules = [
@@ -147,6 +147,35 @@
                   command = "sh -c '[ \"$SWAYNC_TOGGLE_STATE\" = true ] && nmcli radio wifi on || nmcli radio wifi off'";
                   update-command = "sh -c 'nmcli radio wifi | grep -q enabled && echo true || echo false'";
                 }
+
+                {
+                  label = "󰺵";
+                  type = "toggle";
+                  command = "${../../../hyprland/scripts/gamemode.sh}";
+                  update-command = "hyprctl getoption animations:enabled | grep -q 'int: 1' && echo false || echo true";
+                }
+
+                {
+                  label = "";
+                  type = "toggle";
+                  command = "sh -c '${pkgs.procps}/bin/pgrep -x hyprsunset >/dev/null && ${pkgs.procps}/bin/pkill hyprsunset || nohup ${pkgs.hyprsunset}/bin/hyprsunset --temperature 3500 > /tmp/hyprsunset_output.log 2>&1 &'";
+                  update-command = "sh -c 'pgrep -x hyprsunset >/dev/null && echo true || echo false'";
+                }
+
+                {
+                  label = "󰒲";
+                  command = "systemctl --user is-active --quiet hypridle.service && systemctl --user stop hypridle.service || systemctl --user start hypridle.service";
+                  type = "toggle";
+                  update-command = "pgrep -x hypridle > /dev/null && echo false || echo true";
+                }
+
+                {
+                  label = "";
+                  type = "toggle";
+
+                  command = "powermode-toggle";
+                  update-command = "test -f \"$HOME/.config/hypr/power_mode\" && grep -q \"^powersave$\" \"$HOME/.config/hypr/power_mode\" && echo true || echo false";
+                }
               ];
             };
           };
@@ -212,10 +241,6 @@
             background-clip: border-box;
           }
 
-          /* #notifications_box { */
-          /* border: solid 4px red; */
-          /* } */
-
           label {
             color: @text;
           }
@@ -223,12 +248,8 @@
           .notification {
             border: none;
             box-shadow: none;
-            /* margin: 0px; */
-            /* margin: -15px -10px -15px -10px; */
             border-radius: 4px;
             background: inherit;
-            /* background: @theme_bg_color; */
-            /* background: shade(alpha(@borders, 2.55), 0.25); */
           }
 
           .notification button {
@@ -240,7 +261,6 @@
           }
 
           .notification button:hover {
-            /* background: @surface0; */
             background: @insensitive_bg_color;
           }
 
@@ -277,7 +297,6 @@
             border-radius: 0px;
             padding: 2px;
             color: @text;
-            /* color: @theme_text_color; */
           }
 
           /* add bottom border radius to eliminate clipping */
@@ -293,14 +312,12 @@
           /* Notification header */
           .summary {
             color: @text;
-            /* color: @theme_text_color; */
             font-size: 14px;
             padding: 0px;
           }
 
           .time {
             color: @subtext0;
-            /* color: alpha(@theme_text_color, 0.9); */
             font-size: 12px;
             text-shadow: none;
             margin: 0px 0px 0px 0px;
@@ -311,8 +328,6 @@
             font-size: 14px;
             font-weight: 500;
             color: @subtext1;
-            /* color: alpha(@text, 0.9); */
-            /* color: alpha(@theme_text_color, 0.9); */
             text-shadow: none;
             margin: 0px 0px 0px 0px;
           }
@@ -324,12 +339,10 @@
           /* The "Notifications" and "Do Not Disturb" text widget */
           .top-action-title {
             color: @text;
-            /* color: @theme_text_color; */
             text-shadow: none;
           }
 
           /* Control center */
-
           .control-center {
             background: alpha(@crust, .80);
             border-radius: 15px;
@@ -339,15 +352,9 @@
             padding: 0px;
           }
 
-          /* .right.overlay-indicator { */
-          /* border: solid 5px red; */
-          /* } */
-
           .control-center-list {
-            /* background: @base; */
             background: alpha(@crust, .80);
             min-height: 5px;
-            /* border: 1px solid @surface1; */
             border-top: none;
             border-radius: 0px 0px 4px 4px;
           }
@@ -355,25 +362,19 @@
           .control-center-list-placeholder,
           .notification-group-icon,
           .notification-group {
-            /* opacity: 1.0; */
-            /* opacity: 0; */
             color: alpha(@theme_text_color, 0.50);
           }
 
           .notification-group {
-            /* unset the annoying focus thingie */
             opacity: 1.0;
             box-shadow: none;
-            /* selectable: no; */
           }
 
           .notification-group > box {
             all: unset;
             background: transparent;
-            /* background: alpha(currentColor, 0.072); */
             padding: 4px;
             margin: 0px;
-            /* margin: 0px -5px; */
             border: none;
             border-radius: 4px;
             box-shadow: none;
@@ -383,12 +384,9 @@
             outline: none;
             transition: all 1s ease;
             background: alpha(@mantle, .80);
-            /* background: @theme_bg_color; */
             border: 0px solid @crust;
             margin: 10px 5px 10px 5px;
             border-radius: 14px;
-            /* box-shadow: 0px 0px 4px black; */
-            /* background: alpha(currentColor, 0.05); */
           }
 
           .notification-row:focus,
@@ -422,9 +420,7 @@
           .widget-title {
             margin: 0px;
             background: transparent;
-            /* background: @theme_bg_color; */
             border-radius: 4px 4px 0px 0px;
-            /* border: 1px solid @surface1; */
             border-bottom: none;
           }
 
@@ -440,13 +436,11 @@
             margin-right: 10px;
             background: transparent;
             color: @text;
-            /* color: @theme_text_color; */
             border: none;
             border-radius: 4px;
           }
           .widget-title > button:hover {
             background: @base;
-            /* background: alpha(currentColor, 0.1); */
           }
 
           /* Label widget */
@@ -455,9 +449,7 @@
             padding: 0px;
             min-height: 5px;
             background: alpha(@mantle, .80);
-            /* background: @theme_bg_color; */
             border-radius: 0px 0px 4px 4px;
-            /* border: 1px solid @surface1; */
             border-top: none;
           }
           .widget-label > label {
@@ -468,8 +460,6 @@
           /* Menubar */
           .widget-menubar {
             background: transparent;
-            /* background: @theme_bg_color; */
-            /* border: 1px solid @surface1; */
             border-top: none;
             border-bottom: none;
           }
@@ -481,7 +471,6 @@
           }
           .widget-menubar > box > box > button {
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.05); */
             min-width: 185px;
             min-height: 50px;
             margin-right: 10px;
@@ -496,14 +485,12 @@
           }
           .widget-menubar button:focus:hover {
             background: @base;
-            /* background: alpha(currentColor,0.1); */
             box-shadow: none;
           }
 
           .widget-menubar > box > revealer > box {
             margin: 5px 10px 5px 10px;
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.05); */
             border-radius: 4px;
           }
           .widget-menubar > box > revealer > box > button {
@@ -515,9 +502,7 @@
 
           /* Buttons grid */
           .widget-buttons-grid {
-            /* background-color: @theme_bg_color; */
             background: transparent;
-            /* border: 1px solid @surface1; */
             border-top: none;
             border-bottom: none;
             font-size: 14px;
@@ -529,7 +514,6 @@
 
           .widget-buttons-grid > flowbox > flowboxchild {
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.05); */
             border-radius: 4px;
             min-height: 40px;
             min-width: 85px;
@@ -548,7 +532,6 @@
 
           .widget-buttons-grid > flowbox > flowboxchild > button:hover {
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.1); */
           }
 
           /* Mpris widget */
@@ -562,7 +545,6 @@
             margin: -5px 0px -10px 0px;
             padding: 0px;
             border-radius: 4px;
-            /* background: alpha(currentColor, 0.05); */
             background: alpha(@mantle, .80);
           }
           .widget-mpris > box > button:nth-child(1),
@@ -621,7 +603,6 @@
           }
 
           .notification-group > box.vertical {
-            /* border: solid 5px red; */
             margin-top: 3px;
           }
 
@@ -629,9 +610,6 @@
           .widget-backlight,
           .widget-volume {
             background: transparent;
-            /* background-color: @crust; */
-            /* background-color: @theme_bg_color; */
-            /* border: 1px solid @surface1; */
             border-top: none;
             border-bottom: none;
             font-size: 13px;
@@ -642,7 +620,6 @@
           }
           .widget-volume > box {
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.05); */
             border-radius: 4px;
             margin: 5px 10px 5px 10px;
             min-height: 50px;
@@ -657,12 +634,10 @@
             padding: 0px;
           }
           .widget-volume > box > button:hover {
-            /* background: alpha(currentColor, 0.05); */
             background: @surface0;
           }
           .widget-volume > revealer > list {
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.05); */
             border-radius: 4px;
             margin-top: 5px;
             padding: 0px;
@@ -679,7 +654,6 @@
           }
           .widget-backlight > scale {
             background: alpha(@mantle, .80);
-            /* background: alpha(currentColor, 0.05); */
             border-radius: 0px 4px 4px 0px;
             margin: 5px 10px 5px 0px;
             padding: 0px 10px 0px 0px;
@@ -687,7 +661,6 @@
           }
           .widget-backlight > label {
             background: @surface0;
-            /* background: alpha(currentColor, 0.05); */
             margin: 5px 0px 5px 10px;
             border-radius: 4px 0px 0px 4px;
             padding: 0px;
@@ -730,14 +703,9 @@
           /* Toggles */
           .toggle:checked {
             background: @surface1;
-            /* background: @theme_selected_bg_color; */
           }
-          /*.toggle:not(:checked) {
-            color: rgba(128, 128, 128, 0.5);
-          }*/
           .toggle:checked:hover {
             background: @surface2;
-            /* background: alpha(@theme_selected_bg_color, 0.75); */
           }
 
           /* Sliders */
@@ -749,7 +717,6 @@
           scale trough {
             border-radius: 4px;
             background: @surface0;
-            /* background: alpha(currentColor, 0.1); */
           }
 
           scale highlight {
