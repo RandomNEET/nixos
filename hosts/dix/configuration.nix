@@ -27,6 +27,7 @@
     ../../modules/services/greetd
     ../../modules/services/mpd
     ../../modules/services/pipewire
+    ../../modules/services/power-profiles-daemon
     ../../modules/services/proxy
     ../../modules/services/snapper
     ../../modules/services/ssh
