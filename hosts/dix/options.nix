@@ -66,9 +66,6 @@ rec {
     musicDirectory = "/mnt/hdd1/media/music";
     dataDir = "/mnt/hdd1/media/.mpd";
     extraConfig = ''
-      bind_to_address "127.0.0.1"
-      port "6600"
-
       audio_output {
          type   "pipewire"
          name   "PipeWire Sound Server"
