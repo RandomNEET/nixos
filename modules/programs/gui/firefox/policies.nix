@@ -22,6 +22,8 @@
   DisableProfileRefresh = false;
   DisableSafeMode = false;
   DisableTelemetry = true;
+  DisableFeedbackCommands = true;
+  DontCheckDefaultBrowser = true;
   DNSOverHTTPS = {
     Enabled = true;
   };
