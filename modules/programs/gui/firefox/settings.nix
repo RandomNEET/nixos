@@ -144,7 +144,6 @@ in
   "app.shield.optoutstudies.enabled" = lock-false;
   "dom.security.https_only_mode" = lock-true;
   "dom.security.https_only_mode_ever_enabled" = lock-true;
-  "identity.fxaccounts.enabled" = lock-false;
   "app.update.auto" = false;
   "browser.startup.homepage" = opts.firefox.browser.startup.homepage or "about:home";
   "browser.bookmarks.restore_default_bookmarks" = false;

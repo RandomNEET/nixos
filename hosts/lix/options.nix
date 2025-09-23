@@ -203,6 +203,7 @@ rec {
   };
 
   firefox = {
+    DisableFirefoxAccounts = false;
     titlebar-buttons-disable = true;
     full-screen-api.ignore-widgets = true;
     network.trr.mode = 3; # 2 if your havng DNS problems

@@ -1,3 +1,4 @@
+{ opts, ... }:
 {
   AllowFileSelectionDialogs = true;
   AppAutoUpdate = false;
@@ -11,7 +12,7 @@
   BlockAboutSupport = false;
   #Containers = { };
   DisableAppUpdate = true;
-  DisableFirefoxAccounts = false;
+  DisableFirefoxAccounts = opts.firefox.DisableFirefoxAccounts or true;
   DisableFirefoxScreenshots = false;
   DisableFirefoxStudies = true;
   DisableFormHistory = true;
@@ -49,7 +50,7 @@
   };
   HardwareAcceleration = true;
   ManualAppUpdateOnly = true;
-  NoDefaultBookmarks = true;
+  NoDefaultBookmarks = opts.firefox.DisableFirefoxAccounts or false;
   OfferToSaveLogins = false;
   PasswordManagerEnabled = false;
   PictureInPicture = {

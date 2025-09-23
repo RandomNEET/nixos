@@ -10,7 +10,7 @@
       programs = {
         firefox = {
           enable = true;
-          policies = import ./policies.nix;
+          policies = import ./policies.nix { inherit opts; };
           profiles = {
             default = {
               # choose a profile name; directory is /home/<user>/.mozilla/firefox/profile_0
@@ -30,7 +30,9 @@
                 lockPref("dom.security.https_only_mode_pbm", true);
                 lockPref("dom.security.https_only_mode_error_page_user_suggestions", true);
                 lockPref("browser.firefox-view.feature-tour", "{\"screen\":\"\",\"complete\":true}");
-                lockPref("identity.fxaccounts.enabled", true);
+                lockPref("identity.fxaccounts.enabled", ${
+                  if (opts.firefox.DisableFirefoxAccounts or true) then "false" else "true"
+                });
                 lockPref("browser.tabs.firefox-view-next", false);
                 lockPref("privacy.sanitize.sanitizeOnShutdown", false);
                 lockPref("privacy.clearOnShutdown.cache", true);
@@ -49,6 +51,9 @@
                 lockPref("browser.newtabpage.activity-stream.floorp.newtab.releasenote.hide", true);
                 lockPref("browser.search.separatePrivateDefault", true);
               '';
+            }
+            // lib.optionalAttrs (opts.firefox.DisableFirefoxAccounts or true) {
+              bookmarks = import ./bookmarks.nix;
             };
           };
         };
