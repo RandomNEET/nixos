@@ -152,11 +152,15 @@ rec {
     treesitter.enable = true; # Automatically disable noice if set to false
     lint.enable = true;
     conform.enable = true;
-    copilot.enable = true;
+    copilot = {
+      enable = true;
+      cmp = false;
+    };
     noice.enable = true; # Require treesitter
     snack = {
       image.enable = true;
     };
+
     obsidian = {
       workspaces = [
         {
