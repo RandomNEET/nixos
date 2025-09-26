@@ -76,7 +76,7 @@
           };
           dashboard = {
             enabled = true;
-            pane_gap = 6;
+            pane_gap = 1;
             preset = {
               keys = [
                 {
@@ -150,8 +150,13 @@
             };
             sections = [
               {
+                pane = 1;
+                section = "header";
+              }
+              {
                 icon = " ";
                 title = "Keymaps";
+                pane = 2;
                 section = "keys";
                 indent = 2;
                 padding = 1;
@@ -159,6 +164,7 @@
               {
                 icon = " ";
                 title = "Recent Files";
+                pane = 2;
                 section = "recent_files";
                 indent = 2;
                 padding = 1;
@@ -166,14 +172,10 @@
               {
                 icon = " ";
                 title = "Projects";
+                pane = 2;
                 section = "projects";
                 indent = 2;
                 padding = 1;
-              }
-              {
-                pane = 2;
-                section = "header";
-                # padding = 0.5;
               }
             ];
           };
