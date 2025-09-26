@@ -1,4 +1,10 @@
-{ pkgs, opts, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  opts,
+  ...
+}:
 {
   #  use later
   home-manager.sharedModules = [
@@ -84,7 +90,7 @@
                     command = "systemctl reboot";
                   }
                   (
-                    if opts.hibernate then
+                    if opts.hibernate or false then
                       {
                         label = "󰤄   Hibernate";
                         command = "systemctl hibernate";
@@ -158,8 +164,8 @@
                 {
                   label = "";
                   type = "toggle";
-                  command = "sh -c '${pkgs.procps}/bin/pgrep -x hyprsunset >/dev/null && ${pkgs.procps}/bin/pkill hyprsunset || nohup ${pkgs.hyprsunset}/bin/hyprsunset --temperature 3500 > /tmp/hyprsunset_output.log 2>&1 &'";
-                  update-command = "sh -c 'pgrep -x hyprsunset >/dev/null && echo true || echo false'";
+                  command = "pgrep -x hyprsunset >/dev/null && pkill hyprsunset || nohup hyprsunset --temperature 3500";
+                  update-command = "pgrep -x hyprsunset >/dev/null && echo true || echo false";
                 }
 
                 {
@@ -168,15 +174,19 @@
                   type = "toggle";
                   update-command = "pgrep -x hypridle > /dev/null && echo false || echo true";
                 }
-
-                {
-                  label = "";
-                  type = "toggle";
-
-                  command = "powermode-toggle";
-                  update-command = "test -f \"$HOME/.config/hypr/power_mode\" && grep -q \"^powersave$\" \"$HOME/.config/hypr/power_mode\" && echo true || echo false";
-                }
-              ];
+              ]
+              ++ lib.optional config.services.power-profiles-daemon.enable {
+                label = "";
+                type = "toggle";
+                command = "powermode-toggle";
+                update-command = "test -f \"$HOME/.config/hypr/power_mode\" && grep -q \"^powersave$\" \"$HOME/.config/hypr/power_mode\" && echo true || echo false";
+              }
+              ++ lib.optional config.services.tlp.enable {
+                label = "";
+                type = "toggle";
+                command = "powermode-toggle";
+                update-command = "test -f \"$HOME/.config/hypr/power_mode\" && grep -q \"^powersave$\" \"$HOME/.config/hypr/power_mode\" && echo true || echo false";
+              };
             };
           };
           scripts = {

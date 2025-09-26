@@ -60,6 +60,7 @@
           home.packages = with pkgs; [
             hyprpaper
             hyprpicker
+            hyprsunset
             cliphist
             grimblast
             swappy
@@ -402,7 +403,7 @@
                   # "$mainMod ALT, mouse:276, exec, kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${lib.getExe autoclicker} --cps 60"
 
                   # Night Mode (lower value means warmer temp)
-                  "$mainMod, F9, exec, ${getExe pkgs.hyprsunset} --temperature 3500" # good values: 3500, 3000, 2500
+                  "$mainMod, F9, exec, hyprsunset --temperature 3500" # good values: 3500, 3000, 2500
                   "$mainMod, F10, exec, pkill hyprsunset"
 
                   # Window/Session actions
