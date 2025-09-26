@@ -45,6 +45,7 @@
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/mpv
     ../../modules/programs/cli/nixvim
+    ../../modules/programs/cli/rbw
     ../../modules/programs/cli/rigprep
     ../../modules/programs/cli/spotify-player
     ../../modules/programs/cli/tmux

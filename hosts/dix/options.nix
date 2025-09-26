@@ -202,6 +202,15 @@ rec {
     };
   };
 
+  rbw = {
+    settings = {
+      base_url = "https://vaultwarden.scaphium.xyz";
+      email = "selfhost@randomneet.me";
+      lock_timeout = 3600;
+    };
+    rofi-rbw = true;
+  };
+
   zsh = {
     initContent = '''';
 

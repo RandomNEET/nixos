@@ -16,7 +16,7 @@
           pinentry.package = pkgs.pinentry-curses;
           pinentry.program = "pinentry-curses";
         };
-        home.packages = [ pkgs.pinentry-curses ];
+        home.packages = [ pkgs.pinentry-all ];
       }
     )
   ];

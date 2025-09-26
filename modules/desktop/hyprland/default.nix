@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   opts,
@@ -535,7 +536,14 @@
                       "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
                     ]
                   ) 10
-                ));
+                ))
+                ++ lib.optionals (config.programs.steam.enable or false) [
+                  "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
+                  "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
+                ]
+                ++ lib.optionals (opts.rbw.rofi-rbw or false) [
+                  "$mainMod SHIFT, U, exec, ${./scripts/rofi-rbw.sh}" # password manager
+                ];
               bindm = [
                 # Move/Resize windows with mainMod + LMB/RMB and dragging
                 "$mainMod, mouse:272, movewindow"
