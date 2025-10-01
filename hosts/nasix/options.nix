@@ -176,8 +176,6 @@ rec {
     musicDirectory = "/mnt/smb/media/music";
     dataDir = "/mnt/smb/media/.mpd";
     extraConfig = ''
-      bind_to_address "0.0.0.0"
-      port "6600"
       audio_output {
           type        "httpd"
           name        "MPD HTTP Stream"
