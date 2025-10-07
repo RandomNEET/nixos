@@ -58,7 +58,14 @@
   ];
 
   # Home-manager config
-  home-manager.sharedModules = [ (_: { home.packages = with pkgs; [ flac ]; }) ];
+  home-manager.sharedModules = [
+    (_: {
+      home.packages = with pkgs; [
+        flac
+        qq
+      ];
+    })
+  ];
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
