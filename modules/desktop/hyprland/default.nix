@@ -55,7 +55,7 @@
     in
     [
       (
-        { ... }:
+        { config, ... }:
         {
           home.packages = with pkgs; [
             hyprpaper
@@ -89,10 +89,19 @@
             portal = {
               enable = true;
               extraPortals = with pkgs; [
-                xdg-desktop-portal-hyprland
                 xdg-desktop-portal-gtk
               ];
               xdgOpenUsePortal = true;
+              configPackages = [ config.wayland.windowManager.hyprland.package ];
+              config.hyprland = {
+                default = [
+                  "hyprland"
+                  "gtk"
+                ];
+                "org.freedesktop.impl.portal.OpenURI" = "gtk";
+                "org.freedesktop.impl.portal.FileChooser" = "gtk";
+                "org.freedesktop.impl.portal.Print" = "gtk";
+              };
             };
             configFile."hypr/icons" = {
               source = ./icons;
