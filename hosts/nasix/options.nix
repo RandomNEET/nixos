@@ -189,7 +189,7 @@ rec {
 
   proxy = {
     method = "lpf"; # tproxy lpf
-    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/motherly-outside/docker.json";
+    settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/docker.json";
   };
 
   samba = {
