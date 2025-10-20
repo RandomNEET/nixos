@@ -20,7 +20,7 @@
           jsonls.enable = true;
           ts_ls.enable = true;
           html.enable = true;
-          volar.enable = true;
+          vue_ls.enable = true;
         };
         keymaps = {
           silent = true;
