@@ -55,7 +55,8 @@ rec {
   greetd = {
     settings = {
       default_session = {
-        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
+        command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd niri-session";
+        # command = "tuigreet --time --theme 'border=lightblue;text=white;prompt=lightcyan;time=lightyellow;action=white;button=lightred;container=black;input=white' --cmd hyprland";
         user = "greeter";
       };
     };
@@ -264,5 +265,17 @@ rec {
       dpmsOff = "1800";
       sleep = "3600";
     };
+  };
+
+  swayidle = {
+    time = {
+      lock = 300;
+      power-off-monitors = 1800;
+      sleep = 3600;
+    };
+  };
+
+  swaylock = {
+    image = "eDP-1:${wallpaper.dir}/horizontal/mocha/greenbus.jpg";
   };
 }

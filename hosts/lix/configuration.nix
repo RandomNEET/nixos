@@ -76,7 +76,7 @@
 
     ../../modules/scripts
 
-    ../../modules/desktop/hyprland
+    ../../modules/desktop/niri
     ../../modules/desktop/themes
   ];
 
