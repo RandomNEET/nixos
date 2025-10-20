@@ -23,7 +23,7 @@
               vibrancy_darkness = 0.0;
             }
           ]
-          ++ lib.optionals (opts.hyprlock.monitor2 != "") [
+          ++ lib.optionals ((opts.hyprlock.monitor2 or "") != "") [
             {
               monitor = opts.hyprlock.monitor2;
               color = "rgb(36, 39, 58)";
@@ -73,7 +73,7 @@
               halign = "center";
             }
           ]
-          ++ lib.optionals (opts.hyprlock.monitor2 != "") [
+          ++ lib.optionals ((opts.hyprlock.monitor2 or "") != "") [
             {
               monitor = opts.hyprlock.monitor2;
               text = ''Hello <span text_transform="capitalize" size="larger">$USER!</span>'';

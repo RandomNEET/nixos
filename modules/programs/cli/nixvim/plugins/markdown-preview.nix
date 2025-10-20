@@ -6,7 +6,7 @@
 }:
 {
   programs.nixvim = {
-    keymaps = lib.mkIf (opts.browser != "" && config.programs.${opts.browser}.enable) [
+    keymaps = lib.mkIf ((opts.browser or "") != "" && config.programs.${opts.browser}.enable) [
       {
         mode = [
           "n"
@@ -19,7 +19,7 @@
       }
     ];
     plugins.markdown-preview = {
-      enable = opts.browser != "" && config.programs.${opts.browser}.enable;
+      enable = (opts.browser or "") != "" && config.programs.${opts.browser}.enable;
       settings = {
         auto_close = 1;
         # auto_start = true;
