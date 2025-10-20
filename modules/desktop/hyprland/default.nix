@@ -13,6 +13,7 @@
     ./programs/hyprlock
     ./programs/swaync
     ./programs/rofi
+    ./scripts
   ];
 
   nix.settings = {
@@ -70,12 +71,10 @@
             pamixer
             pavucontrol
             playerctl
-            waybar
             wtype
             wl-clipboard
-            xdotool
             yad
-            jq # for random-walls.sh
+            jq
           ];
 
           home.sessionVariables = {
@@ -435,17 +434,15 @@
                   "$CONTROL ALT, DELETE, exec, $terminal -e '${getExe pkgs.btop}'" # System Monitor
                   "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
-                  "$mainMod, A, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
-                  "$mainMod, SPACE, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
-                  # "$mainMod, Z, exec, pkill -x rofi || ${
-                  #   ./scripts/rofi.sh
-                  # } emoji" # launch emoji picker
-                  # "$mainMod, tab, exec, pkill -x rofi || ${./scripts/rofi.sh} window" # switch between desktop applications
-                  # "$mainMod, R, exec, pkill -x rofi || ${./scripts/rofi.sh} file" # brrwse system files
+                  "$mainMod, A, exec, launcher drun" # launch desktop applications
+                  "$mainMod, SPACE, exec, launcher drun" # launch desktop applications
+                  # "$mainMod, Z, exec, launcher emoji" # launch emoji picker
+                  # "$mainMod, tab, exec, launcher window" # switch between desktop applications
+                  # "$mainMod, R, exec, launcher file" # brrwse system files
                   "$mainMod ALT, K, exec, ${./scripts/keyboard-switch.sh}" # change keyboard layout
                   "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
-                  "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
+                  "$mainMod, G, exec, launcher games" # game launcher
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
                   "$mainMod, V, exec, ${./scripts/clip-manager.sh}" # Clipboard Manager
                   "$mainMod, R, exec, ${./scripts/random-walls.sh}" # random wallpaper
@@ -552,7 +549,7 @@
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
                 ]
                 ++ lib.optionals (opts.rbw.rofi-rbw or false) [
-                  "$mainMod SHIFT, U, exec, ${./scripts/rofi-rbw.sh}" # password manager
+                  "$mainMod SHIFT, U, exec, launcher rbw" # password manager
                 ];
               bindm = [
                 # Move/Resize windows with mainMod + LMB/RMB and dragging

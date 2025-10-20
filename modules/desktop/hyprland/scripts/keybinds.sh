@@ -26,8 +26,8 @@ KEYBINDERS=(
 	"SUPER E" "Launch editor" "$_editor"
 	"SUPER B" "Launch browser" "$_browser"
 	"CTRL ALT Delete" "Open system monitor" "$_terminal -e 'btop'"
-	"SUPER A" "Launch application menu" "scripts/rofi.sh drun"
-	"SUPER SPACE" "Launch application menu" "scripts/rofi.sh drun"
+	"SUPER A" "Launch application menu" "launcher drun"
+	"SUPER SPACE" "Launch application menu" "launcher drun"
 	"SUPER F9" "Enable night mode" "hyprsunset --temperature 2500"
 	"SUPER F10" "Disable night mode" "pkill hyprsunset"
 	"SUPER F8" "Toggle autoclicker" "scripts/autoclicker.nix"
@@ -100,7 +100,7 @@ fi
 
 if [ "$RBW_ROFI" = "true" ]; then
 	KEYBINDERS+=(
-		"SUPER SHIFT U" "Password manager" "scripts/rofi-rbw.sh"
+		"SUPER SHIFT U" "Password manager" "launcher rbw"
 	)
 fi
 
@@ -112,7 +112,7 @@ fi
 
 if [ "$GAME_LAUNCHER" = true ]; then
 	KEYBINDERS+=(
-		"SUPER G" "Game launcher" "scripts/rofi.sh games"
+		"SUPER G" "Game launcher" "launcher games"
 		"SUPER ALT G" "Enable game mode" "scripts/gamemode.sh"
 	)
 fi
