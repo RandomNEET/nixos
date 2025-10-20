@@ -249,8 +249,10 @@ rec {
 
   # Programs
   git = {
-    userName = "RandomNEET";
-    userEmail = "dev@randomneet.me";
+    user = {
+      name = "RandomNEET";
+      email = "dev@randomneet.me";
+    };
   };
 
   nixvim = {

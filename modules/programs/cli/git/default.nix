@@ -4,8 +4,12 @@
     (_: {
       programs.git = {
         enable = true;
-        userName = "${opts.git.userName}";
-        userEmail = "${opts.git.userEmail}";
+        settings = {
+          user = {
+            name = "${opts.git.user.name}";
+            email = "${opts.git.user.email}";
+          };
+        };
       };
 
       home.shellAliases = {
