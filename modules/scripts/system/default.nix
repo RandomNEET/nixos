@@ -47,7 +47,14 @@ let
         file:
         let
           fileName = builtins.baseNameOf file;
-          imported = import file { inherit config pkgs opts; };
+          imported = import file {
+            inherit
+              config
+              lib
+              pkgs
+              opts
+              ;
+          };
 
           # Check if the imported file is a function expecting pkgs
           isFunction = builtins.isFunction imported;
