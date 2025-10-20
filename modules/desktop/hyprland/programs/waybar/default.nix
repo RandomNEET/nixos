@@ -50,8 +50,8 @@
                 "pulseaudio"
                 "bluetooth"
                 "network"
-                "tray"
                 "battery"
+                "tray"
               ];
 
             "custom/notification" = {
