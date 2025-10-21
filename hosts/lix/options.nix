@@ -272,7 +272,7 @@ rec {
   swayidle = {
     time = {
       lock = 300;
-      power-off-monitors = 1800;
+      dpmsOff = 1800;
       sleep = 3600;
     };
   };

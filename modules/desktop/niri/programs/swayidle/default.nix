@@ -34,9 +34,9 @@
               command = "${pkgs.systemd}/bin/loginctl lock-session";
             }
           ]
-          ++ lib.optionals ((opts.swayidle.time.power-off-monitors or "") != "") [
+          ++ lib.optionals ((opts.swayidle.time.dpmsOff or "") != "") [
             {
-              timeout = opts.swayidle.time.power-off-monitors;
+              timeout = opts.swayidle.time.dpmsOff;
               command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
               resumeCommand = "${pkgs.niri}/bin/niri msg action power-on-monitors";
             }
