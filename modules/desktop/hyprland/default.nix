@@ -7,12 +7,13 @@
 }:
 {
   imports = [
-    ./programs/waybar
-    ./programs/wlogout
     ./programs/hypridle
     ./programs/hyprlock
-    ./programs/swaync
     ./programs/rofi
+    ./programs/swaync
+    ./programs/swww
+    ./programs/waybar
+    ./programs/wlogout
     ./scripts
   ];
 
@@ -35,10 +36,10 @@
     };
   };
 
-  systemd.user.services.random-walls = {
+  systemd.user.services.random-wall = {
     description = "Change wallpaper every hour";
     startAt = "hourly";
-    script = "exec /run/current-system/sw/bin/bash /home/${opts.username}/nixos/modules/desktop/hyprland/scripts/random-walls.sh";
+    script = "exec /run/current-system/sw/bin/bash ${./scripts/swww-randomize-multi.sh}";
     serviceConfig = {
       Type = "oneshot";
       Environment = "PATH=/etc/profiles/per-user/${opts.username}/bin:/run/current-system/sw/bin";
@@ -59,7 +60,6 @@
         { config, ... }:
         {
           home.packages = with pkgs; [
-            hyprpaper
             hyprpicker
             hyprsunset
             cliphist
@@ -74,7 +74,6 @@
             wtype
             wl-clipboard
             yad
-            jq
           ];
 
           home.sessionVariables = {
@@ -105,15 +104,6 @@
             configFile."hypr/icons" = {
               source = ./icons;
               recursive = true;
-            };
-          };
-
-          # Set wallpaper
-          services.hyprpaper = {
-            enable = true;
-            settings = {
-              preload = [ "${opts.wallpaper.default}" ];
-              wallpaper = [ "${opts.wallpaper.default}" ];
             };
           };
 
@@ -165,7 +155,6 @@
                 "polkit-agent-helper-1"
                 "hyprctl dispatch workspace 1"
                 "sleep 2 && pamixer --set-volume 50"
-                "sleep 2 && ${./scripts/random-walls.sh}" # random wallpaper
               ];
 
               input = {
@@ -449,7 +438,8 @@
                   "$mainMod, G, exec, launcher games" # game launcher
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
                   "$mainMod, V, exec, ${./scripts/clip-manager.sh}" # Clipboard Manager
-                  "$mainMod, R, exec, ${./scripts/random-walls.sh}" # random wallpaper
+                  "$mainMod SHIFT, W, exec, launcher wallpaper" # launch wallpaper switcher
+                  "$mainMod CTRL, W, exec, ${./scripts/swww-randomize-multi.sh}" # random wallpaper
 
                   # Screenshot/Screencapture
                   "$mainMod, P, exec, ${./scripts/screenshot.sh} s" # drag to snip an area / click on a window to print it
@@ -548,12 +538,15 @@
                     ]
                   ) 10
                 ))
+                ++ lib.optionals (config.programs.tmux.enable or false) [
+                  "$mainMod SHIFT, T, exec, launcher tmux" # launch tmux sessions
+                ]
+                ++ lib.optionals (opts.rbw.rofi-rbw or false) [
+                  "$mainMod SHIFT, U, exec, launcher rbw" # launch password manager
+                ]
                 ++ lib.optionals (config.programs.steam.enable or false) [
                   "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
-                ]
-                ++ lib.optionals (opts.rbw.rofi-rbw or false) [
-                  "$mainMod SHIFT, U, exec, launcher rbw" # password manager
                 ];
               bindm = [
                 # Move/Resize windows with mainMod + LMB/RMB and dragging

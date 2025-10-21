@@ -11,15 +11,16 @@
     ./programs/swayidle
     ./programs/swaylock
     ./programs/swaync
+    ./programs/swww
     ./programs/waybar
     ./programs/wlogout
     ./scripts
   ];
 
-  systemd.user.services.random-walls = {
+  systemd.user.services.random-wall = {
     description = "Change wallpaper every hour";
     startAt = "hourly";
-    script = "exec /run/current-system/sw/bin/bash /home/${opts.username}/nixos/modules/desktop/niri/scripts/random-walls.sh";
+    script = "exec /run/current-system/sw/bin/bash ${./scripts/swww-randomize-multi.sh}";
     serviceConfig = {
       Type = "oneshot";
       Environment = "PATH=/etc/profiles/per-user/${opts.username}/bin:/run/current-system/sw/bin";
@@ -35,7 +36,6 @@
       { pkgs, ... }:
       {
         home.packages = with pkgs; [
-          swaybg
           cliphist
           libnotify
           brightnessctl
@@ -45,7 +45,6 @@
           playerctl
           wtype
           wl-clipboard
-          jq
           xwayland-satellite
         ];
 

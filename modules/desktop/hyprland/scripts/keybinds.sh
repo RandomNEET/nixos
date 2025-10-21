@@ -26,8 +26,10 @@ KEYBINDERS=(
 	"SUPER E" "Launch editor" "$_editor"
 	"SUPER B" "Launch browser" "$_browser"
 	"CTRL ALT Delete" "Open system monitor" "$_terminal -e 'btop'"
-	"SUPER A" "Launch application menu" "launcher drun"
-	"SUPER SPACE" "Launch application menu" "launcher drun"
+	"SUPER A" "Launch application menu" "scripts/launcher drun"
+	"SUPER SPACE" "Launch application menu" "scripts/launcher drun"
+	"SUPER SHIFT W" "Launch wallpaper menu" "scripts/launcher wallpaper"
+	"SUPER SHIFT T" "Launch tmux sessions" "scripts/launcher tmux"
 	"SUPER F9" "Enable night mode" "hyprsunset --temperature 2500"
 	"SUPER F10" "Disable night mode" "pkill hyprsunset"
 	"SUPER F8" "Toggle autoclicker" "scripts/autoclicker.nix"
@@ -86,33 +88,45 @@ KEYBINDERS=(
 	"SUPER 1-0" "Switch to workspace 1-10" "workspace 1-10"
 	"SUPER SHIFT 1-0" "Move to workspace 1-10" "movetoworkspace 1-10"
 
-	"SUPER R" "Random wallpapers" "scripts/random-walls.sh"
+	"SUPER CTRL W" "Random wallpaper" "scripts/swww-randomize-multi.sh"
 	"SUPER ALT K" "Change keyboard layout" "scripts/keyboard-switch.sh"
 	"SUPER U" "Rebuild system" "$_terminal -e scripts/rebuild.sh"
 	"SUPER V" "Clipboard manager" "scripts/clip-manager.sh"
 )
 
 if grep -E '^[^#]*rofi-rbw *= *true;' "$HOME/nixos/hosts/$HOSTNAME/options.nix" >/dev/null; then
-	RBW_ROFI=true
+	RBW=true
 else
-	RBW_ROFI=false
+	RBW=false
 fi
 
-if [ "$RBW_ROFI" = "true" ]; then
+if [ "$RBW" = "true" ]; then
 	KEYBINDERS+=(
-		"SUPER SHIFT U" "Password manager" "launcher rbw"
+		"SUPER SHIFT U" "Launch password manager" "scripts/launcher rbw"
+	)
+fi
+
+if grep -E '^[^#]*modules/programs/cli/tmux' "$HOME/nixos/hosts/$HOSTNAME/configuration.nix" >/dev/null; then
+	TMUX=true
+else
+	TMUX=false
+fi
+
+if [ "$TMUX" = true ]; then
+	KEYBINDERS+=(
+		"SUPER SHIFT T" "Launch tmux sessions" "scripts/launcher tmux"
 	)
 fi
 
 if grep -E '^[^#]*modules/programs/gui/games' "$HOME/nixos/hosts/$HOSTNAME/configuration.nix" >/dev/null; then
-	GAME_LAUNCHER=true
+	GAMES=true
 else
-	GAME_LAUNCHER=false
+	GAMES=false
 fi
 
-if [ "$GAME_LAUNCHER" = true ]; then
+if [ "$GAMES" = true ]; then
 	KEYBINDERS+=(
-		"SUPER G" "Game launcher" "launcher games"
+		"SUPER G" "Game launcher" "scripts/launcher games"
 		"SUPER ALT G" "Enable game mode" "scripts/gamemode.sh"
 	)
 fi

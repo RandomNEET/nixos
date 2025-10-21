@@ -236,14 +236,17 @@ rec {
   };
 
   # Desktop
-  display = {
-    width = 1920;
-    height = 1080;
-  };
+  display = [
+    {
+      output = "eDP-1";
+      width = 1920;
+      height = 1080;
+      orientation = "landscape";
+    }
+  ];
 
   wallpaper = {
     dir = "/home/${username}/pic/wallpapers";
-    default = "${wallpaper.dir}/universal/black.png";
   };
 
   hyprland = {
@@ -258,7 +261,7 @@ rec {
   hyprlock = {
     monitor1 = "eDP-1";
     monitor2 = "";
-    background1 = "${wallpaper.dir}/horizontal/mocha/greenbus.jpg";
+    background1 = "${wallpaper.dir}/landscape/mocha/greenbus.jpg";
   };
 
   hypridle = {
@@ -278,6 +281,6 @@ rec {
   };
 
   swaylock = {
-    image = "eDP-1:${wallpaper.dir}/horizontal/mocha/greenbus.jpg";
+    image = "eDP-1:${wallpaper.dir}/landscape/mocha/greenbus.jpg";
   };
 }

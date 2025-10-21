@@ -32,7 +32,7 @@ layout {
 }
 
 layer-rule {
-    match namespace="^wallpaper$"
+    match namespace="swww-daemon"
     place-within-backdrop true
 }
 
@@ -82,7 +82,6 @@ spawn-sh-at-startup "rm '$XDG_CACHE_HOME/cliphist/db'"
 
 spawn-sh-at-startup "nm-applet --indicator"
 spawn-sh-at-startup "pamixer --set-volume 50"
-spawn-sh-at-startup "/run/current-system/sw/bin/bash $HOME/nixos/modules/desktop/niri/scripts/random-walls.sh"
 
 hotkey-overlay {
     skip-at-startup
@@ -112,11 +111,12 @@ binds {
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     Mod+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "launcher drun"; }
+    Mod+Shift+P hotkey-overlay-title="Launch wallpaper menu" { spawn-sh "launcher wallpaper"; }
+    Mod+Ctrl+P hotkey-overlay-title="Random wallpaper" { spawn-sh "bash $HOME/nixos/modules/desktop/niri/scripts/swww-randomize-multi.sh"; }
     Mod+Backspace hotkey-overlay-title="Power menu" { spawn-sh "pkill -x wlogout || wlogout -b 4"; }
     Mod+Shift+Q hotkey-overlay-title="Open notification panel" { spawn-sh "swaync-client -t -sw"; }
     Mod+V hotkey-overlay-title="Clipvoard manager" { spawn-sh "bash $HOME/nixos/modules/desktop/niri/scripts/clip-manager.sh"; }
     Ctrl+Shift+U hotkey-overlay-title="Rebuild system" { spawn-sh "kitty -e $HOME/nixos/modules/desktop/niri/scripts/rebuild.sh"; }
-    Ctrl+Shift+W hotkey-overlay-title="Random wallpapers" { spawn-sh "bash $HOME/nixos/modules/desktop/niri/scripts/random-walls.sh"; }
     Ctrl+Escape hotkey-overlay-title="Toggle Waybar" { spawn-sh "pkill waybar || waybar"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.

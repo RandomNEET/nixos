@@ -256,14 +256,23 @@ rec {
   };
 
   # Desktop
-  display = {
-    width = 3840;
-    height = 2160;
-  };
+  display = [
+    {
+      output = "DP-1";
+      width = 3840;
+      height = 2160;
+      orientation = "landscape";
+    }
+    {
+      output = "HDMI-A-1";
+      width = 2160;
+      height = 3840;
+      orientation = "portrait";
+    }
+  ];
 
   wallpaper = {
     dir = "/home/${username}/pic/wallpapers";
-    default = "${wallpaper.dir}/universal/black.png";
   };
 
   hyprland = {
@@ -280,8 +289,8 @@ rec {
   hyprlock = {
     monitor1 = "DP-1";
     monitor2 = "HDMI-A-1";
-    background1 = "${wallpaper.dir}/horizontal/mocha/greenbus.jpg";
-    background2 = "${wallpaper.dir}/vertical/anime/reimu-city.jpg";
+    background1 = "${wallpaper.dir}/landscape/mocha/greenbus.jpg";
+    background2 = "${wallpaper.dir}/portrait/anime/reimu-city.jpg";
   };
 
   hypridle = {

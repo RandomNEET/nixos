@@ -1,79 +1,227 @@
 {
+  lib,
   pkgs,
   opts,
   ...
 }:
+let
+  displays = opts.display or [ ];
+  wallpaperDir = opts.wallpaper.dir;
+  landscapeDir = "${wallpaperDir}/landscape";
+  portraitDir = "${wallpaperDir}/portrait";
+in
 pkgs.writeShellScriptBin "launcher" ''
-  # check if rofi is already running
-  if pidof rofi >/dev/null; then
-    pkill rofi
-    exit 0
-  fi
-
-  case $1 in
-  drun)
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-2/style-2.rasi"
-    r_override="entry{placeholder:'Search Applications...';}listview{lines:9;}"
-
-    rofi -show drun -theme-str "$r_override" -theme "$rofi_theme"
-    ;;
-  window)
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
-    r_override="entry{placeholder:'Search Windows...';}listview{lines:12;}"
-
-    rofi -show window -theme-str "$r_override" -theme "$rofi_theme"
-    ;;
-  file)
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-2/style-2.rasi"
-    r_override="entry{placeholder:'Search Files...';}listview{lines:8;}"
-
-    rofi -show filebrowser -theme-str "$r_override" -theme "$rofi_theme"
-    ;;
-  tmux)
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
-    r_override="entry{placeholder:'Search Tmux Sessions...';}listview{lines:15;}"
-
-    sessions=$(tmux ls -F '#{session_name}: #{session_path} (#{session_windows} windows)' |
-      rofi -dmenu -i -theme-str "$r_override" -theme "$rofi_theme" | cut -d: -f1)
-    if [[ $sessions ]]; then
-      ${opts.terminal} --hold -e tmux attach -t $sessions
+    if pidof rofi >/dev/null; then
+      pkill rofi
+      exit 0
     fi
-    ;;
-  rbw)
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-1/style-6.rasi"
 
-    rofi-rbw --selector rofi --selector-args="-theme $rofi_theme"
-    ;;
-  emoji)
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
-    r_override="entry{placeholder:'Search Emojis...';}listview{lines:15;}"
+    case $1 in
+    drun)
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-2/style-2.rasi"
+      r_override="entry{placeholder:'Search Applications...';}listview{lines:9;}"
 
-    rofi -modi emoji -show emoji -theme "''${rofi_theme}" -theme-str "$r_override"
-    ;;
-  games)
-    r_override="entry{placeholder:'Search Games...';}listview{lines:15;}"
-    rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-1/style-5.rasi"
+      rofi -show drun -theme-str "$r_override" -theme "$rofi_theme"
+      ;;
+    window)
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
+      r_override="entry{placeholder:'Search Windows...';}listview{lines:12;}"
 
-    rofi -show games -modi games -theme "''${rofi_theme}" -theme-str "$r_override"
-    ;;
-  help | --help | -h)
-    echo "Usage: launcher [ACTION]"
-    echo "Launch various rofi modes with custom themes and settings."
-    echo ""
-    echo "Actions:"
-    echo "  drun         Launch application search mode"
-    echo "  window       Switch between open windows"
-    echo "  file         Browse and search files"
-    echo "  tmux         Search active tmux sessions"
-    echo "  rbw          Browse and search passwords"
-    echo "  emoji        Search and insert emojis"
-    echo "  games        Launch games menu"
-    echo "  help         Display this help message"
-    echo "  --help       Same as 'help'"
-    echo ""
-    echo "If no action is specified, defaults to 'drun' mode."
-    exit 0
-    ;;
-  *) exec "$0" drun ;;
-  esac
+      rofi -show window -theme-str "$r_override" -theme "$rofi_theme"
+      ;;
+    file)
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-2/style-2.rasi"
+      r_override="entry{placeholder:'Search Files...';}listview{lines:8;}"
+
+      rofi -show filebrowser -theme-str "$r_override" -theme "$rofi_theme"
+      ;;
+    tmux)
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
+      r_override="entry{placeholder:'Search Tmux Sessions...';}listview{lines:15;}"
+
+      sessions=$(tmux ls -F '#{session_name}: #{session_path} (#{session_windows} windows)' |
+        rofi -dmenu -i -theme-str "$r_override" -theme "$rofi_theme" | cut -d: -f1)
+      if [[ $sessions ]]; then
+        ${opts.terminal} --hold -e tmux attach -t $sessions
+      fi
+      ;;
+    rbw)
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-1/style-6.rasi"
+
+      rofi-rbw --selector rofi --selector-args="-theme $rofi_theme"
+      ;;
+    wallpaper)
+      rofi_theme_display="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
+      r_override_display="entry{placeholder:'Select Display...';}listview{lines:${toString (builtins.length displays)};}"
+      
+      DISPLAY_CHOICE=$(cat <<EOF | rofi -dmenu -i -theme-str "$r_override_display" -theme "$rofi_theme_display" -format 'i:s'
+  ${lib.concatMapStringsSep "\n" (
+    idx:
+    let
+      display = builtins.elemAt displays idx;
+    in
+    "${toString (idx + 1)}: ${display.output} (${display.orientation})"
+  ) (lib.range 0 ((builtins.length displays) - 1))}
+  EOF
+  )
+      
+      [ -z "$DISPLAY_CHOICE" ] && exit 0
+      
+      TARGET_DISPLAY=$(echo "$DISPLAY_CHOICE" | cut -d':' -f2 | cut -d':' -f1 | tr -d ' ')
+      
+      case "$TARGET_DISPLAY" in
+  ${lib.concatMapStringsSep "\n" (
+    idx:
+    let
+      display = builtins.elemAt displays idx;
+    in
+    "      ${toString (idx + 1)})\n        DISPLAY_OUTPUT=\"${display.output}\"\n        DISPLAY_ORIENTATION=\"${display.orientation}\"\n        ;;"
+  ) (lib.range 0 ((builtins.length displays) - 1))}
+        *)
+          echo "Invalid display selection"
+          exit 1
+          ;;
+      esac
+
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/wallpaper-select.rasi"
+      r_override="entry{placeholder:'Search Wallpapers for $DISPLAY_OUTPUT ($DISPLAY_ORIENTATION)...';}"
+
+      WALLPAPER_DIR="${wallpaperDir}"
+      CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-thumbnails"
+      CACHE_FLAG="$CACHE_DIR/.cache_ready"
+      
+      if [ "$DISPLAY_ORIENTATION" = "landscape" ]; then
+        SEARCH_DIR="${landscapeDir}"
+      else
+        SEARCH_DIR="${portraitDir}"
+      fi
+      
+      generate_thumbnail() {
+        local wallpaper="$1"
+        local relative_path="''${wallpaper#$WALLPAPER_DIR/}"
+        local wallpaper_name="''${relative_path%.*}"
+        local thumbnail="$CACHE_DIR/''${wallpaper_name}.jpg"
+        
+        mkdir -p "$(dirname "$thumbnail")"
+        
+        if [ ! -f "$thumbnail" ]; then
+          ${lib.getExe pkgs.imagemagick} "$wallpaper[0]" \
+            -strip -gravity center \
+            -thumbnail "320x180^" \
+            -extent "320x180" \
+            "$thumbnail" 2>/dev/null || true
+        fi
+      }
+      
+      if [ ! -f "$CACHE_FLAG" ]; then
+        echo "Generating wallpaper thumbnails for the first time..."
+        echo "This may take a moment..."
+        mkdir -p "$CACHE_DIR"
+        
+        if command -v ${lib.getExe pkgs.parallel} >/dev/null 2>&1; then
+          ${lib.getExe pkgs.fd} --type f \
+            -e jpg -e jpeg -e png -e webp -e jxl -e gif \
+            . "$WALLPAPER_DIR" \
+            | ${lib.getExe pkgs.parallel} --will-cite -j4 \
+              'rel="{}"; rel="''${rel#'"$WALLPAPER_DIR"'/}"; \
+               thumb="'"$CACHE_DIR"'/''${rel%.*}.jpg"; \
+               mkdir -p "$(dirname "$thumb")"; \
+               [ ! -f "$thumb" ] && \
+               ${lib.getExe pkgs.imagemagick} "{}[0]" -strip -gravity center -thumbnail "320x180^" -extent "320x180" "$thumb" 2>/dev/null'
+        else
+          ${lib.getExe pkgs.fd} --type f \
+            -e jpg -e jpeg -e png -e webp -e jxl -e gif \
+            . "$WALLPAPER_DIR" | while read -r wallpaper; do
+            generate_thumbnail "$wallpaper"
+          done
+        fi
+        
+        touch "$CACHE_FLAG"
+        echo "Thumbnails generated at $CACHE_DIR"
+      else
+        ${lib.getExe pkgs.fd} --type f \
+          -e jpg -e jpeg -e png -e webp -e jxl -e gif \
+          . "$SEARCH_DIR" | while read -r wallpaper; do
+          relative_path="''${wallpaper#$WALLPAPER_DIR/}"
+          wallpaper_name="''${relative_path%.*}"
+          thumbnail="$CACHE_DIR/''${wallpaper_name}.jpg"
+          
+          if [ ! -f "$thumbnail" ]; then
+            generate_thumbnail "$wallpaper" &
+          fi
+        done
+      fi
+
+      rofi_cmd() {
+        rofi -dmenu \
+          -i \
+          -theme-str "$r_override" \
+          -theme "$rofi_theme"
+      }
+
+      CHOICE=$(${lib.getExe pkgs.fd} --type f \
+        -e jpg -e jpeg -e png -e webp -e jxl -e gif \
+        . "$SEARCH_DIR" \
+        | sed "s|$WALLPAPER_DIR/||" \
+        | while read -r A; do
+            thumb_path="''${A%.*}.jpg"
+            echo -en "$A\x00icon\x1f$CACHE_DIR/$thumb_path\n"
+          done \
+        | rofi_cmd)
+      
+      [ -z "$CHOICE" ] && exit 0
+
+      WALLPAPER_PATH="$WALLPAPER_DIR/$CHOICE"
+      
+      swww img --outputs "$DISPLAY_OUTPUT" "$WALLPAPER_PATH" \
+        --transition-step 90 \
+        --transition-duration 1 \
+        --transition-fps 60 \
+        --transition-type wipe
+      
+      echo "Set wallpaper for Display $TARGET_DISPLAY ($DISPLAY_OUTPUT): $WALLPAPER_PATH"
+      ;;
+    emoji)
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
+      r_override="entry{placeholder:'Search Emojis...';}listview{lines:15;}"
+
+      rofi -modi emoji -show emoji -theme "''${rofi_theme}" -theme-str "$r_override"
+      ;;
+    games)
+      r_override="entry{placeholder:'Search Games...';}listview{lines:15;}"
+      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-1/style-5.rasi"
+
+      rofi -show games -modi games -theme "''${rofi_theme}" -theme-str "$r_override"
+      ;;
+    wallpaper-clear-cache)
+      CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-thumbnails"
+      if [ -d "$CACHE_DIR" ]; then
+        rm -rf "$CACHE_DIR"
+        echo "Wallpaper thumbnail cache cleared!"
+      else
+        echo "No cache to clear."
+      fi
+      ;;
+    help | --help | -h)
+      echo "Usage: launcher [ACTION]"
+      echo "Launch various rofi modes with custom themes and settings."
+      echo ""
+      echo "Actions:"
+      echo "  drun                   Launch application search mode"
+      echo "  window                 Switch between open windows"
+      echo "  file                   Browse and search files"
+      echo "  tmux                   Search active tmux sessions"
+      echo "  rbw                    Browse and search passwords"
+      echo "  wallpaper              Select display and set wallpaper"
+      echo "  wallpaper-clear-cache  Clear wallpaper thumbnail cache"
+      echo "  emoji                  Search and insert emojis"
+      echo "  games                  Launch games menu"
+      echo "  help                   Display this help message"
+      echo "  --help                 Same as 'help'"
+      echo ""
+      echo "If no action is specified, defaults to 'drun' mode."
+      exit 0
+      ;;
+    *) exec "$0" drun ;;
+    esac
 ''
