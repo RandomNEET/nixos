@@ -243,7 +243,7 @@ rec {
     titlebar-buttons-disable = true;
     full-screen-api.ignore-widgets = true;
     network.trr.mode = 3; # 2 if your havng DNS problems
-    browser.startup.homepage = "https://homepage.randomneet.me/";
+    browser.startup.homepage = "https://startpage.randomneet.me/";
   };
 
   obsidian = {
