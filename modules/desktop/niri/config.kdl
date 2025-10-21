@@ -60,8 +60,6 @@ window-rule {
     match app-id="steam"
     match app-id="code"
     match app-id="obsidian"
-    match app-id="obs-studio"
-    match app-id="org.qbittorrent.qBittorrent"
     opacity 0.95
 }
 
