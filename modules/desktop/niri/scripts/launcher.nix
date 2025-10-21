@@ -51,7 +51,7 @@ pkgs.writeShellScriptBin "launcher" ''
       rofi-rbw --selector rofi --selector-args="-theme $rofi_theme"
       ;;
     wallpaper)
-      rofi_theme_display="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/type-4/style-4.rasi"
+      rofi_theme_display="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/wallpaper/display-select.rasi"
       r_override_display="entry{placeholder:'Select Display...';}listview{lines:${toString (builtins.length displays)};}"
       
       DISPLAY_CHOICE=$(cat <<EOF | rofi -dmenu -i -theme-str "$r_override_display" -theme "$rofi_theme_display" -format 'i:s'
@@ -60,7 +60,7 @@ pkgs.writeShellScriptBin "launcher" ''
     let
       display = builtins.elemAt displays idx;
     in
-    "${toString (idx + 1)}: ${display.output} (${display.orientation})"
+    "${toString (idx + 1)}: ${display.output} - ${toString display.width}x${toString display.height} (${display.orientation})"
   ) (lib.range 0 ((builtins.length displays) - 1))}
   EOF
   )
@@ -83,21 +83,25 @@ pkgs.writeShellScriptBin "launcher" ''
           ;;
       esac
 
-      rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/wallpaper-select.rasi"
-      r_override="entry{placeholder:'Search Wallpapers for $DISPLAY_OUTPUT ($DISPLAY_ORIENTATION)...';}"
-
       WALLPAPER_DIR="${wallpaperDir}"
       CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-thumbnails"
       CACHE_FLAG="$CACHE_DIR/.cache_ready"
       
       if [ "$DISPLAY_ORIENTATION" = "landscape" ]; then
+        rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/wallpaper/wallpaper-select-landscape.rasi"
         SEARCH_DIR="${landscapeDir}"
+        THUMB_SIZE="320x180"
       else
+        rofi_theme="''${XDG_CONFIG_HOME:-$HOME/.config}/rofi/launchers/wallpaper/wallpaper-select-portrait.rasi"
         SEARCH_DIR="${portraitDir}"
+        THUMB_SIZE="180x320"
       fi
+      
+      r_override="entry{placeholder:'Search Wallpapers for $DISPLAY_OUTPUT ($DISPLAY_ORIENTATION)...';}"
       
       generate_thumbnail() {
         local wallpaper="$1"
+        local thumb_size="$2"
         local relative_path="''${wallpaper#$WALLPAPER_DIR/}"
         local wallpaper_name="''${relative_path%.*}"
         local thumbnail="$CACHE_DIR/''${wallpaper_name}.jpg"
@@ -107,8 +111,8 @@ pkgs.writeShellScriptBin "launcher" ''
         if [ ! -f "$thumbnail" ]; then
           ${lib.getExe pkgs.imagemagick} "$wallpaper[0]" \
             -strip -gravity center \
-            -thumbnail "320x180^" \
-            -extent "320x180" \
+            -thumbnail "$thumb_size^" \
+            -extent "$thumb_size" \
             "$thumbnail" 2>/dev/null || true
         fi
       }
@@ -119,20 +123,31 @@ pkgs.writeShellScriptBin "launcher" ''
         mkdir -p "$CACHE_DIR"
         
         if command -v ${lib.getExe pkgs.parallel} >/dev/null 2>&1; then
+          export WALLPAPER_DIR CACHE_DIR
+          export -f generate_thumbnail
+          
           ${lib.getExe pkgs.fd} --type f \
             -e jpg -e jpeg -e png -e webp -e jxl -e gif \
-            . "$WALLPAPER_DIR" \
+            . "${landscapeDir}" \
             | ${lib.getExe pkgs.parallel} --will-cite -j4 \
-              'rel="{}"; rel="''${rel#'"$WALLPAPER_DIR"'/}"; \
-               thumb="'"$CACHE_DIR"'/''${rel%.*}.jpg"; \
-               mkdir -p "$(dirname "$thumb")"; \
-               [ ! -f "$thumb" ] && \
-               ${lib.getExe pkgs.imagemagick} "{}[0]" -strip -gravity center -thumbnail "320x180^" -extent "320x180" "$thumb" 2>/dev/null'
+              'generate_thumbnail {} "320x180"'
+          
+          ${lib.getExe pkgs.fd} --type f \
+            -e jpg -e jpeg -e png -e webp -e jxl -e gif \
+            . "${portraitDir}" \
+            | ${lib.getExe pkgs.parallel} --will-cite -j4 \
+              'generate_thumbnail {} "180x320"'
         else
           ${lib.getExe pkgs.fd} --type f \
             -e jpg -e jpeg -e png -e webp -e jxl -e gif \
-            . "$WALLPAPER_DIR" | while read -r wallpaper; do
-            generate_thumbnail "$wallpaper"
+            . "${landscapeDir}" | while read -r wallpaper; do
+            generate_thumbnail "$wallpaper" "320x180"
+          done
+          
+          ${lib.getExe pkgs.fd} --type f \
+            -e jpg -e jpeg -e png -e webp -e jxl -e gif \
+            . "${portraitDir}" | while read -r wallpaper; do
+            generate_thumbnail "$wallpaper" "180x320"
           done
         fi
         
@@ -147,7 +162,7 @@ pkgs.writeShellScriptBin "launcher" ''
           thumbnail="$CACHE_DIR/''${wallpaper_name}.jpg"
           
           if [ ! -f "$thumbnail" ]; then
-            generate_thumbnail "$wallpaper" &
+            generate_thumbnail "$wallpaper" "$THUMB_SIZE" &
           fi
         done
       fi
