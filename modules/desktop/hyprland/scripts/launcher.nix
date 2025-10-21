@@ -6,9 +6,17 @@
 }:
 let
   displays = opts.display or [ ];
+
+  # Wallpaper directory
   wallpaperDir = opts.wallpaper.dir;
   landscapeDir = "${wallpaperDir}/landscape";
   portraitDir = "${wallpaperDir}/portrait";
+
+  # Wallpaper transition settings
+  transitionType = "center";
+  transitionStep = "90";
+  transitionDuration = "1";
+  transitionFps = "60";
 in
 pkgs.writeShellScriptBin "launcher" ''
     if pidof rofi >/dev/null; then
@@ -189,10 +197,10 @@ pkgs.writeShellScriptBin "launcher" ''
       WALLPAPER_PATH="$WALLPAPER_DIR/$CHOICE"
       
       swww img --outputs "$DISPLAY_OUTPUT" "$WALLPAPER_PATH" \
-        --transition-step 90 \
-        --transition-duration 1 \
-        --transition-fps 60 \
-        --transition-type wipe
+        --transition-type ${transitionType} \
+        --transition-step ${transitionStep} \
+        --transition-duration ${transitionDuration} \
+        --transition-fps ${transitionFps}
       
       echo "Set wallpaper for Display $TARGET_DISPLAY ($DISPLAY_OUTPUT): $WALLPAPER_PATH"
       ;;
