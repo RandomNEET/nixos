@@ -90,18 +90,18 @@ rec {
   ssh = {
     keysDir = "/home/${username}/.vault/ssh";
 
-    system = {
+    daemon = {
       enable = true;
       ports = [
         22
       ];
-      authorizedKeysFiles = [ "${ssh.keysDir}/dix.pub" ];
       settings = {
         PasswordAuthentication = false;
       };
+      authorizedKeysFiles = [ "${ssh.keysDir}/dix.pub" ];
     };
 
-    home = {
+    client = {
       matchBlocks = {
         "github.com" = {
           hostname = "github.com";

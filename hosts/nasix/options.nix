@@ -215,18 +215,18 @@ rec {
   ssh = {
     keysDir = "/home/${username}/.vault/ssh";
 
-    system = {
+    daemon = {
       enable = true;
       ports = [
         22
       ];
-      authorizedKeysFiles = [ "${ssh.keysDir}/nasix.pub" ];
       settings = {
         PasswordAuthentication = false;
       };
+      authorizedKeysFiles = [ "${ssh.keysDir}/nasix.pub" ];
     };
 
-    home = {
+    client = {
       matchBlocks = {
         "dix" = {
           hostname = "192.168.0.24";
