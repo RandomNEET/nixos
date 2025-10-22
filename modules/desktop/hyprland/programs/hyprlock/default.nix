@@ -1,4 +1,11 @@
 { lib, opts, ... }:
+let
+  displays = opts.display or [ ];
+
+  primaryLandscape = lib.findFirst (d: d.orientation == "landscape") (lib.head displays) displays;
+
+  otherDisplays = lib.filter (d: d.output != primaryLandscape.output) displays;
+in
 {
   home-manager.sharedModules = [
     (_: {
@@ -8,40 +15,34 @@
           general = {
             hide_cursor = true;
           };
+
           background = [
-            {
-              monitor = opts.hyprlock.monitor1;
-              color = "rgb(36, 39, 58)";
-              path = opts.hyprlock.background1;
-              new_optimizations = true;
-              blur_size = 3;
-              blur_passes = 2;
-              noise = 1.17e-2;
-              contrast = 1.0;
-              brightness = 1.0;
-              vibrancy = 0.21;
-              vibrancy_darkness = 0.0;
-            }
+            (
+              {
+                monitor = primaryLandscape.output;
+                color = "rgb(36, 39, 58)";
+              }
+              // lib.optionalAttrs (opts.hyprlock.background or null != null) {
+                path = opts.hyprlock.background;
+                new_optimizations = true;
+                blur_size = 3;
+                blur_passes = 2;
+                noise = 1.17e-2;
+                contrast = 1.0;
+                brightness = 1.0;
+                vibrancy = 0.21;
+                vibrancy_darkness = 0.0;
+              }
+            )
           ]
-          ++ lib.optionals ((opts.hyprlock.monitor2 or "") != "") [
-            {
-              monitor = opts.hyprlock.monitor2;
-              color = "rgb(36, 39, 58)";
-              path = opts.hyprlock.background2;
-              new_optimizations = true;
-              blur_size = 3;
-              blur_passes = 2;
-              noise = 1.17e-2;
-              contrast = 1.0;
-              brightness = 1.0;
-              vibrancy = 0.21;
-              vibrancy_darkness = 0.0;
-            }
-          ];
+          ++ (map (d: {
+            monitor = d.output;
+            color = "rgb(0, 0, 0)";
+          }) otherDisplays);
 
           input-field = [
             {
-              monitor = opts.hyprlock.monitor1;
+              monitor = primaryLandscape.output;
               size = "250, 50";
               outline_thickness = 3;
               outer_color = "rgb(198, 160, 246)";
@@ -63,7 +64,7 @@
 
           label = [
             {
-              monitor = opts.hyprlock.monitor1;
+              monitor = primaryLandscape.output;
               text = "$TIME";
               font_size = 64;
               font_family = "JetBrains Mono Nerd Font 10";
@@ -71,18 +72,6 @@
               position = "0, 16";
               valign = "center";
               halign = "center";
-            }
-          ]
-          ++ lib.optionals ((opts.hyprlock.monitor2 or "") != "") [
-            {
-              monitor = opts.hyprlock.monitor2;
-              text = ''Hello <span text_transform="capitalize" size="larger">$USER!</span>'';
-              color = "rgb(198, 160, 246)";
-              font_size = 20;
-              font_family = "JetBrains Mono Nerd Font 10";
-              position = "0, 100";
-              halign = "center";
-              valign = "center";
             }
           ];
         };

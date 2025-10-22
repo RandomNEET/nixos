@@ -286,18 +286,15 @@ rec {
     '';
   };
 
-  hyprlock = {
-    monitor1 = "DP-1";
-    monitor2 = "HDMI-A-1";
-    background1 = "${wallpaper.dir}/landscape/mocha/greenbus.jpg";
-    background2 = "${wallpaper.dir}/portrait/anime/reimu-city.jpg";
-  };
-
   hypridle = {
     time = {
       lock = "1800";
       dpmsOff = "3600";
       sleep = "";
     };
+  };
+
+  hyprlock = {
+    background = "${wallpaper.dir}/landscape/touhou/marisa-reimu-3.jpg";
   };
 }

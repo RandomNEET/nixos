@@ -258,18 +258,16 @@ rec {
     '';
   };
 
-  hyprlock = {
-    monitor1 = "eDP-1";
-    monitor2 = "";
-    background1 = "${wallpaper.dir}/landscape/mocha/greenbus.jpg";
-  };
-
   hypridle = {
     time = {
       lock = "300";
       dpmsOff = "1800";
       sleep = "3600";
     };
+  };
+
+  hyprlock = {
+    background = "${wallpaper.dir}/landscape/touhou/marisa-reimu-3.jpg";
   };
 
   swayidle = {
@@ -281,6 +279,6 @@ rec {
   };
 
   swaylock = {
-    image = "eDP-1:${wallpaper.dir}/landscape/mocha/greenbus.jpg";
+    image = "eDP-1:${wallpaper.dir}/landscape/touhou/marisa-reimu-3.jpg";
   };
 }
