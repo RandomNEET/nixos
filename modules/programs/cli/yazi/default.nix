@@ -16,9 +16,7 @@
       programs.yazi =
         let
           displays = opts.display or [ ];
-          primaryDisplay = lib.findFirst (
-            d: d.orientation or "" == "landscape"
-          ) (builtins.head displays) displays;
+          primaryDisplay = lib.findFirst (d: d.orientation or "" == "landscape") { } displays;
         in
         {
           enable = true;
