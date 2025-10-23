@@ -57,7 +57,7 @@
     in
     [
       (
-        { config, ... }:
+        { osConfig, config, ... }:
         {
           home.packages = with pkgs; [
             hyprpicker
@@ -435,8 +435,6 @@
                   "$mainMod ALT, K, exec, ${./scripts/keyboard-switch.sh}" # change keyboard layout
                   "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
-                  "$mainMod, G, exec, launcher games" # game launcher
-                  "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
                   "$mainMod, V, exec, ${./scripts/clip-manager.sh}" # Clipboard Manager
                   "$mainMod SHIFT, W, exec, launcher wallpaper" # launch wallpaper switcher
                   "$mainMod CTRL, W, exec, ${./scripts/swww-randomize-multi.sh}" # random wallpaper
@@ -544,8 +542,8 @@
                 ++ lib.optionals (opts.rbw.rofi-rbw or false) [
                   "$mainMod SHIFT, U, exec, launcher rbw" # launch password manager
                 ]
-                ++ lib.optionals (config.programs.steam.enable or false) [
-                  "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
+                ++ lib.optionals (osConfig.programs.steam.enable or false) [
+                  "$mainMod, G, exec, launcher games" # game launcher
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
                 ];
               bindm = [
