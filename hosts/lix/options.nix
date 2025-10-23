@@ -270,6 +270,24 @@ rec {
     background = "${wallpaper.dir}/landscape/touhou/marisa-reimu-3.jpg";
   };
 
+  niri = {
+    output = [
+      {
+        off = false;
+        name = "eDP-1";
+        mode = "1920x1080@60.008";
+        scale = 1.25;
+        transform = "normal";
+        position = {
+          x = 0;
+          y = 0;
+        };
+        variable-refresh-rate = false;
+        focus-at-startup = true;
+      }
+    ];
+  };
+
   swayidle = {
     time = {
       lock = 300;
