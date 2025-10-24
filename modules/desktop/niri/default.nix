@@ -40,6 +40,8 @@
         ...
       }:
       let
+        inherit (lib) getExe getExe';
+        autoclicker = pkgs.callPackage ./scripts/autoclicker.nix { };
         niriConfig = ''
           ${lib.concatMapStringsSep "\n" (output: ''
             output "${output.name}" {
@@ -171,6 +173,10 @@
               Mod+Backspace hotkey-overlay-title="Power menu" { spawn-sh "pkill -x wlogout || wlogout -b 4"; }
               Mod+Shift+Q hotkey-overlay-title="Open notification panel" { spawn-sh "swaync-client -t -sw"; }
               Ctrl+Escape hotkey-overlay-title="Toggle waybar" { spawn-sh "pkill waybar || waybar"; }
+
+              Mod+F8 hotkey-overlay-title="Toggle autoclicker" { spawn-sh "kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${lib.getExe autoclicker} --cps 40"; }
+              Mod+F9 hotkey-overlay-title="Enable night mode" { spawn-sh "wlsunset -T 6500"; }
+              Mod+F10 hotkey-overlay-title="Disable night mode" { spawn-sh "pkill wlsunset"; }
 
               Mod+V hotkey-overlay-title="Clipboard manager" { spawn-sh "bash ${./scripts}/clip-manager.sh"; }
               Mod+Ctrl+W hotkey-overlay-title="Random wallpaper" { spawn-sh "bash ${./scripts}/swww-randomize-multi.sh"; }
@@ -330,6 +336,7 @@
           pavucontrol
           playerctl
           wtype
+          wlsunset
           wl-clipboard
           xwayland-satellite
         ];
