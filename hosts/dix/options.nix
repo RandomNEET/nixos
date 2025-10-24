@@ -273,6 +273,14 @@ rec {
 
   wallpaper = {
     dir = "/home/${username}/pic/wallpapers";
+    landscapeDir = "${wallpaper.dir}/landscape";
+    portraitDir = "${wallpaper.dir}/portrait";
+    transition = {
+      type = "center";
+      step = 90;
+      duration = 1;
+      fps = 60;
+    };
   };
 
   hyprland = {
