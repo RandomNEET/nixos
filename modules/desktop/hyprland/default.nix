@@ -489,9 +489,6 @@
                   "$mainMod CTRL, mouse:276, movetoworkspacesilent, 1"
                   "$mainMod CTRL, mouse:275, movetoworkspacesilent, 10"
 
-                  # Rebuild NixOS with a KeyBind
-                  "$mainMod, U, exec, $terminal -e ${./scripts/rebuild.sh}"
-
                   # Scroll through existing workspaces with mainMod + scroll
                   "$mainMod, mouse_down, workspace, e+1"
                   "$mainMod, mouse_up, workspace, e-1"

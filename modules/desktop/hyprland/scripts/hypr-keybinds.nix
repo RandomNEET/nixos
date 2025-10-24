@@ -75,7 +75,6 @@ pkgs.writeShellScriptBin "hypr-keybinds" ''
     "SUPER SHIFT Q" "Open notification panel" "swaync-client -t -sw"
     "SUPER Q" "Close active window" "killactive"
     "ALT F4" "Close active window" "killactive"
-    "SUPER U" "Rebuild system" "$TERMINAL -e scripts/rebuild.sh"
     "SUPER V" "Clipboard manager" "scripts/clip-manager.sh"
     "SUPER CTRL W" "Random wallpaper" "scripts/swww-randomize-multi.sh"
     "SUPER ALT K" "Change keyboard layout" "scripts/keyboard-switch.sh"
