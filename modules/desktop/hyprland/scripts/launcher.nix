@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   opts,
@@ -6,9 +7,9 @@
 }:
 
 let
-  wallpaperDir = opts.wallpaper.dir;
-  landscapeDir = opts.wallpaper.landscapeDir;
-  portraitDir = opts.wallpaper.portraitDir;
+  wallpaperDir = (opts.wallpaper.dir or "${config.users.users.${opts.username}.home}/pic/wallpapers");
+  landscapeDir = (opts.wallpaper.landscapeDir or "${wallpaperDir}/landscape");
+  portraitDir = (opts.wallpaper.portraitDir or "${wallpaperDir}/portrait");
 in
 pkgs.writeShellScriptBin "launcher" ''
       if pidof rofi >/dev/null; then
