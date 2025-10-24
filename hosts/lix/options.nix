@@ -62,6 +62,26 @@ rec {
     };
   };
 
+  mpd = {
+    startWhenNeeded = true;
+    musicDirectory = "/home/${username}/mus";
+    dataDir = "/home/${username}/.local/share/mpd";
+    extraConfig = ''
+      audio_output {
+         type   "pipewire"
+         name   "PipeWire Sound Server"
+      }
+      audio_output {
+         type   "fifo"
+         name   "my_fifo"
+         path   "/tmp/mpd.fifo"
+         format "44100:16:2"
+      }
+      auto_update "yes"
+    '';
+    audioType = "pipewire";
+  };
+
   proxy = {
     method = "tproxy"; # tproxy lpf
     settingsFile = "/home/${username}/.vault/proxy/${proxy.method}/outsider/default.json";

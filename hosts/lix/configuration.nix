@@ -25,6 +25,7 @@
     ../../modules/services/blueman
     ../../modules/services/flatpak
     ../../modules/services/greetd
+    ../../modules/services/mpd
     ../../modules/services/pipewire
     ../../modules/services/proxy
     ../../modules/services/snapper
@@ -47,6 +48,7 @@
     ../../modules/programs/cli/nixvim
     ../../modules/programs/cli/rbw
     ../../modules/programs/cli/rigprep
+    ../../modules/programs/cli/rmpc
     ../../modules/programs/cli/spotify-player
     ../../modules/programs/cli/tmux
     ../../modules/programs/cli/trash-cli
