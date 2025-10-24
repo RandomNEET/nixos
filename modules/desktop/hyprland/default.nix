@@ -396,9 +396,7 @@
                 in
                 [
                   # Keybinds help menu
-                  "$mainMod, question, exec, ${./scripts/keybinds.sh}"
-                  "$mainMod, slash, exec, ${./scripts/keybinds.sh}"
-                  "$mainMod CTRL, K, exec, ${./scripts/keybinds.sh}"
+                  "$mainMod SHIFT, slash, exec, hypr-keybinds"
 
                   "$mainMod, F8, exec, kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${lib.getExe autoclicker} --cps 40"
                   # "$mainMod ALT, mouse:276, exec, kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${lib.getExe autoclicker} --cps 60"
@@ -424,7 +422,7 @@
                   "$mainMod, F, exec, $fileManager"
                   "$mainMod, E, exec, $editor"
                   "$mainMod, B, exec, $browser"
-                  "$CONTROL ALT, DELETE, exec, $terminal -e '${getExe pkgs.btop}'" # System Monitor
+                  "$CONTROL ALT, DELETE, exec, $terminal -e ${getExe pkgs.btop}" # System Monitor
                   "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
                   "$mainMod, A, exec, launcher drun" # launch desktop applications
@@ -540,7 +538,7 @@
                   "$mainMod SHIFT, T, exec, launcher tmux" # launch tmux sessions
                 ]
                 ++ lib.optionals (opts.rbw.rofi-rbw or false) [
-                  "$mainMod SHIFT, U, exec, launcher rbw" # launch password manager
+                  "$mainMod ALT, U, exec, launcher rbw" # launch password manager
                 ]
                 ++ lib.optionals (osConfig.programs.steam.enable or false) [
                   "$mainMod, G, exec, launcher games" # game launcher
