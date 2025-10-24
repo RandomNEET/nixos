@@ -155,14 +155,14 @@
                 }
 
                 {
-                  label = "󰺵";
+                  label = "󰸉";
                   type = "toggle";
-                  command = "${../../../hyprland/scripts/gamemode.sh}";
-                  update-command = "hyprctl getoption animations:enabled | grep -q 'int: 1' && echo false || echo true";
+                  command = "systemctl --user is-active --quiet random-wall.timer && systemctl --user stop random-wall.timer || systemctl --user start random-wall.timer";
+                  update-command = "systemctl --user is-active --quiet random-wall.timer && echo false || echo true";
                 }
 
                 {
-                  label = "";
+                  label = "󰖚";
                   type = "toggle";
                   command = "pgrep -x hyprsunset >/dev/null && pkill hyprsunset || nohup hyprsunset --temperature 3500";
                   update-command = "pgrep -x hyprsunset >/dev/null && echo true || echo false";

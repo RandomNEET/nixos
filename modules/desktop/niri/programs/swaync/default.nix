@@ -155,6 +155,20 @@
                 }
 
                 {
+                  label = "󰸉";
+                  type = "toggle";
+                  command = "systemctl --user is-active --quiet random-wall.timer && systemctl --user stop random-wall.timer || systemctl --user start random-wall.timer";
+                  update-command = "systemctl --user is-active --quiet random-wall.timer && echo false || echo true";
+                }
+
+                {
+                  label = "󰖚";
+                  type = "toggle";
+                  command = "pgrep -x wlsunset >/dev/null && pkill wlsunset || nohup wlsunset -T 6500";
+                  update-command = "pgrep -x wlsunset >/dev/null && echo true || echo false";
+                }
+
+                {
                   label = "󰒲";
                   command = "systemctl --user is-active --quiet swayidle.service && systemctl --user stop swayidle.service || systemctl --user start swayidle.service";
                   type = "toggle";
