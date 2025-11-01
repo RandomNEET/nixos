@@ -1,6 +1,18 @@
 { pkgs, ... }:
-{
-  obsidian-catppuccin = pkgs.callPackage ./obsidian-catppuccin { };
-  obsidian-livesync = pkgs.callPackage ./obsidian-livesync { };
-  obsidian-trash-explorer = pkgs.callPackage ./obsidian-trash-explorer { };
-}
+let
+  dir = ./.;
+  entries = builtins.readDir dir;
+
+  pkgDirs = builtins.filter (
+    name:
+    entries.${name} == "directory"
+    && builtins.pathExists (dir + "/${name}/default.nix")
+    && builtins.substring 0 1 name != "."
+  ) (builtins.attrNames entries);
+in
+builtins.listToAttrs (
+  map (name: {
+    name = name;
+    value = pkgs.callPackage (dir + "/${name}/default.nix") { };
+  }) pkgDirs
+)
