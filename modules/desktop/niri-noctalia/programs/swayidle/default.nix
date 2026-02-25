@@ -5,8 +5,7 @@
       services.swayidle = {
         enable = true;
         events = {
-          lock = "swaylock &";
-          unlock = "pkill --signal SIGUSR1 swaylock";
+          lock = "noctalia-shell ipc call lockScreen lock";
           before-sleep = "loginctl lock-session";
           after-resume = "niri msg action power-on-monitors";
         };

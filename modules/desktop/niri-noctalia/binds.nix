@@ -5,7 +5,6 @@
   pkgs,
   opts,
   launcher,
-  random-wall,
   clip-manager,
   screenshot,
   autoclicker,
@@ -93,13 +92,6 @@ in
     ];
     hotkey-overlay.title = "Launch application menu";
   };
-  "Mod+Ctrl+W" = {
-    action.spawn = [
-      "${launcher}"
-      "wallpaper"
-    ];
-    hotkey-overlay.title = "Select wallpaper";
-  };
   "Mod+Ctrl+T" = {
     action.spawn = [
       "${launcher}"
@@ -119,32 +111,78 @@ in
     hotkey-overlay.title = "Clipboard manager";
   };
 
-  "Mod+Shift+W" = {
-    action.spawn = "${random-wall}";
-    hotkey-overlay.title = "Random wallpaper";
+  "Mod+Shift+A" = {
+    action.spawn = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "controlCenter"
+      "toggle"
+    ];
+    hotkey-overlay.title = "Open control center";
   };
   "Mod+Shift+Q" = {
     action.spawn = [
-      "swaync-client"
-      "-t"
-      "-sw"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "notifications"
+      "toggleHistory"
     ];
     hotkey-overlay.title = "Open notification panel";
   };
+  "Mod+Ctrl+W" = {
+    action.spawn = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "wallpaper"
+      "toggle"
+    ];
+    hotkey-overlay.title = "Select wallpaper";
+  };
+  "Mod+Shift+W" = {
+    action.spawn = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "wallpaper"
+      "random"
+    ];
+    hotkey-overlay.title = "Random wallpaper";
+  };
   "Ctrl+Escape" = {
-    action.spawn-sh = "systemctl --user is-active --quiet waybar && systemctl --user stop waybar || systemctl --user start waybar";
-    hotkey-overlay.title = "Toggle waybar";
+    action.spawn = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "bar"
+      "toggle"
+    ];
+    hotkey-overlay.title = "Toggle bar";
   };
   "Mod+Alt+L" = {
-    action.spawn = "swaylock";
+    action.spawn = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "lockScreen"
+      "lock"
+    ];
     hotkey-overlay.title = "Lock screen";
   };
   "Mod+Backspace" = {
-    action.spawn-sh = "pkill -x wlogout || wlogout -b 4";
-    hotkey-overlay.title = "Power menu";
+    action.spawn = [
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "sessionMenu"
+      "toggle"
+    ];
+    hotkey-overlay.title = "Session menu";
   };
 
-  "Mod+F1" = {
+  "Mod+F10" = {
     action.spawn = [
       "${terminal}"
       "-e"
@@ -153,8 +191,8 @@ in
     hotkey-overlay.title = "Open system monitor: btop";
   };
   "Mod+F11" = {
-    action.spawn-sh = "pkill wlsunset || wlsunset -T 6500";
-    hotkey-overlay.title = "Enable night mode";
+    action.spawn-sh = "pkill hyprpicker || hyprpicker --autocopy --format=hex";
+    hotkey-overlay.title = "Color picker";
   };
   "Mod+F12" = {
     action.spawn-sh = "kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${autoclicker} --cps 40";
@@ -163,65 +201,81 @@ in
 
   "XF86AudioRaiseVolume" = {
     action.spawn = [
-      "wpctl"
-      "set-volume"
-      "@DEFAULT_AUDIO_SINK@"
-      "0.1+"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "increase"
     ];
     allow-when-locked = true;
   };
   "XF86AudioLowerVolume" = {
     action.spawn = [
-      "wpctl"
-      "set-volume"
-      "@DEFAULT_AUDIO_SINK@"
-      "0.1-"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "decrease"
     ];
     allow-when-locked = true;
   };
   "XF86AudioMute" = {
     action.spawn = [
-      "wpctl"
-      "set-mute"
-      "@DEFAULT_AUDIO_SINK@"
-      "toggle"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "muteOutput"
     ];
     allow-when-locked = true;
   };
   "XF86AudioMicMute" = {
     action.spawn = [
-      "wpctl"
-      "set-mute"
-      "@DEFAULT_AUDIO_SOURCE@"
-      "toggle"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "volume"
+      "muteInput"
     ];
     allow-when-locked = true;
   };
 
   "XF86AudioPlay" = {
     action.spawn = [
-      "playerctl"
-      "play-pause"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "media"
+      "play"
     ];
     allow-when-locked = true;
   };
   "XF86AudioStop" = {
     action.spawn = [
-      "playerctl"
-      "stop"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "media"
+      "pause"
     ];
     allow-when-locked = true;
   };
   "XF86AudioPrev" = {
     action.spawn = [
-      "playerctl"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "media"
       "previous"
     ];
     allow-when-locked = true;
   };
   "XF86AudioNext" = {
     action.spawn = [
-      "playerctl"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "media"
       "next"
     ];
     allow-when-locked = true;
@@ -229,19 +283,21 @@ in
 
   "XF86MonBrightnessUp" = {
     action.spawn = [
-      "brightnessctl="
-      "--class=backlight"
-      "set"
-      "+10%"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "brightness"
+      "increase"
     ];
     allow-when-locked = true;
   };
   "XF86MonBrightnessDown" = {
     action.spawn = [
-      "brightnessctl="
-      "--class=backlight"
-      "set"
-      "10%-"
+      "noctalia-shell"
+      "ipc"
+      "call"
+      "brightness"
+      "decrease"
     ];
     allow-when-locked = true;
   };

@@ -25,12 +25,12 @@
     };
 
     focus-ring = {
-      enable = true;
-      width = 2;
+      enable = false;
     };
 
     border = {
-      enable = false;
+      enable = true;
+      width = 2;
     };
 
     shadow = {
@@ -59,4 +59,8 @@
   };
 
   screenshot-path = "~/pic/screenshots/screenshot from %Y-%m-%d %H-%M-%S.png";
+
+  debug = {
+    honor-xdg-activation-with-invalid-serial = { };
+  };
 }

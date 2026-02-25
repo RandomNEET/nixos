@@ -12,13 +12,9 @@
     ../shared/themes
     ../shared/programs/fcitx5
     ../shared/programs/gowall
+    ../shared/programs/noctalia
     ../shared/programs/rofi
-    ../shared/programs/swaync
-    ../shared/programs/swww
-    ../shared/programs/waybar
-    ../shared/programs/wlogout
     ./programs/swayidle
-    ./programs/swaylock
   ];
 
   programs.niri = {
@@ -43,17 +39,6 @@
               ;
           }
         );
-        random-wall = getExe (
-          import ../shared/scripts/random-wall.nix {
-            inherit
-              config
-              pkgs
-              mylib
-              opts
-              ;
-          }
-        );
-        randomwallctl = import ../shared/scripts/randomwallctl.nix { inherit lib pkgs opts; };
         clip-manager = getExe (import ../shared/scripts/clip-manager.nix { inherit pkgs; });
         screenshot = getExe (import ../shared/scripts/screenshot.nix { inherit config pkgs; });
         autoclicker = getExe (pkgs.callPackage ../shared/scripts/autoclicker.nix { });
@@ -74,7 +59,6 @@
                 lib
                 pkgs
                 opts
-                randomwallctl
                 getExe
                 ;
             };
@@ -86,7 +70,6 @@
                 pkgs
                 opts
                 launcher
-                random-wall
                 clip-manager
                 screenshot
                 autoclicker
@@ -100,34 +83,10 @@
         };
 
         services.lxqt-policykit-agent.enable = true;
-        # Put inside of home-manager to auto start sservice after switching specialisation
         systemd.user = {
           services.lxqt-policykit-agent = {
             Unit = {
               After = [ "graphical-session.target" ];
-            };
-          };
-          services.random-wall = {
-            Unit = {
-              Description = "Random wallpaper";
-            };
-            Service = {
-              Type = "oneshot";
-              ExecStart = "${random-wall}";
-            };
-            Install = {
-              WantedBy = [ "default.target" ];
-            };
-          };
-          timers.random-wall = {
-            Unit = {
-              Description = "Timer for Random wallpaper";
-            };
-            Timer = {
-              OnCalendar = "hourly";
-            };
-            Install = {
-              WantedBy = [ "timers.target" ];
             };
           };
         };
@@ -147,16 +106,10 @@
           brightnessctl
           cliphist
           grim
-          inotify-tools
           libnotify
-          networkmanagerapplet
-          pamixer
-          pavucontrol
-          playerctl
           slurp
           swappy
           wl-clipboard
-          wlsunset
           xwayland-satellite
         ];
       }
