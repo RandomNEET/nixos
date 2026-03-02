@@ -3,6 +3,7 @@
   lib,
   pkgs,
   opts,
+  isExt,
   ...
 }:
 let
@@ -53,6 +54,7 @@ let
               lib
               pkgs
               opts
+              isExt
               ;
           };
 

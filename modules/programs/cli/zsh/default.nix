@@ -2,6 +2,7 @@
   lib,
   pkgs,
   opts,
+  isExt,
   ...
 }:
 let
@@ -111,7 +112,7 @@ in
 
             shellAliases = {
               "_" = "sudo ";
-              update = "sudo nixos-rebuild switch";
+              update = lib.mkIf (!isExt) "sudo nixos-rebuild switch";
             }
             // (opts.zsh.shellAliases or { });
           };
