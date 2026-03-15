@@ -252,6 +252,7 @@ pkgs.writeShellScriptBin "launcher" ''
       systemctl --user restart waybar
       systemctl --user restart fcitx5-daemon
     ''}
+    ${optionalString config.programs.tmux.enable "tmux source-file ${config.xdg.configHome}/tmux/tmux.conf"} 
     ;;
   spec)
     SPEC_DIR="/nix/var/nix/profiles/system/specialisation"
